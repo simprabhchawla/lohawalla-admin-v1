@@ -8,6 +8,7 @@ import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStat
 import useHeight from "@src/modules/hooks/useHeight";
 import EmployeePageTabs from "./Components/EmployeePageTabs/EmployeePageTabs";
 import CurrentEmployeeTable from "./Components/CurrentEmployeeTable/CurrentEmployeeTable";
+import SessionLogTable from "./Components/SessionLogTable/SessionLogTable";
 
 interface ContextProps {
 	state: Employee.State;
@@ -69,11 +70,9 @@ const Employe = () => {
 								/>
 							</div>
 						</div>
-						{state.currentTab === 0 ? (
-							<EmployeeDetailsTable />
-						) : (
-							<CurrentEmployeeTable data={state.verifiedEmployeeList} />
-						)}
+						{state.currentTab === 0 && <EmployeeDetailsTable />}
+						{state.currentTab === 1 && <CurrentEmployeeTable data={state.verifiedEmployeeList} />}
+						{state.currentTab === 2 && <SessionLogTable data={state.verifiedEmployeeList} />}
 					</div>
 				</div>
 			</div>

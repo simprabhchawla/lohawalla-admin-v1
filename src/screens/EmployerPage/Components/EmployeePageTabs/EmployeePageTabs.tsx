@@ -59,6 +59,22 @@ export default function EmployeePageTabs(props: Props) {
 					</p>
 				}
 			/>
+			<Tab
+				sx={{
+					fontWeight: 500,
+					textTransform: "none",
+					color: "gray",
+					"&.Mui-selected": {
+						color: "#374151",
+						borderColor: "#374151",
+					},
+				}}
+				label={
+					<p className="mr-2" style={{ fontFamily: "inherit" }}>
+						Session Logs
+					</p>
+				}
+			/>
 		</Tabs>
 	);
 }
