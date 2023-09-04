@@ -53,16 +53,16 @@ const SessionLogTable = (props: Props) => {
                         </thead>
                         <tbody>
                             {sessionLogs && sessionLogs.map((element: any, i: number) => {
-                                const localDate = new Date(new Date(element.logInTime).getTime() + new Date(element.logInTime).getTimezoneOffset() * 60000);
-                                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-                                const day = localDate.getDate();
-                                const month = months[localDate.getMonth()];
-                                const year = localDate.getFullYear();
-                                const hours = localDate.getHours();
-                                const minutes = localDate.getMinutes();
-                                const ampm = hours >= 12 ? 'pm' : 'am';
-                                const formattedDate = `${day} ${month} ${year} - ${hours % 12}:${minutes.toString().padStart(2, '0')} ${ampm}`;
-
+                                const date = new Date(element.logInTime);
+                                const options: any = {
+                                    year: 'numeric',
+                                    month: 'short',
+                                    day: 'numeric',
+                                    hour: 'numeric',
+                                    minute: 'numeric',
+                                    hour12: true
+                                };
+                                const formattedDate = date.toLocaleString('en-US', options);
                                 return (
                                     <tr key={i}>
                                         <td className="text-center pt-1 max-w-xl">
@@ -91,7 +91,7 @@ const SessionLogTable = (props: Props) => {
                                             <p className="text-sm text-slate-800">{formattedDate}</p>
                                         </td>
                                         <td className="px-6 py-3 font-normal">
-                                            <p className="text-sm text-slate-800">{element.device ? (element.device.userAgent).slice(13,36) : "Not Avilable"}</p>
+                                            <p className="text-sm text-slate-800">{element.device ? (element.device.userAgent).slice(13, 36) : "Not Avilable"}</p>
                                         </td>
                                         <td className="px-6 py-3 font-normal">
                                             <p className="text-sm text-slate-800">{element.user.phoneNumber}</p>
