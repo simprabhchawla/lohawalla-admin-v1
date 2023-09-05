@@ -8,14 +8,14 @@ import AuthGuard from "./auth/AuthGuard/AuthGuard";
 
 function App() {
 	return (
-		<AuthGuard>
+		// <AuthGuard>
 			<div>
 				<Routes>
 					<Route path="/" element={<Dashboard />}></Route>
 					<Route path="/employer" element={<EmployerPage />}></Route>
 				</Routes>
 			</div>
-		</AuthGuard>
+		// </AuthGuard>
 	);
 }
 
