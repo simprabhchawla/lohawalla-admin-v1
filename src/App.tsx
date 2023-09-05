@@ -10,7 +10,7 @@ import AuthGuard from "./auth/AuthGuard/AuthGuard";
 function App() {
 	return (
 
-		// <AuthGuard>
+		<AuthGuard>
 
 			<div>
 				<Routes>
@@ -18,12 +18,12 @@ function App() {
 					<Route path="/employer" element={<EmployerPage />}></Route>
 				</Routes>
 				<Toaster
-        position="top-center"
-        reverseOrder={false}
-      />
+					position="top-center"
+					reverseOrder={false}
+				/>
 			</div>
 
-		// </AuthGuard>
+		</AuthGuard>
 
 	);
 }
