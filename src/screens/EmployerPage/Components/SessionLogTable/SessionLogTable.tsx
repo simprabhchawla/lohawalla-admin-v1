@@ -11,13 +11,27 @@ interface Props {
 const SessionLogTable = (props: Props) => {
     const [show, setShow] = useState({ idx: -1, val: -1 });
     const [sessionLogs, setSessionLogs] = useState<any>([])
+    const [limit,setlimit]=useState(10)
+	const [page,setPage]=useState(1)
+   const [total,setTotal]=useState(0)
+   const [pageCount,setPageCount]=useState(0)
     const getLogginLogs = async () => {
-        const { data } = await axios.get(`${basePath}auth/LogIn/companyLogIn/loginLogs`, { withCredentials: true })
+        const { data } = await axios.get(`${basePath}auth/LogIn/companyLogIn/loginLogs?page=${page}&limit=${limit}`, { withCredentials: true })
+        console.log(data)
         setSessionLogs([...data.logs])
+        setTotal(data.count)
+        
     }
     useEffect(() => {
+        if (total%limit===0) {
+          setPageCount(Math.ceil(total / limit));
+        } else {
+          setPageCount(Math.ceil(total / limit)+1);
+        }
+      }, [total, limit]);
+    useEffect(() => {
         getLogginLogs();
-    }, [])
+    }, [page,limit])
     return (
         <>
             <div
@@ -109,15 +123,19 @@ const SessionLogTable = (props: Props) => {
                     <div className="px-3">
                         <select
                             className="bg-theme-btn-gray px-2 py-0.5 border-2 text-zinc-500 border-gray-50 rounded-lg"
-                            placeholder="10"
+                          value={limit}
+                          onChange={(event) => {
+                           
+                            setlimit(Number(event.target.value));
+                          }}
                         >
                             <option value="10">10</option>
                             <option value="1">1</option>
                             <option value="20">20</option>
-                            <option value="ALl">All</option>
+                            <option value={total}>All</option>
                         </select>
                         <label className="text-zinc-400 pl-2">Items per page</label>
-                        <label className="text-zinc-700 pl-4">1-10 of 200 items</label>
+                        <label className="text-zinc-700 pl-4">1-{limit} of {total} items</label>
                     </div>
                     <div className="ml-auto px-6">
                         <select
@@ -126,17 +144,17 @@ const SessionLogTable = (props: Props) => {
                         >
                             <option value="10">1</option>
                         </select>
-                        <label className="text-zinc-700 pl-2">of 44 pages</label>
+                        <label className="text-zinc-700 pl-2">of {pageCount} pages</label>
                         <label className="text-zinc-700 pl-4">
                             <div className="inline-block">
-                                <button>
+                                <button onClick={()=>page>0?setPage(page-1):alert("You reached on page 1")} >
                                     <Icon
                                         className="inline-block"
                                         icon="ic:round-keyboard-arrow-left"
                                         width="20"
                                     />
                                 </button>
-                                <button>
+                                <button onClick={()=>setPage(page+1)}>
                                     <Icon
                                         className="inline-block"
                                         icon="material-symbols:keyboard-arrow-right"

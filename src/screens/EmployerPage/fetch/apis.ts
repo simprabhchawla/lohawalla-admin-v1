@@ -1,8 +1,8 @@
 const apiIndex = {
-	getPendingEmployeeListing: "getPendingEmployeeListing",
+	getPendingEmployeeListing:(data:any)=>`getPendingEmployeeListing/${data}`,
 	updateUserVerification: (id: string) => `updateUserVerification/${id}`,
 	deleteUser: (id: string) => `deleteUser/${id}`,
-	getVerifiedUserList: "admin/pages/employeeListing/getVerifiedEmployee",
+	getVerifiedUserList:(data:any)=>`admin/pages/employeeListing/getVerifiedEmployee?${data}`,
 };
 
 export default apiIndex;
