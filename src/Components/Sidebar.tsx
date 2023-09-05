@@ -3,6 +3,7 @@ import Logo from "../Assets/LogoLohawalla.svg"
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';
 import { useLocation } from "react-router-dom";
+import { useAuthGuardContext } from "@src/auth/AuthGuard/AuthGuard";
 
 // import { SidebarState } from '../screens/Dashboard/types';
 // import { initialState } from '../screens/Dashboard/Management/States/initialState';
@@ -12,6 +13,7 @@ import { useLocation } from "react-router-dom";
 
 const Sidebar = () => {
     const  {pathname} = useLocation();
+    const { user, loginData, action } = useAuthGuardContext();
 
     return (
         <>
@@ -54,7 +56,11 @@ const Sidebar = () => {
                         <ul className=''>
                             <ul className='mt-32 text-left text-sm py-2 text-zinc-600'>
                                 <li className='bg-gray-200 my-3 px-4 py-2 rounded-xl hover:bg-slate-700 hover:text-white '><Icon className=' mr-2 inline-block hover:text-white' icon="ri:headphone-line" width="26" /> Contact Support</li>
-                                <li className='my-3 px-4 py-2 rounded-xl text-theme-btn-red hover:bg-theme-btn-red hover:text-white'><Icon className='mr-2 inline-block hover:text-white' icon="solar:logout-2-bold-duotone" rotate={2} width="26" /> Logout</li>
+                                <li
+                                onClick={() => {
+                                    action.logOut();
+                                }}
+                                className='my-3 px-4 py-2 rounded-xl text-theme-btn-red hover:bg-theme-btn-red hover:text-white'><Icon className='mr-2 inline-block hover:text-white' icon="solar:logout-2-bold-duotone" rotate={2} width="26" /> Logout</li>
                             </ul>
                         </ul>
                     </nav>

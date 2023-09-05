@@ -12,9 +12,24 @@ interface VerifiedEmployeeListing {
 	phoneNumber: string;
 	profile: string;
 }
+function convertToQueryString(data: any) {
+	let queryStr = '';
+	for (let key in data) {
+	  if (data.hasOwnProperty(key) && data[key] !== '' && data[key] !== null) {
+		if (queryStr !== '') {
+		  queryStr += '&';
+		}
+		queryStr += `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`;
+	  }
+	}
+	return queryStr;
+  }
 
-export default async function getVerifiedUserList() {
+export default async function getVerifiedUserList(filterdata:any) {
+	const data=convertToQueryString(filterdata)
+	console.log("dddddd",data)
 	return AxiosFactory.createInstance().get<VerifiedEmployeeListing[]>(
-		apiIndex.getVerifiedUserList
+		
+		apiIndex.getVerifiedUserList(data)
 	);
 }

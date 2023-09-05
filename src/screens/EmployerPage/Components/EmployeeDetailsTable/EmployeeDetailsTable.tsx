@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import CustomerDetailsRow from "../EmployeeDetailsRow/EmployeeDetailsRow";
 import { Icon } from "@iconify/react";
@@ -9,7 +9,20 @@ import style from "./EmployeeDetailsTable.module.css";
 
 const CustomerDetails = () => {
 	const { state, employerActions } = useEmployerPageContext();
-
+	const [limit,setlimit]=useState(10)
+	const [page,setPage]=useState(1)
+	useEffect(() => {
+		const requestData = {
+		  page: page,
+		  limit: limit,
+		};
+	
+		console.log("hii")
+		
+		employerActions.getPendingEmployeeList(requestData);
+	
+		
+	  }, [limit, page]);
 	return (
 		<>
 			<div
@@ -96,6 +109,7 @@ const CustomerDetails = () => {
 										<SortIcon />
 									</span>
 								</th>
+								
 								<th scope="col" className="px-6 py-5 font-normal text-zinc-800">
 									Profile Picture{" "}
 									<span className="pl-0.5 inline-block relative top-0.5">
@@ -114,6 +128,7 @@ const CustomerDetails = () => {
 										<SortIcon />
 									</span>
 								</th>
+								
 							</tr>
 						</thead>
 						{/* Table Contents */}
@@ -137,10 +152,14 @@ const CustomerDetails = () => {
 				{/* Pagination for table */}
 				<div className="flex bg-white border-t-2 border-gray-100 py-6 text-sm">
 					<div className="px-3">
-						<select
-							className="bg-theme-btn-gray px-2 py-0.5 border-2 text-zinc-500 border-gray-50 rounded-lg"
-							placeholder="10"
-						>
+					    <select
+  className="bg-theme-btn-gray px-2 py-0.5 border-2 text-zinc-500 border-gray-50 rounded-lg"
+  value={limit}
+  onChange={(event) => {
+    console.log("Selected value:", event.target.value);
+    setlimit(Number(event.target.value));
+  }}
+>
 							<option value="10">10</option>
 							<option value="1">1</option>
 							<option value="20">20</option>
@@ -152,21 +171,25 @@ const CustomerDetails = () => {
 					<div className="ml-auto px-6">
 						<select
 							className="bg-theme-btn-gray px-2 py-0.5 border-2 text-zinc-500 border-gray-50 rounded-lg"
-							placeholder="10"
+							placeholder="10" value={page} onChange={(event) => {
+								
+								setPage(Number(event.target.value));
+							  }}
 						>
-							<option value="10">1</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
 						</select>
 						<label className="text-zinc-700 pl-2">of 44 pages</label>
 						<label className="text-zinc-700 pl-4">
 							<div className="inline-block">
-								<button>
+								<button onClick={()=>page>0?setPage(page-1):alert("You reached on page 1")} >
 									<Icon
 										className="inline-block"
 										icon="ic:round-keyboard-arrow-left"
 										width="20"
 									/>
 								</button>
-								<button>
+								<button onClick={()=>setPage(page+1)}>
 									<Icon
 										className="inline-block"
 										icon="material-symbols:keyboard-arrow-right"

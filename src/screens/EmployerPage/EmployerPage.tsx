@@ -33,8 +33,12 @@ const Employe = () => {
 	const employerActions = new EmployerAction(state, setState);
 
 	useEffect(() => {
-		employerActions.getPendingEmployeeListing();
-		employerActions.getVerifiedEmployeeList();
+		/*const data={
+			page:1,
+			limit:10
+		}*/
+		//employerActions.getPendingEmployeeListing();
+		//employerActions.getVerifiedEmployeeList(data);
 	}, [state.refresh]);
 
 	const heightHandle = useHeight();

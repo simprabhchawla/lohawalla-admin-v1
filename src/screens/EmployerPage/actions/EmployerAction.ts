@@ -21,10 +21,10 @@ export default class EmployerAction
 			p.refresh = !p.refresh;
 		});
 	}
-
 	async getPendingEmployeeListing() {
+		const data=""
 		const res = await this.handleAsync("getPendingList", () =>
-			fetchPendingEmployeeList()
+			fetchPendingEmployeeList(data)
 		);
 		if (res) {
 			this.mutateState((p) => {
@@ -33,9 +33,21 @@ export default class EmployerAction
 		}
 	}
 
-	async getVerifiedEmployeeList() {
+	async getPendingEmployeeList(data: any) {
+		const res = await this.handleAsync("getPendingList", () =>
+			fetchPendingEmployeeList(data)
+		);
+		if (res) {
+			this.mutateState((p) => {
+				p.fetchPendingEmployeeList = res.data;
+			});
+		}
+	}
+
+	async getVerifiedEmployeeList(data:any) {
+		console.log(data)
 		const res = await this.handleAsync("getVerifiedList", () =>
-			getVerifiedUserList()
+			getVerifiedUserList(data)
 		);
 		if (res) {
 			this.mutateState((p) => {
