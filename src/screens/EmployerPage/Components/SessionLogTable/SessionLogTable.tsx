@@ -23,7 +23,7 @@ const SessionLogTable = (props: Props) => {
         
     }
     useEffect(() => {
-        if (total%limit===0) {
+        if (total>0) {
           setPageCount(Math.ceil(total / limit));
         } else {
           setPageCount(Math.ceil(total / limit)+1);
@@ -154,7 +154,7 @@ const SessionLogTable = (props: Props) => {
                                         width="20"
                                     />
                                 </button>
-                                <button onClick={()=>setPage(page+1)}>
+                                <button onClick={()=>(page<pageCount)?setPage(page+1):alert("You reached on maximum limit")}>
                                     <Icon
                                         className="inline-block"
                                         icon="material-symbols:keyboard-arrow-right"

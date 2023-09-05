@@ -30,28 +30,27 @@ export default function CurrentEmployeeTable(props: Props) {
 	const [isOpen, setIsOpen] = useState(false)
 	const [isChangeOpen, setisChangeOpen] = useState(false)
 	const [total,setTotal]=useState(0)
-   const [pageCount,setPageCount]=useState(0)
+   const [pageCount,setPageCount]=useState(1)
     const getTotal= async () => {
         const { data } = await axios.get(`${basePath}admin/pages/employeeListing/getVerifiedEmployee`, { withCredentials: true })
         console.log(data)
         setTotal(data[0].totalVerifiedEmployee)
+		if (total>0) {
+			setPageCount(Math.ceil(total / limit));
+		  } else {
+			setPageCount(0);
+		  }
         
     }
 	useEffect(() => {
-        if (total%limit===0) {
+        if (total%limit>0) {
           setPageCount(Math.ceil(total / limit));
         } else {
           setPageCount(Math.ceil(total / limit)+1);
         }
-      }, [limit]);
+      }, [limit,page]);
 	useEffect(()=>{
 		getTotal()
-		if (total%limit===0) {
-			setPageCount(Math.ceil(total / limit));
-		  } else {
-			setPageCount(Math.ceil(total / limit)+1);
-		  }
-
 
 	},[])
 	useEffect(() => {
@@ -216,11 +215,11 @@ export default function CurrentEmployeeTable(props: Props) {
 										<td className="px-6 py-3 font-normal">
 											<p className="text-sm text-slate-800">{phoneNumber}</p>
 										</td>
-										<td className="px-6 py-3 flex gap-[5px] font-normal">
+										<td className="px-6 py-5 flex gap-[5px] font-normal">
 											<p className="text-sm text-slate-800">{role}</p>
 											<img src={edit} alt="" onClick={()=>openPopup(id)} className="w-[16px] cursor-pointer h-[16px]" />
 										</td>
-										<td className="px-6 py-3">
+										<td className="px-6 py-1">
 											<div
 												className="flex items-center hover:ring-1 hover:ring-slate-200 cursor-pointer p-2 rounded transition-all duration-500 delay-75"
 												onClick={(e) => {
@@ -374,7 +373,7 @@ export default function CurrentEmployeeTable(props: Props) {
 							<option value="ALl">All</option>
 						</select>
 						<label className="text-zinc-400 pl-2">Items per page</label>
-						<label className="text-zinc-700 pl-4">1-10 of 200 items</label>
+						<label className="text-zinc-700 pl-4">{page>1?(page-1)*limit:1}-{(page)*limit} of {total} items</label>
 					</div>
 					<div className="ml-auto px-6">
 						<select
@@ -386,7 +385,7 @@ export default function CurrentEmployeeTable(props: Props) {
 						>
 							<option value="10">1</option>
 						</select>
-						<label className="text-zinc-700 pl-2">of 44 pages</label>
+						<label className="text-zinc-700 pl-2">of {pageCount} pages</label>
 						<label className="text-zinc-700 pl-4">
 							<div className="inline-block">
 								<button onClick={()=>page>1?setPage(page-1):alert("You reached on page 1")}> 
@@ -396,7 +395,7 @@ export default function CurrentEmployeeTable(props: Props) {
 										width="20"
 									/>
 								</button>
-								<button onClick={()=>setPage(page+1)}>
+								<button onClick={()=>(page<pageCount|| pageCount==0)?setPage(page+1):alert("You reached on maximum limit")}>
 									<Icon
 										className="inline-block"
 										icon="material-symbols:keyboard-arrow-right"
