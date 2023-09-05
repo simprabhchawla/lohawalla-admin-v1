@@ -9,7 +9,9 @@ import AuthGuard from "./auth/AuthGuard/AuthGuard";
 
 function App() {
 	return (
-		//<AuthGuard>
+
+		// <AuthGuard>
+
 			<div>
 				<Routes>
 					<Route path="/" element={<Dashboard />}></Route>
@@ -20,7 +22,8 @@ function App() {
         reverseOrder={false}
       />
 			</div>
-		//</AuthGuard>
+
+		// </AuthGuard>
 
 	);
 }
