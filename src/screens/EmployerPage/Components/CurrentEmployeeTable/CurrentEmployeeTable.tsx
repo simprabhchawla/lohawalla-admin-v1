@@ -216,9 +216,11 @@ export default function CurrentEmployeeTable(props: Props) {
 											<td className="px-6 py-3 font-normal">
 												<p className="text-sm text-slate-800">{phoneNumber}</p>
 											</td>
-											<td className="px-6 py-3 flex gap-[5px] font-normal">
-												<p className="text-sm text-slate-800">{role}</p>
-												<img src={edit} alt="" onClick={() => openPopup(id)} className="w-[16px] cursor-pointer h-[16px]" />
+											<td className="px-6 py-3 ">
+												<div className="font-normal flex gap-[5px] " >
+													<p className="text-sm text-slate-800">{role}</p>
+													<img src={edit} alt="" onClick={() => openPopup(id)} className="w-[16px] cursor-pointer h-[16px]" />
+												</div>
 											</td>
 											<td className="px-6 py-3">
 												<div
@@ -238,11 +240,15 @@ export default function CurrentEmployeeTable(props: Props) {
 													/>
 												</div>
 											</td>
-											<td onClick={() => openChangePopup(id)} className="px-6 flex cursor-pointer gap-[5px] py-3 font-normal">
-												<p className="text-sm text-[#B72626]">
-													Change
-												</p>
-												<img src={change} alt="" />
+											<td onClick={() => openChangePopup(id)} className="px-6 py-3 ">
+												<div className="flex cursor-pointer gap-[5px] font-normal">
+
+													<p className="text-sm text-[#B72626]">
+														Change
+													</p>
+													<img src={change} alt="" />
+												</div>
+
 											</td>
 											<td className="px-6 py-3">
 												<div
