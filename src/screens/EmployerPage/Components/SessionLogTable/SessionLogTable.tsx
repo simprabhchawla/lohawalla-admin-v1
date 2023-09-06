@@ -11,27 +11,27 @@ interface Props {
 const SessionLogTable = (props: Props) => {
     const [show, setShow] = useState({ idx: -1, val: -1 });
     const [sessionLogs, setSessionLogs] = useState<any>([])
-    const [limit,setlimit]=useState(10)
-	const [page,setPage]=useState(1)
-   const [total,setTotal]=useState(0)
-   const [pageCount,setPageCount]=useState(0)
+    const [limit, setlimit] = useState(10)
+    const [page, setPage] = useState(1)
+    const [total, setTotal] = useState(0)
+    const [pageCount, setPageCount] = useState(0)
     const getLogginLogs = async () => {
         const { data } = await axios.get(`${basePath}auth/LogIn/companyLogIn/loginLogs?page=${page}&limit=${limit}`, { withCredentials: true })
         console.log(data)
         setSessionLogs([...data.logs])
         setTotal(data.count)
-        
+
     }
     useEffect(() => {
-        if (total>0) {
-          setPageCount(Math.ceil(total / limit));
+        if (total > 0) {
+            setPageCount(Math.ceil(total / limit));
         } else {
-          setPageCount(Math.ceil(total / limit)+1);
+            setPageCount(Math.ceil(total / limit) + 1);
         }
-      }, [total, limit]);
+    }, [total, limit]);
     useEffect(() => {
         getLogginLogs();
-    }, [page,limit])
+    }, [page, limit])
     return (
         <>
             <div
@@ -123,11 +123,11 @@ const SessionLogTable = (props: Props) => {
                     <div className="px-3">
                         <select
                             className="bg-theme-btn-gray px-2 py-0.5 border-2 text-zinc-500 border-gray-50 rounded-lg"
-                          value={limit}
-                          onChange={(event) => {
-                           
-                            setlimit(Number(event.target.value));
-                          }}
+                            value={limit}
+                            onChange={(event) => {
+
+                                setlimit(Number(event.target.value));
+                            }}
                         >
                             <option value="10">10</option>
                             <option value="1">1</option>
@@ -137,24 +137,24 @@ const SessionLogTable = (props: Props) => {
                         <label className="text-zinc-400 pl-2">Items per page</label>
                         <label className="text-zinc-700 pl-4">1-{limit} of {total} items</label>
                     </div>
-                    <div className="ml-auto px-6">
-                        <select
+                    <div className="ml-auto px-6 flex items-center">
+                        <div
                             className="bg-theme-btn-gray px-2 py-0.5 border-2 text-zinc-500 border-gray-50 rounded-lg"
-                            placeholder="10"
+
                         >
-                            <option value="10">1</option>
-                        </select>
+                            <p >{page}</p>
+                        </div>
                         <label className="text-zinc-700 pl-2">of {pageCount} pages</label>
                         <label className="text-zinc-700 pl-4">
                             <div className="inline-block">
-                                <button onClick={()=>page>0?setPage(page-1):alert("You reached on page 1")} >
+                                <button onClick={() => page > 1 ? setPage(page - 1) : alert("You reached on page 1")} >
                                     <Icon
                                         className="inline-block"
                                         icon="ic:round-keyboard-arrow-left"
                                         width="20"
                                     />
                                 </button>
-                                <button onClick={()=>(page<pageCount)?setPage(page+1):alert("You reached on maximum limit")}>
+                                <button onClick={() => (page < pageCount) ? setPage(page + 1) : alert("You reached on maximum limit")}>
                                     <Icon
                                         className="inline-block"
                                         icon="material-symbols:keyboard-arrow-right"
