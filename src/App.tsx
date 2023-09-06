@@ -11,19 +11,17 @@ function App() {
 	return (
 
 		// <AuthGuard>
-
 			<div>
 				<Routes>
 					<Route path="/" element={<Dashboard />}></Route>
 					<Route path="/employer" element={<EmployerPage />}></Route>
 				</Routes>
 				<Toaster
-        position="top-center"
-        reverseOrder={false}
-      />
+					position="top-center"
+					reverseOrder={false}
+				/>
 			</div>
-
-		// </AuthGuard>
+		// {/* </AuthGuard> */}
 
 	);
 }

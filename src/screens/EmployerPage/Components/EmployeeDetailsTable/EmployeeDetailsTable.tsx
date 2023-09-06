@@ -6,23 +6,43 @@ import EmployeeDetailsRow from "../EmployeeDetailsRow/EmployeeDetailsRow";
 import { ReactComponent as SortIcon } from "../../../../Assets/Icons/EmployeePage/SortIcon.svg";
 import { useEmployerPageContext } from "@src/screens/EmployerPage/EmployerPage";
 import style from "./EmployeeDetailsTable.module.css";
+import { basePath } from "@src/modules/axios/AxiosFactory";
+import axios from "axios";
 
 const CustomerDetails = () => {
 	const { state, employerActions } = useEmployerPageContext();
-	const [limit,setlimit]=useState(10)
-	const [page,setPage]=useState(1)
+	const [limit, setlimit] = useState(10)
+	const [page, setPage] = useState(1)
+	const [pageCount, setPageCount] = useState(1)
+	const [total, setTotal] = useState(0)
+	const getTotal = async () => {
+		const { data } = await axios.get(`${basePath}admin/pages/Dashboard/getPendingEmployeeListing/`, { withCredentials: true })
+		console.log(data)
+		if (data.length > 0) {
+			setTotal(data[0].totalPendingEmployees)
+			setPageCount(Math.ceil(total / limit));
+		}
+
+	}
+	useEffect(() => {
+		if (total % limit > 0) {
+			setPageCount(Math.ceil(total / limit));
+		} else {
+			setPageCount(Math.ceil(total / limit) + 1);
+		}
+	}, [limit, page]);
 	useEffect(() => {
 		const requestData = {
-		  page: page,
-		  limit: limit,
+			page: page,
+			limit: limit,
 		};
-	
+
 		console.log("hii")
-		
+
 		employerActions.getPendingEmployeeList(requestData);
-	
-		
-	  }, [limit, page]);
+
+
+	}, [limit, page]);
 	return (
 		<>
 			<div
@@ -109,7 +129,7 @@ const CustomerDetails = () => {
 										<SortIcon />
 									</span>
 								</th>
-								
+
 								<th scope="col" className="px-6 py-5 font-normal text-zinc-800">
 									Profile Picture{" "}
 									<span className="pl-0.5 inline-block relative top-0.5">
@@ -128,7 +148,7 @@ const CustomerDetails = () => {
 										<SortIcon />
 									</span>
 								</th>
-								
+
 							</tr>
 						</thead>
 						{/* Table Contents */}
@@ -152,44 +172,40 @@ const CustomerDetails = () => {
 				{/* Pagination for table */}
 				<div className="flex bg-white border-t-2 border-gray-100 py-6 text-sm">
 					<div className="px-3">
-					    <select
-  className="bg-theme-btn-gray px-2 py-0.5 border-2 text-zinc-500 border-gray-50 rounded-lg"
-  value={limit}
-  onChange={(event) => {
-    console.log("Selected value:", event.target.value);
-    setlimit(Number(event.target.value));
-  }}
->
+						<select
+							className="bg-theme-btn-gray px-2 py-0.5 border-2 text-zinc-500 border-gray-50 rounded-lg"
+							value={limit}
+							onChange={(event) => {
+								console.log("Selected value:", event.target.value);
+								setlimit(Number(event.target.value));
+							}}
+						>
 							<option value="10">10</option>
 							<option value="1">1</option>
 							<option value="20">20</option>
 							<option value="ALl">All</option>
 						</select>
 						<label className="text-zinc-400 pl-2">Items per page</label>
-						<label className="text-zinc-700 pl-4">1-10 of 200 items</label>
+						<label className="text-zinc-700 pl-4">{total == 0 ? 0 : (page > 1 ? (page - 1) * limit : 1) + "-" + ((page) * limit)} of {total} items</label>
 					</div>
-					<div className="ml-auto px-6">
-						<select
+					<div className="ml-auto px-6 flex items-center">
+						<div
 							className="bg-theme-btn-gray px-2 py-0.5 border-2 text-zinc-500 border-gray-50 rounded-lg"
-							placeholder="10" value={page} onChange={(event) => {
-								
-								setPage(Number(event.target.value));
-							  }}
+
 						>
-							<option value="1">1</option>
-							<option value="2">2</option>
-						</select>
-						<label className="text-zinc-700 pl-2">of 44 pages</label>
+							<p>{page}</p>
+						</div>
+						<label className="text-zinc-700 pl-2">of {pageCount} pages</label>
 						<label className="text-zinc-700 pl-4">
 							<div className="inline-block">
-								<button onClick={()=>page>0?setPage(page-1):alert("You reached on page 1")} >
+								<button onClick={() => page > 1 ? setPage(page - 1) : alert("You reached on page 1")} >
 									<Icon
 										className="inline-block"
 										icon="ic:round-keyboard-arrow-left"
 										width="20"
 									/>
 								</button>
-								<button onClick={()=>setPage(page+1)}>
+								<button onClick={() => (page < pageCount || pageCount == 0) ? setPage(page + 1) : alert("you reched pn maximum")}>
 									<Icon
 										className="inline-block"
 										icon="material-symbols:keyboard-arrow-right"
