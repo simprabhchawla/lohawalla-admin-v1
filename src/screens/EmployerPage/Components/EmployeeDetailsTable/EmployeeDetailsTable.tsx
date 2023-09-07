@@ -16,13 +16,12 @@ const CustomerDetails = () => {
 	const [pageCount, setPageCount] = useState(1)
 	const [total, setTotal] = useState(0)
 	const getTotal = async () => {
-		const { data } = await axios.get(`${basePath}admin/pages/Dashboard/getPendingEmployeeListing/`, { withCredentials: true })
+		const { data } = await axios.get(`${basePath}admin/pages/Dashboard/getPendingEmployeeListing?`, { withCredentials: true })
 		console.log(data)
 		if (data.length > 0) {
 			setTotal(data[0].totalPendingEmployees)
 			setPageCount(Math.ceil(total / limit));
 		}
-
 	}
 	useEffect(() => {
 		if (total % limit > 0) {
