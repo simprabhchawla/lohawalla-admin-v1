@@ -12,6 +12,7 @@ import lock from "../../../../assets_/icons/pop upchangerole.svg"
 import axios from "axios";
 import { basePath } from "@src/modules/axios/AxiosFactory";
 import toast from "react-hot-toast";
+import deletess from "../../../../assets_/icons/Delete.svg"
 
 interface Props {
 	data: Employee.EmployeeData[];
@@ -23,8 +24,8 @@ export default function CurrentEmployeeTable(props: Props) {
 	const { state, employerActions } = useEmployerPageContext();
 	const [role, setrole] = useState("")
 	const [Id, setId] = useState("")
-	const [password, setPassword] = useState("")
 	const [match, setMatch] = useState(false)
+	const [password, setPassword] = useState("")
 	const [tpassword, setTPassword] = useState("")
 	const [limit, setlimit] = useState(10)
 	const [page, setPage] = useState(1)
@@ -44,7 +45,7 @@ export default function CurrentEmployeeTable(props: Props) {
 
 	}
 	getTotal()
-	
+
 	useEffect(() => {
 		if (total % limit > 0) {
 			setPageCount(Math.ceil(total / limit));
@@ -92,8 +93,6 @@ export default function CurrentEmployeeTable(props: Props) {
 	}
 
 	const handleSumbit = async () => {
-		//console.log("Roleeeeee",role)
-		//console.log("iiiiiii",Id)
 		try {
 			const { data } = await axios.patch(
 				`${basePath}admin/pages/employeeListing/updateEmployeeRole/${Id}`,
@@ -129,7 +128,6 @@ export default function CurrentEmployeeTable(props: Props) {
 			);
 
 			toast.success("Password update Sucessfully")
-
 			closeChangePopup()
 		}
 		catch (err: any) {
@@ -137,6 +135,43 @@ export default function CurrentEmployeeTable(props: Props) {
 			toast.error(err)
 		}
 	}
+
+
+
+	const [showConfirmation, setShowConfirmation] = useState(false);
+	const [employeeId, setEmployeeId] = useState('');
+
+	const handleDeleteClick = (id: any) => {
+		console.log(id)
+		setEmployeeId(id);
+		setShowConfirmation(true);
+	}
+
+
+
+	const deleteEmployee = async () => {
+		try {
+			const { data } = await axios.patch(
+				`${basePath}admin/pages/employeeListing/inActiveUser/${employeeId}`,				
+				{
+					withCredentials: true
+				}
+				);
+			toast.success("Employee Deleted Successfullly")
+			setShowConfirmation(false);
+			window.location.reload();
+
+		}
+		catch (err: any) {
+			console.log(err);
+			toast.error("error")
+		}
+	}
+
+	const handleCancelClick = () => {
+		setShowConfirmation(false);
+	};
+
 	return (
 		<>
 			<div
@@ -151,7 +186,7 @@ export default function CurrentEmployeeTable(props: Props) {
 				</div>
 				<div style={{ overflowX: "auto" }}>
 					<table className={style.table + " bg-white w-full table-auto"}>
-						<thead className="border-b">
+						<thead className="border-b w-full">
 							<th
 								scope="col"
 								className="px-6 py-5 font-medium text-gray-900"
@@ -172,6 +207,7 @@ export default function CurrentEmployeeTable(props: Props) {
 							<TableHeaderCell text="Password" />
 							<TableHeaderCell text="Profile Image" />
 							<TableHeaderCell text="Date Of Creation" />
+							<TableHeaderCell text="Delete Employee" />
 						</thead>
 						<tbody>
 							{props.data.map(
@@ -266,10 +302,20 @@ export default function CurrentEmployeeTable(props: Props) {
 													{dateOfCreation}
 												</p>
 											</td>
-
+											<td className="px-6 cursor-pointer py-3 font-normal">
+												<div className="flex gap-[5px]">
+													<p
+														className="text-sm text-slate-800"
+														onClick={() => handleDeleteClick(id)}
+													>
+														Delete
+													</p>
+													<div>
+														<img src={deletess} alt="Delete" onClick={() => handleDeleteClick(id)} />
+													</div>
+												</div>
+											</td>
 										</tr>
-
-
 									);
 								}
 							)}
@@ -353,6 +399,26 @@ export default function CurrentEmployeeTable(props: Props) {
 									}
 								</div>
 							</div>
+						</div>
+					</div>
+				)}
+
+				{showConfirmation && (
+					<div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black bg-opacity-50">
+						<div className="bg-white p-6 text-lg rounded-lg text-center">
+							<p className="font-bold">Are you sure you want to delete?</p>
+							<button
+								className="bg-red-500 text-white px-4 py-2 rounded-md m-2"
+								onClick={deleteEmployee}
+							>
+								Yes
+							</button>
+							<button
+								className="bg-gray-300 text-gray-700 px-4 py-2 rounded-md m-2"
+								onClick={handleCancelClick}
+							>
+								No
+							</button>
 						</div>
 					</div>
 				)}
