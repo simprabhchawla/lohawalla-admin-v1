@@ -36,6 +36,7 @@ export default function UnAuthPage(props: Props) {
 									onClick={() => {
 										props.login && props.login();
 										window.location.replace('https://www.lohawalla.com/')
+										// window.location.replace('http://localhost:3000/')
 										// window.location.replace('https://lohawala.onrender.com/')
 									}}
 								>

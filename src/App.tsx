@@ -6,22 +6,29 @@ import "./App.css";
 import EmployerPage from "./screens/EmployerPage/EmployerPage";
 import Dashboard from "./screens/Dashboard/Dashboard";
 import AuthGuard from "./auth/AuthGuard/AuthGuard";
+import { DashboardVouchers } from "./screens/Vouchers/DashboardVouchers";
+import { RatioSelect } from "./screens/RatioSelect/ratioSelect";
+import { ManagerDashboard } from "./screens/ManagerDashboard/ManagerDashboard";
+import { GodownDashboard } from "./screens/Godown/GodownDashboard";
 
 function App() {
 	return (
 
-		<AuthGuard>
+		//<AuthGuard>
 			<div>
 				<Routes>
-					<Route path="/" element={<Dashboard />}></Route>
+					<Route path="/" element={<DashboardVouchers />}></Route>
 					<Route path="/employer" element={<EmployerPage />}></Route>
+					<Route path="/ratio" element={<RatioSelect />}></Route>
+					<Route path="/manager" element={<ManagerDashboard />}></Route>
+					<Route path="/godown" element={<GodownDashboard />}></Route>
 				</Routes>
 				<Toaster
 					position="top-center"
 					reverseOrder={false}
 				/>
 			</div>
-		 </AuthGuard> 
+		//</AuthGuard>
 
 	);
 }
