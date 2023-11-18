@@ -15,12 +15,12 @@ export const Table = () => {
                     </tr>
                     {/* {filteredData && filteredData.map((element:any, index:any) => (
                         <tr key={index} className='border-b-4'>
-                            <td className="px-4  text-xs font-bold h-[56px] whitespace-nowrap">{index + 1}</td>
-                            <td className="px-4  text-xs font-bold h-[56px] whitespace-nowrap">{element.voucherName}</td>
-                            <td className="px-4  text-xs font-bold h-[56px] whitespace-nowrap">{element.voucherMethod}</td>
+                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{index + 1}</td>
+                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element.voucherName}</td>
+                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element.voucherMethod}</td>
                             <td className="px-4 text-[#21A0C3]  underline  text-xs font-bold h-[56px] whitespace-nowrap">{element.typeOfVoucher}</td>
-                            <td className="px-4  text-xs font-bold h-[56px] whitespace-nowrap">{element.voucherCode}</td>
-                            <td className="px-4  text-xs font-bold h-[56px] whitespace-nowrap">{element.updatedAt.slice(0, 10)}</td>
+                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element.voucherCode}</td>
+                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element.updatedAt.slice(0, 10)}</td>
                         </tr>
                     ))} */}
                 </tbody>

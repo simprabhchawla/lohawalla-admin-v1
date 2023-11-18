@@ -1,14 +1,24 @@
 import axios from 'axios';
-import { addVouchersApiPath, getAllVouchersApiPath } from "../ApiRoutes";
+import { addVouchersApiPath, getAllGroupsApiPath, getAllVouchersApiPath } from "../ApiRoutes";
 
 
 
-export const AllVouchersDataApi = async (group:any) => {
+export const AllVouchersDataApi = async (groups:any) => {
 
-  console.log(group)
+  console.log(groups)
   try {
-    const response = await axios.post(`${getAllVouchersApiPath}`,group);
+    const response = await axios.post(`${getAllVouchersApiPath}`,groups);
     console.log(response.data)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const AllGroupsDataApi = async () => {
+  try {
+    const response = await axios.get(`${getAllGroupsApiPath}`);
+    console.log("aa",response.data)
     return response.data;
   } catch (error) {
     throw error;
@@ -19,8 +29,9 @@ export const AllVouchersDataApi = async (group:any) => {
 
 export const addVouchersAPI = async (updatedData:any) => {
   try {
-    console.log(updatedData)
+    console.log("efnefuw",updatedData)
     const response = await axios.post(`${addVouchersApiPath}`, updatedData);
+    console.log("efnefuw",response.data)
     return response.data;
   } catch (error:any) {
     throw new Error('Error adding : ' + error.message);

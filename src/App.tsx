@@ -9,7 +9,8 @@ import AuthGuard from "./auth/AuthGuard/AuthGuard";
 import { DashboardVouchers } from "./screens/Vouchers/DashboardVouchers";
 import { RatioSelect } from "./screens/RatioSelect/ratioSelect";
 import { ManagerDashboard } from "./screens/ManagerDashboard/ManagerDashboard";
-import { GodownDashboard } from "./screens/Godown/GodownDashboard";
+import { Godown } from "./screens/Godown/Godown";
+// import { GodownDashboard } from "./screens/Godown/GodownDashboard";
 
 function App() {
 	return (
@@ -21,7 +22,7 @@ function App() {
 					<Route path="/employer" element={<EmployerPage />}></Route>
 					<Route path="/ratio" element={<RatioSelect />}></Route>
 					<Route path="/manager" element={<ManagerDashboard />}></Route>
-					<Route path="/godown" element={<GodownDashboard />}></Route>
+					<Route path="/godown" element={<Godown />}></Route>
 				</Routes>
 				<Toaster
 					position="top-center"

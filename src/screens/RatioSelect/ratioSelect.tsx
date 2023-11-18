@@ -1,7 +1,8 @@
 import Navbar from '@src/Components/Navbar'
 import Sidebar from '../../Components/Sidebar'
 import { Table } from './Components/Table'
-
+import add from "../../assets_/icons/add.svg"
+import edit from "../../assets_/icons/edit.svg"
 export const RatioSelect = () => {
 
 
@@ -23,10 +24,12 @@ export const RatioSelect = () => {
                                 Ratio Creation
                             </div>
                             <div className='flex gap-[10px]'>
-                                <div className='border-2 flex px-[20px] cursor-pointer py-[16px] text-[#005D7F] font-bold gap-[5px] rounded-[5px]'>
+                                <div className='border-2 flex px-[30px] cursor-pointer  items-center text-[#005D7F] font-bold gap-[5px] rounded-[8px]'>
+                                    <img src={edit} alt="" />
                                     Edit
                                 </div>
-                                <div className='border-2 flex px-[20px] cursor-pointer text-white py-[16px] bg-[#005D7F] font-bold gap-[5px] rounded-[5px]'>
+                                <div className='border-2 flex px-[30px] cursor-pointer text-white  items-center bg-[#005D7F] font-bold gap-[5px] rounded-[8px]'>
+                                    <img src={add} alt="" />
                                     Create
                                 </div>
 

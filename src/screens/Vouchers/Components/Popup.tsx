@@ -1,9 +1,11 @@
 import { addVouchers, getVouchersAsync } from '@src/Redux/Slice/customerSlice';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from "react-hook-form";
-import { useDispatch } from 'react-redux';
-
-const PopupComponent = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import add from "../../../assets_/icons/add.svg"
+import check from "../../../assets_/icons/save.svg"
+import { getGroupsAsync } from '@src/Redux/Slice/getGroupSlice';
+const PopupComponent = ({groupsData}:any) => {
 
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
@@ -38,19 +40,16 @@ const PopupComponent = () => {
         const updatedData = {
             ...data,
             selectedValue: data.typeOfVoucher,
-            group: [
-                "654df2fffb600592ae840d23",
-                "647b2d6dfc9a5ec789cdee9c"
-            ],
-            godown: "654df261c418797151682e6f"
+            group: [data.group],
         };
 
-        const group = {
-            "userId" :"647b2d6dfc9a5ec789cdee9c"
-        } 
-            
+        const groups = {
+            "userId": "647b2d6dfc9a5ec789cdee9c"
+        }
+
         dispatch(addVouchers(updatedData)).then(() => {
-            dispatch(getVouchersAsync(group));
+            dispatch(getVouchersAsync(groups));
+            dispatch(getGroupsAsync())
         });
 
         setFormData(updatedData);
@@ -58,10 +57,13 @@ const PopupComponent = () => {
 
 
 
+   
 
     return (
         <div>
+
             <button onClick={openPopup} className='flex px-[20px] text-white py-[10px] justify-center items-center rounded-[8px] border bg-[#005D7F]'>
+                <img src={add} alt="" />
                 Create Vouchers
             </button>
             {isPopupOpen && (
@@ -77,17 +79,19 @@ const PopupComponent = () => {
 
                             <div className='flex flex-col gap-[10px]'>
                                 <span>Choose Types Of Vouchers</span>
-                                <select {...register('typeOfVoucher', { required: 'typeOfVoucher is required' })}
 
-                                    value={selectedValue} className='outline-none border rounded-[8px]'>
+                                <select
+                                    {...register('typeOfVoucher', { required: 'typeOfVoucher is required' })}
+                                    className='outline-none border rounded-[8px]'
+                                >
                                     <option value="purchase">Purchase</option>
                                     <option value="purchaseOrder">PurchaseOrder</option>
                                     <option value="sales">Sales</option>
                                     <option value="salesOrder">SalesOrder</option>
                                     <option value="transfer">Transfer</option>
                                 </select>
-
                             </div>
+
                             <div className='flex flex-col gap-[10px]'>
                                 <span>Voucher Code</span>
                                 <input
@@ -116,15 +120,20 @@ const PopupComponent = () => {
                                 </select>
 
                             </div>
-                            {/* <div className='flex flex-col gap-[10px]'>
+                            <div className='flex flex-col gap-[10px]'>
                                 <span>Group</span>
                                 <select
-                                    className='outline-none border rounded-[8px]'>
-                                    <option value="Group1">Group1</option>
-                                    <option value="Group2">Group2</option>
+                                    {...register('group', { required: 'group is required' })}
+                                    className='outline-none border rounded-[8px]'
+                                >
+                                    {groupsData && groupsData.map((element: any, index: any) => (
+                                        <option key={element.id} value={element.id}>
+                                            {element.name}
+                                        </option>
+                                    ))}
                                 </select>
+                            </div>
 
-                            </div> */}
 
                             <div className='flex gap-[10px] justify-end'>
 
@@ -136,8 +145,9 @@ const PopupComponent = () => {
                                 </button>
                                 <button
                                     type='submit'
-                                    className="bg-[#005D7F] text-white font-bold py-2 px-4 mt-4 rounded"
+                                    className="bg-[#005D7F] flex gap-[5px] items-center text-white font-bold py-2 px-4 mt-4 rounded"
                                 >
+                                    <img src={check} alt="" />
                                     Create Voucher
                                 </button>
                             </div>

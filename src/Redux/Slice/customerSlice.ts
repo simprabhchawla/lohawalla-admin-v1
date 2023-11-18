@@ -10,9 +10,9 @@ const initialState = {
 
 };
 
-export const getVouchersAsync: any = createAsyncThunk('getVouchersAsync', async (group) => {
+export const getVouchersAsync: any = createAsyncThunk('getVouchersAsync', async (groups) => {
   try {
-    const data = await AllVouchersDataApi(group);
+    const data = await AllVouchersDataApi(groups);
     return data;
   } catch (error) {
     throw error;

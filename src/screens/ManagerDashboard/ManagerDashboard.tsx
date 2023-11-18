@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import { addManagerDataAsync, getManagerAsync } from '@src/Redux/Slice/ManagerSlice'
 import AddManagerForm from './Components/AddManagerForm'
-
+import add from "../../assets_/icons/add.svg"
 
 export const ManagerDashboard = () => {
 
@@ -62,6 +62,7 @@ export const ManagerDashboard = () => {
                                         className='border-2 flex px-[20px] cursor-pointer text-white py-[16px] bg-[#005D7F] font-bold gap-[5px] rounded-[5px]'
                                         onClick={openPopup}
                                     >
+                                        <img src={add} alt="" />
                                         Add Manager
                                     </div>
 

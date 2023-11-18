@@ -5,7 +5,8 @@ import { VoucherEntry } from './Components/VoucherEntry';
 import { Graph } from './Components/Graph';
 import PopupComponent from './Components/Popup';
 import { useDispatch, useSelector } from "react-redux"
-import { getVouchersAsync } from '@src/Redux/Slice/customerSlice';
+import {  getVouchersAsync } from '@src/Redux/Slice/customerSlice';
+import { getGroupsAsync } from '@src/Redux/Slice/getGroupSlice';
 
 export const DashboardVouchers = () => {
     const [activeTab, setActiveTab] = useState('Voucher');
@@ -19,14 +20,22 @@ export const DashboardVouchers = () => {
     console.log("dd", vouchersData)
 
     const group = {
-        "userId" :"647b2d6dfc9a5ec789cdee9c"
-    } 
-        
+        "userId": "647b2d6dfc9a5ec789cdee9c"
+    }
+
 
     // view
     useEffect(() => {
         dispatch(getVouchersAsync(group));
     }, [dispatch]);
+
+    const groupsData = useSelector((state: any) => state?.groups?.data);
+    console.log("hello", groupsData)
+
+    useEffect(() => {
+        dispatch(getGroupsAsync());
+    }, [dispatch]);
+
 
 
     return (
@@ -66,13 +75,13 @@ export const DashboardVouchers = () => {
 
                         </div>
                         <div className='pt-[32px]'>
-                           
-                            <PopupComponent/>
+
+                            <PopupComponent groupsData={groupsData}/>
                         </div>
                     </div>
                     <div >
                         {activeTab === 'Voucher' && (
-                            <div className="p-[16px]"><VoucherEntry vouchersData={vouchersData}/></div>
+                            <div className="p-[16px]"><VoucherEntry  vouchersData={vouchersData} /></div>
                         )}
 
                         {/* {activeTab === 'Graph' && (

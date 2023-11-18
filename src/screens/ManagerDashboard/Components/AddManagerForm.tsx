@@ -1,7 +1,7 @@
 // AddManagerForm.js
 import React from 'react';
 import { useForm } from 'react-hook-form';
-
+import check from "../../../assets_/icons/save.svg"
 const AddManagerForm = ({ onClose, onSubmit }: any) => {
     const { register, handleSubmit } = useForm();
 
@@ -79,7 +79,9 @@ const AddManagerForm = ({ onClose, onSubmit }: any) => {
 
             <div className='flex gap-[10px] justify-end text-center'>
                 <button onClick={onClose} className='text-[#005D7F] border-2 border-[#005D7F] rounded-[8px] py-[12px] px-[30px]  '>Cancel</button>
-                <button type="submit" className='bg-[#005D7F] rounded-[8px] py-[12px] px-[30px]  text-white'>Submit</button>
+                <button type="submit" className='bg-[#005D7F] items-center gap-[10px] flex  rounded-[8px] py-[12px] px-[30px]  text-white'>
+                    <img src={check} alt="" />
+                    Submit</button>
 
             </div>
         </form>
