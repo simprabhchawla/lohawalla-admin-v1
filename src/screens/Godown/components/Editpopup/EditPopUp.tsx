@@ -14,7 +14,7 @@ const EditPopUp = ({ handleFormSubmit, closed, selectedRow, setSelectedRow }: an
                                     <h1 className='text-[32px] bold'>Edit Details</h1>
                                     <button type='submit' className='flex items-center px-[32px] py-[12px] bg-[#005D7F]  rounded-[8px] gap-[8px]'>
                                     <img src={check} alt="" className='w-[20px] h-[20px]' />
-                                        <span className='text-white bold text-[14px]'>Save</span>
+                                        <span className='text-white bold text-[14px]'>Saves</span>
                                     </button>
                                 </div>
 
