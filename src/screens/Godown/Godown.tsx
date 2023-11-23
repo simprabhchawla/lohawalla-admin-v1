@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { addGodown, deleteGodownAsync, fetchGodownData, updateGodown } from '../../Redux/Slice/godownSlice';
-import Search from './components/search/search';
+import { addGodown, deleteGodownAsync, fetchGodownData, updateGodown } from '../../Redux/Slice/Admin/godownSlice';
 import { useForm } from 'react-hook-form';
 import EditPopUp from './components/Editpopup/EditPopUp';
 import AddGodown from './components/Addpopup/AddGodown';
@@ -25,7 +24,6 @@ export const Godown = () => {
 
     // console.log("ecbieucbie", editData)
 
-    // submit
 
     const { handleSubmit, register, formState: { errors } } = useForm();
 
@@ -96,7 +94,7 @@ export const Godown = () => {
     useEffect(() => {
         dispatch(fetchGodownData());
     }, [dispatch]);
-
+ 
     // edit
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
@@ -198,7 +196,6 @@ export const Godown = () => {
                             <tr className='border-b-4'>
                                 <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'>SR NO</td>
                                 <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'>Godown name</td>
-                                <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'>Selfs</td>
                                 <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'>Details</td>
                                 <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'>Code</td>
                                 <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'></td>
@@ -208,7 +205,6 @@ export const Godown = () => {
                                 return <tr className={`border-b border-solid border-[#0000001A]`} key={index}>
                                     <td className='ps-[34px] h-14 text-sm font-medium text-[#5C5C77]'>{index + 1}</td>
                                     <td className='px-4 h-14 text-sm font-medium text-[#5C5C77]'>{element.godownName}</td>
-                                    <td className='px-4 h-14 text-sm font-medium text-[#5C5C77]'>{element.numberOfShelfs}</td>
                                     <td className='px-4 h-14 flex cursor-pointer items-center gap-[5px] text-sm font-medium text-[#4B4DED]'
                                        >
                                         View Detail
@@ -277,7 +273,7 @@ export const Godown = () => {
 
                             </div>
                         </div>
-                    )}
+                    )} 
 
                     {deletePopupOpen && (
                         <div className="fixed inset-0 flex items-center z-50 justify-center bg-black bg-opacity-50">

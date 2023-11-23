@@ -68,12 +68,7 @@ const AddGodown = ({ closed, onSubmitCallback }: any) => {
                                     </select>
                                 </div>
 
-                                <div className='flex flex-col border rounded-[8px]  px-[16px] py-[8px]'>
-                                    <span className='text-[12px]'>Shelfs</span>
-                                    <input
-                                        {...register('numberOfShelfs', { required: 'numberOfShelfs is required' })}
-                                        type="number" placeholder='10' className='outline:none border-none focus:outline-none' />
-                                </div>
+                             
                                
                             </div>
                         </div>

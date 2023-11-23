@@ -1,13 +1,15 @@
 import RotateAndScale from "@src/Components/interactions/RotateAndScale/RotateAndScale";
 import ScaleOnHover from "@src/Components/interactions/ScaleOnHover/ScaleOnHover";
 import AssetIndex, { ImageIndex } from "@src/assets_/AssetIndex";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface Props {
 	login?: () => void;
 }
 
 export default function UnAuthPage(props: Props) {
+
+
 	return (
 		<div className="w-full">
 			{/* header */}
@@ -35,8 +37,8 @@ export default function UnAuthPage(props: Props) {
 									className="px-12 py-4 bg-indigo-600 text-white rounded-full"
 									onClick={() => {
 										props.login && props.login();
-										window.location.replace('https://www.lohawalla.com/')
-										// window.location.replace('http://localhost:3000/')
+										// window.location.replace('https://www.lohawalla.com/')
+										window.location.replace('http://localhost:3000/')
 										// window.location.replace('https://lohawala.onrender.com/')
 									}}
 								>

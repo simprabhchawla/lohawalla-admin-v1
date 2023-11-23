@@ -19,5 +19,9 @@ interface LoginData {
 }
 
 export default async function getIsLoggedIn() {
+	// const headers = {
+	// 	'Content-Type': 'application/json',
+	// 	'cookies': localStorage.getItem("userData"),
+	// };
 	return AuthInstance.post<LoginData>(apiIndex.isLoggedIn);
 }

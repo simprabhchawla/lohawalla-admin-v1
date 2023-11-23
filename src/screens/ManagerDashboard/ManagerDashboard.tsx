@@ -3,9 +3,10 @@ import Sidebar from '../../Components/Sidebar'
 import { Table } from './Components/Table'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { addManagerDataAsync, getManagerAsync } from '@src/Redux/Slice/ManagerSlice'
+import { addManagerDataAsync, getManagerAsync } from '@src/Redux/Slice/Admin/ManagerSlice'
 import AddManagerForm from './Components/AddManagerForm'
 import add from "../../assets_/icons/add.svg"
+import { fetchGodownData } from '@src/Redux/Slice/Admin/godownSlice'
 
 export const ManagerDashboard = () => {
 
@@ -37,6 +38,11 @@ export const ManagerDashboard = () => {
         });
         
     };
+
+    const Godowndata = useSelector((state: any) => state.godown.data);
+    useEffect(() => {
+        dispatch(fetchGodownData());
+    }, [dispatch]);
 
     return (
         <>
@@ -70,7 +76,7 @@ export const ManagerDashboard = () => {
                                         <div className="fixed inset-0 flex items-center justify-center z-50">
                                             <div className="modal-bg absolute inset-0 bg-gray-800 opacity-50"></div>
                                             <div className="modal w-[700px] relative bg-white p-6 rounded-lg shadow-lg">
-                                                <AddManagerForm onClose={closePopup} onSubmit={handleFormSubmit} />
+                                                <AddManagerForm onClose={closePopup} onSubmit={handleFormSubmit} Godowndata={Godowndata}/>
                                             </div>
                                         </div>
                                     )}

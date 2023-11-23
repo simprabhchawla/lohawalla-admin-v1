@@ -1,11 +1,13 @@
 import axios from 'axios';
-import { getAllGodownApiPath } from '../ApiRoutes';
+import { getAllGodownApiPath } from '../../ApiRoutes';
 
 
 
 export const AllGodownDataApi = async () => {
   try {
-    const response = await axios.get(`${getAllGodownApiPath}`);
+    const response = await axios.get(`${getAllGodownApiPath}`,{
+      withCredentials:true
+    });
     return response.data;
   } catch (error) {
     throw error;
@@ -17,7 +19,9 @@ export const AllGodownDataApi = async () => {
 export const addGodownAPI = async (godownData:any) => {
   try {
     // console.log(godownData)
-    const response = await axios.post(`${getAllGodownApiPath}`, godownData);
+    const response = await axios.post(`${getAllGodownApiPath}`, godownData,{
+      withCredentials:true
+    });
     return response.data;
   } catch (error:any) {
     throw new Error('Error adding godown: ' + error.message);

@@ -2,7 +2,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import check from "../../../assets_/icons/save.svg"
-const AddManagerForm = ({ onClose, onSubmit }: any) => {
+const AddManagerForm = ({ onClose, onSubmit, Godowndata }: any) => {
+    console.log("shshs", Godowndata)
     const { register, handleSubmit } = useForm();
 
     const handleFormSubmit = (data: any) => {
@@ -56,13 +57,19 @@ const AddManagerForm = ({ onClose, onSubmit }: any) => {
 
                 <div className='flex gap-[10px]  justify-between'>
 
-                    <label className='flex gap-[10px] w-[100%] flex-col'>
-                        <span className='text-[#21A0C3]'>
-                            Godown
-
-                        </span>
-                        <input type="text" {...register('godown', { required: true })} className='border rounded-[8px] border-[#DFE1E6]' />
-                    </label>
+                    <div className='flex w-[100%] flex-col gap-[10px]'>
+                        <span className='text-[#21A0C3]'>Godown</span>
+                        <select
+                           {...register('godown', { required: true })} 
+                            className='border rounded-[8px] border-[#DFE1E6]'
+                        >
+                            {Godowndata && Godowndata.map((element: any, index: any) => (
+                                <option key={element._id} value={element._id}>
+                                    {element.godownName}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
                     <label className='flex gap-[10px] w-[100%] flex-col'>
 

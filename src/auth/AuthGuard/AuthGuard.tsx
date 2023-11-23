@@ -4,6 +4,9 @@ import RoleIndex from "@src/modules/types/Roles.enum";
 import { NameIdPair } from "@src/modules/backendTypes/change/NameIdPair";
 import AsyncStateFactory from "@src/modules/StateManagement/AsyncState/AsyncStateFactory";
 import AuthActions from "./actions/AuthActions";
+import LoginPage from "@src/Login/LoginPage/Loginpage";
+import { DashboardVouchers } from "@src/screens/Vouchers/DashboardVouchers";
+// import Login from "@src/screens/Login/Login";
 
 //* interfaces
 interface Props {
@@ -52,6 +55,8 @@ export default function AuthGuard(props: Props) {
 		},
 	});
 
+	const data = localStorage.getItem("userData")
+	// console.log(data)
 	const authActions = new AuthActions(state, setState);
 
 	useEffect(() => {
@@ -65,11 +70,12 @@ export default function AuthGuard(props: Props) {
 		state.loginData.role !== RoleIndex.ADMIN
 	) {
 		return (
-			<UnAuthPage
-				login={() => {
-					authActions.login();
-				}}
-			/>
+			// <UnAuthPage
+			// 	login={() => {
+			// 		authActions.login();
+			// 	}}
+			// />
+			<LoginPage/>
 		);
 	} else {
 		return (
@@ -88,6 +94,8 @@ export default function AuthGuard(props: Props) {
 				}}
 			>
 				{props.children}
+
+				{/* <DashboardVouchers /> */}
 			</AuthGuardContext.Provider>
 		);
 	}

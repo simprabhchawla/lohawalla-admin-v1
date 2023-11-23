@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import {  AllGodownDataApi, addGodownAPI, deleteGodownApi, editGodownAPI } from '../Api/godownApi';
+import {  AllGodownDataApi, addGodownAPI, deleteGodownApi, editGodownAPI } from '../../Api/Admin/godownApi';
 
 const initialState = {
   data: null,

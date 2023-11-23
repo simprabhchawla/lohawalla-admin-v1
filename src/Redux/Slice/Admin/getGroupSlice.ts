@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { AllGroupsDataApi } from '../Api/customerApi';
+import { AllGroupsDataApi } from '../../Api/Admin/customerApi';
 
 const initialState = {
   data: null,
