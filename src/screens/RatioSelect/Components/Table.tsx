@@ -1,7 +1,7 @@
 
 export const Table = () => {
   return (
-    <div>
+    <div> 
            <table className='w-full'>
                 <tbody>
                     <tr className='border-b-4'>
