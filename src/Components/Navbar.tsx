@@ -51,6 +51,7 @@ const Navbar = ({ Pagename }: PageNameProps) => {
 					</p>
 				</div>
 			</div>
+			{/* <LoginForm/> */}
 		</div>
 	);
 };
