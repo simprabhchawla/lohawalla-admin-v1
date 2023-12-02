@@ -4,85 +4,39 @@ import searchh from "../../../assets_/Godown Ions images//search.svg"
 import Table from "./Components/Table"
 import img from "../../../assets_/Godown Ions images//avatar.svg"
 import { Link } from "react-router-dom";
-
-// const PageLimit = 9
-
-
-const tableData = [
-  {
-    date: "23/04/23, 03:56pm",
-    img: img,
-    customerName: "Rohan Kaushal",
-    voucherNumber: "07OCTO2023",
-    orderNumber: "0121213123",
-    totalAmount: "45000",
-  },
-  {
-    date: "23/04/23, 03:56pm",
-    img: img,
-    customerName: "kajal Kaushal",
-    voucherNumber: "07OCTO2023",
-    orderNumber: "0121213123",
-    totalAmount: "45000",
-  },
-  {
-    date: "23/04/23, 03:56pm",
-    img: img,
-    customerName: "Rohan Kaushal",
-    voucherNumber: "07OCTO2023",
-    orderNumber: "0121213123",
-    totalAmount: "45000",
-  },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { getSalesOrderAsync } from "@src/Redux/Slice/GodownManager/SalesOrderSlice";
 
 
 export const SalesOrder = () => {
 
-  // const [page, setPage] = useState(1);
-  // const [limit, setLimit] = useState(10);
-  const [searchInput, setSearchInput] = useState(""); 
+  const [searchInput, setSearchInput] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
-  // const handleNextClick = () => {
-  //   const totalPages = Math.ceil(PageLimit / limit);
-  //   console.log("hyy", totalPages, page)
-  //   if (page < totalPages) {
-  //     setPage(page + 1);
-  //   }
-  // };
-
-  // const handlePreviousClick = () => {
-  //   if (page > 1) {
-  //     setPage(page - 1);
-  //   }
-  // };
 
 
-  // useEffect(() => {
-  //     const data = {
-  //         page: page,
-  //         limit: limit
-  //     }
+  const dispatch = useDispatch()
 
-  //     // dispatch(fetchNotifications(data)).then((res: any) => {
-  //     //     setNotificationData(res.payload)
-  //     //     console.log("hiiiii", notificationsData)
-  //     // })
+  const tableData = useSelector((state: any) => state.salesOrder?.data?.orders);
+  console.log(tableData)
 
-  // }, [dispatch, page, limit]);
+  useEffect(() => {
+    dispatch(getSalesOrderAsync());
+  }, [dispatch]);
 
-  // const totalPages = Math.ceil(PageLimit / limit);
 
-  const filteredTableData = tableData.filter((data) =>
-    Object.values(data).some((value) =>
+
+  const dataArray = Array.isArray(tableData) ? tableData : [];
+
+  const filteredTableData = dataArray.filter((data: any) =>
+    Object.values(data).some((value: any) =>
       value.toString().toLowerCase().includes(searchInput.toLowerCase())
     )
   );
-
   useEffect(() => {
     if (searchInput.trim() !== "") {
       const newSuggestions: string[] = tableData
-        .map((data) => data.customerName)
-        .filter((value) => value.toLowerCase().includes(searchInput.toLowerCase()));
+        .map((data: any) => data.customerName)
+        .filter((value: any) => value.toLowerCase().includes(searchInput.toLowerCase()));
       setSuggestions(newSuggestions);
     } else {
       setSuggestions([]);
@@ -152,17 +106,7 @@ export const SalesOrder = () => {
       <div className="mt-12 overflow-auto">
         <Table tableData={filteredTableData} />
 
-        {/* <div className="flex pt-[10px] gap-[10px] justify-center items-center">
-          <button onClick={handlePreviousClick} disabled={page === 1}>
-            {"<<<"}
-          </button>
-          <span className="border rounded-full bg-blue-500 px-[18px] shadow-lg text-white py-[12px]">
-            {page} of {totalPages}
-          </span>
-          <button onClick={handleNextClick}>
-            {">>>"}
-          </button>
-        </div> */}
+
       </div>
 
     </div>

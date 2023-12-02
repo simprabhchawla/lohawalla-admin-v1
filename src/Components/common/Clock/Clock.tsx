@@ -29,7 +29,7 @@ function Clock() {
 					" cursor-pointer hover:bg-slate-50 transition-all hover:shadow-sm"
 				}
 			>
-				<p className="text-sm font-medium text-slate-500">
+				<p className="text-sm  py-[5px] font-medium text-slate-500">
 					{clock.hr} : {clock.mn} {clock.sector}
 				</p>
 			</div>

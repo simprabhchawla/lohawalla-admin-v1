@@ -4,6 +4,7 @@ import AdminImg from "../Assets/EmployerPage/UserTestPic.png";
 import Clock from "./common/Clock/Clock";
 import { useAuthGuardContext } from "@src/auth/AuthGuard/AuthGuard";
 import { Avatar } from "@mui/material";
+import { Link } from "react-router-dom";
 
 interface PageNameProps {
 	Pagename: string;
@@ -15,12 +16,22 @@ const Navbar = ({ Pagename }: PageNameProps) => {
 	return (
 		<div className="">
 			<div className="bg-white flex border-b-2 border-gray-100 py-2 px-4 ">
+
 				<div>
 					<h1 className="text-xl font-medium text-zinc-700 tracking-wider fontPoppins">
 						{Pagename}
 					</h1>
 				</div>
 				<div className="ml-auto flex">
+
+					<Link to='/sales'>
+						<li
+							className="text-sm border py-[15px] rounded-[8px] px-3 flex items-center active:brightness-95 mr-3  transition duration-300 hover:bg-slate-700 hover:text-white"
+
+						>
+							Switch To Godown Manager
+						</li>
+					</Link>
 					<div className="mr-5">
 						<Clock />
 					</div>
@@ -32,10 +43,14 @@ const Navbar = ({ Pagename }: PageNameProps) => {
 							width="24"
 						/>
 					</button>
+
+
+
 					<div>
 						<Avatar src={loginData?.image} sizes="small" />
 					</div>
 				</div>
+
 			</div>
 
 			<div className="bg-white px-4 py-1 mr-auto">
