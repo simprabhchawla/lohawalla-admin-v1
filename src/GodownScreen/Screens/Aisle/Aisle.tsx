@@ -5,41 +5,43 @@ import Table from "./Components/Table"
 import img from "../../../assets_/Godown Ions images/avatar.svg"
 import { Link } from "react-router-dom";
 import { AddAisle } from "./Components/AddAisle";
+import { useDispatch, useSelector } from "react-redux";
+import { getAisleAsync } from "@src/Redux/Slice/GodownManager/AisleSlice";
 
-
-const tableData = [
-  {
-    date: "23/04/23, 03:56pm",
-    img: img,
-    customerName: "Rohan Kaushal",
-    voucherNumber: "07OCTO2023",
-    orderNumber: "0121213123",
-    totalAmount: "45000",
-  }
-];
 
 
 export const Aisle = () => {
-
   const [searchInput, setSearchInput] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
-  const filteredTableData = tableData.filter((data) =>
-    Object.values(data).some((value) =>
-      value.toString().toLowerCase().includes(searchInput.toLowerCase())
-    )
-  );
+  const aisleData = useSelector((state: any) => state?.aisle?.data?.data);
+  console.log(aisleData)
+
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getAisleAsync());
+  }, [dispatch]);
+
+
+  const dataArray = Array.isArray(aisleData) ? aisleData : [];
+
+  const filteredaisleData = dataArray.filter((data: any) =>
+  Object.values(data).some((value: any) =>
+    value.toString().toLowerCase().includes(searchInput.toLowerCase())
+  )
+);
 
   useEffect(() => {
     if (searchInput.trim() !== "") {
-      const newSuggestions: string[] = tableData
-        .map((data) => data.customerName)
-        .filter((value) => value.toLowerCase().includes(searchInput.toLowerCase()));
+      const newSuggestions: string[] = aisleData
+        .map((data:any) => data.customerName)
+        ?.filter((value:any) => value.toLowerCase().includes(searchInput.toLowerCase()));
       setSuggestions(newSuggestions);
     } else {
       setSuggestions([]);
     }
-  }, [searchInput, tableData]);
+  }, [searchInput, aisleData]);
 
   const handleSuggestionClick = (suggestion: string) => {
     setSearchInput(suggestion);
@@ -82,7 +84,7 @@ export const Aisle = () => {
       {isPopupOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="modal-bg absolute inset-0 bg-gray-800 opacity-50"></div>
-          <div className="modal w-[700px] h-[650px] overflow-x-auto relative bg-white p-6 rounded-lg shadow-lg">
+          <div className="modal   overflow-x-auto relative bg-white p-6 rounded-lg shadow-lg">
             <AddAisle isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} openPopup={openPopup}
               closePopup={closePopup} />
           </div>
@@ -98,7 +100,7 @@ export const Aisle = () => {
 
       </div>
       <div className="mt-12 overflow-auto">
-        <Table tableData={filteredTableData} />
+        <Table aisleData={filteredaisleData} />
       </div>
 
     </div>

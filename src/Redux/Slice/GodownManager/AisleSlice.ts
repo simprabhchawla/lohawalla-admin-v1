@@ -1,27 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { AddShelfsApi, AllShelfsApi } from '@src/Redux/Api/GodownManager/ShelfApi';
+import { AllAisleApi,AddAisleApi } from '@src/Redux/Api/GodownManager/AisleApi';
 
 const initialState = {
   data: null,
   isLoading: false,
   error: null,
-  shelfs: [],
+  aisle: [],
   status: 'idle',
 
 };
 
-export const getShelfsAsync: any = createAsyncThunk('getShelfsAsync', async () => {
+export const getAisleAsync: any = createAsyncThunk('getAisleAsync', async (shelfCode) => {
   try {
-    const data = await AllShelfsApi();
-    return data;
-  } catch (error) {
-    throw error;
-  }
-});
-
-export const addShelfsAsync: any = createAsyncThunk('addShelfsAsync', async (selfData) => {
-  try {
-    const data = await AddShelfsApi(selfData);
+    const data = await AllAisleApi(shelfCode);
     return data;
   } catch (error) {
     throw error;
@@ -29,43 +20,53 @@ export const addShelfsAsync: any = createAsyncThunk('addShelfsAsync', async (sel
 });
 
 
+export const addAisleApiAsync: any = createAsyncThunk('addAisleApiAsync', async (aisles) => {
+  try {
+    const data = await AddAisleApi(aisles);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+});
 
-const ShelfsSlice = createSlice({
+
+
+const AisleSlice = createSlice({
   name: 'data',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getShelfsAsync.pending, (state) => {
+      .addCase(getAisleAsync.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getShelfsAsync.fulfilled, (state: any, action: any) => {
+      .addCase(getAisleAsync.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
         state.data = action.payload;
         state.error = null;
       })
-      .addCase(getShelfsAsync.rejected, (state: any, action: any) => {
+      .addCase(getAisleAsync.rejected, (state: any, action: any) => {
         state.isLoading = false;
         state.data = null;
         state.error = action.error.message;
       })
-      .addCase(addShelfsAsync.pending, (state) => {
+      .addCase(addAisleApiAsync.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(addShelfsAsync.fulfilled, (state: any, action: any) => {
+      .addCase(addAisleApiAsync.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
-        console.log("post",action.payload)
         state.data = action.payload;
         state.error = null;
       })
-      .addCase(addShelfsAsync.rejected, (state: any, action: any) => {
+      .addCase(addAisleApiAsync.rejected, (state: any, action: any) => {
         state.isLoading = false;
         state.data = null;
         state.error = action.error.message;
       })
+
   },
 });
 
-export default ShelfsSlice.reducer;
+export default AisleSlice.reducer;

@@ -19,7 +19,7 @@ export const AllVouchersDataApi = async () => {
 
 export const AllGroupsDataApi = async () => {
   try {
-    const response = await axios.get(`${getAllGroupsApiPath}`,{
+    const response = await axios.get(`${getAllGroupsApiPath}?limit=100`,{
       withCredentials:true
     });
     console.log("aa",response.data)

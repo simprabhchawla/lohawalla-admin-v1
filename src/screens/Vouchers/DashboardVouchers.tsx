@@ -15,7 +15,7 @@ export const DashboardVouchers = () => {
         setActiveTab(tab);
     };
 
-
+ 
     const dispatch = useDispatch();
     const vouchersData = useSelector((state: any) => state.voucher?.data?.vouchers);
     console.log("dd", vouchersData)
@@ -31,7 +31,7 @@ export const DashboardVouchers = () => {
     }, [dispatch]);
 
     const groupsData = useSelector((state: any) => state?.groups?.data);
-    console.log("hello", groupsData)
+    console.log("hellogroupsss", groupsData)
 
     useEffect(() => {
         dispatch(getGroupsAsync());

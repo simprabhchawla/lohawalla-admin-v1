@@ -79,6 +79,8 @@ const Sidebar = () => {
                                 </li>
                             </Link>
 
+
+
                             <li className='my-3 px-4 py-2 rounded-lg hover:bg-slate-700 hover:text-white'>
                                 <Icon className=' inline-block hover:text-white' icon="ph:arrows-down-up" width="26" />
                                 Purchaser Switch
@@ -87,6 +89,8 @@ const Sidebar = () => {
                                 <Icon className='mr-2 inline-block hover:text-white' icon="material-symbols:settings" width="26" />
                                 <Link to='/settings'>Settings</Link>
                             </li>
+
+                           
                         </ul>
 
                         <ul className=''>

@@ -23,7 +23,7 @@ type NavItem = {
 const navItems: NavItem[] = [
   {
     id: "Godown",
-    name: "Godown",
+    name: "Godown Vouchers",
     link: "/GodownDashboard",
     icon: sales,
 
@@ -32,22 +32,13 @@ const navItems: NavItem[] = [
     id: "Sales",
     name: "Sales Order",
     link: "/sales",
-    icon: sales,
-    // dropdown: [
-    //   { id: "Sales_Subitem_1", name: "Subitem 1", link: "/purchaseorder" },
-    //   { id: "Sales_Subitem_2", name: "Subitem 2", link: "/purchase" },
-    // ],
-    // hasDropdown: true,
+    icon: sales
   },
   {
     id: "Selfs",
     name: "Shelfs ",
     link: "/Selfs",
-    icon: sales,
-    // dropdown: [
-    //   { id: "SelfsListing", name: "SelfsListing", link: "/SelfsListing" },
-    // ],
-    // hasDropdown: true,
+    icon: sales
   },
   {
     id: "PurchaseOrder",
@@ -69,8 +60,7 @@ type Props = {
 };
 
 const Aside = (props: Props) => {
-  const [selectedNavItem, setSelectedNavItem] = useState<string | null>(null);
-  const [selectedDropdownItem, setSelectedDropdownItem] = useState<string | null>(null);
+  const [selectedNavItem, setSelectedNavItem] = useState<string | null>('Godown');
   const [showSidebar, setShowSidebar] = useState(false);
 
   const getTitle = () => {
@@ -111,13 +101,12 @@ const Aside = (props: Props) => {
                     className={`py-3 px-[20px] h-11  flex items-center ${selectedNavItem === item.id ? "bg-[#F0F7FE] border-l-4 border-black" : ""}`}
                     onClick={() => {
                       setSelectedNavItem(selectedNavItem === item.id ? null : item.id);
-                      setSelectedDropdownItem(null); 
                     }}
                   >
                     <div className={`${asideButtonCSS}`}>
                       <img src={item.icon} alt="" />
                       <p className="whitespace-nowrap text-[16px] font-bold">{item.name}</p>
-                      {item.hasDropdown && <span className="ml-2">&#9662;</span>} 
+                      {item.hasDropdown && <span className="ml-2">&#9662;</span>}
                     </div>
                   </Link>
                   {item.dropdown && selectedNavItem === item.id && (
@@ -126,8 +115,7 @@ const Aside = (props: Props) => {
                         <Link
                           key={subItem.id}
                           to={subItem.link}
-                          className={`py-2 px-[20px] h-11  flex items-center ${selectedDropdownItem === subItem.id ? "bg-[#F0F7FE] border-l-4 border-black" : ""}`}
-                          onClick={() => setSelectedDropdownItem(subItem.id)}
+                          className={`py-2 px-[20px] h-11  flex items-center ${subItem.id ? "bg-[#F0F7FE] border-l-4 border-black" : ""}`}
                         >
                           <div className={`${asideButtonCSS} pl-8`}>
                             <p className="whitespace-nowrap text-[16px] font-bold">{subItem.name}</p>

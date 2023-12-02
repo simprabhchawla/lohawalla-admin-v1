@@ -5,8 +5,8 @@ const Table = (props: any) => {
         console.error('tableData is not an array:', tableData);
         return null;
     }
-    const commonTableCell = `text-[#6B778C] border flex-wrap`
-    const commonTableRow = `py-[10px] border flex-wrap`
+    const commonTableCell = `text-[#6B778C] border flex-wrap text-center`
+    const commonTableRow = `py-[10px] border flex-wrap text-center`
     return (
         <table className="w-full">
             <tbody className="border">
@@ -24,12 +24,12 @@ const Table = (props: any) => {
                         <td className={`${commonTableRow}`}>{index + 1}</td>
                         <td className={`${commonTableRow} flex gap-[5px]`}>
                             <img src={row.img} alt="" />
-                            {row.customerName}
+                            {row.customer.customerName}
                         </td>
-                        <td className={`${commonTableRow}`}>{row.date}</td>
-                        <td className={`${commonTableRow} text-[#21A0C3] font-bold underline cursor-pointer`}>{row.voucherNumber}</td>
+                        <td className={`${commonTableRow}`}>{row.createdAt.slice(0, 10)}</td>
+                        <td className={`${commonTableRow} text-[#21A0C3] font-bold underline cursor-pointer`}>{row.voucherCode}</td>
                         <td className={`${commonTableRow}`}>{row.orderNumber}</td>
-                        <td className={`${commonTableRow}`}>₹{row.totalAmount}</td>
+                        <td className={`${commonTableRow}`}>₹{row.total}</td>
 
                     </tr>
                 ))}

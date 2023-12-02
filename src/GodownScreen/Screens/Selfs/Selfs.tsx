@@ -6,37 +6,33 @@ import img from "../../../assets_/Godown Ions images/avatar.svg"
 import view from "../../../assets_/Godown Ions images/arrow.svg"
 import { Link } from "react-router-dom";
 import { AddShelfs } from "./Components/AddShelfs";
-
-
-const tableData = [
-  {
-    date: "23/04/23, 03:56pm",
-    img: img,
-    view:view,
-    customerName: "Rohan Kaushal",
-    voucherNumber: "07OCTO2023",
-    orderNumber: "0121213123",
-    totalAmount: "45000",
-  }
-];
-
+import { useDispatch, useSelector } from "react-redux";
+import { getShelfsAsync } from "@src/Redux/Slice/GodownManager/ShelfSlice";
 
 export const Selfs = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getShelfsAsync());
+}, [dispatch]);
+
+const tableData =  useSelector((state: any) => state.shelfs?.data?.data);
+console.log(tableData)
 
   const [searchInput, setSearchInput] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
-  const filteredTableData = tableData.filter((data) =>
-    Object.values(data).some((value) =>
-      value.toString().toLowerCase().includes(searchInput.toLowerCase())
-    )
-  );
+  const filteredTableData = tableData ? tableData.filter((data:any) =>
+  Object.values(data).some((value:any) =>
+    value.toString().toLowerCase().includes(searchInput.toLowerCase())
+  )
+) : [];
+
 
   useEffect(() => {
     if (searchInput.trim() !== "") {
       const newSuggestions: string[] = tableData
-        .map((data) => data.customerName)
-        .filter((value) => value.toLowerCase().includes(searchInput.toLowerCase()));
+        .map((data:any) => data.customerName)
+        ?.filter((value:any) => value?.toLowerCase().includes(searchInput.toLowerCase()));
       setSuggestions(newSuggestions);
     } else {
       setSuggestions([]);
@@ -76,7 +72,7 @@ export const Selfs = () => {
       {isPopupOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="modal-bg absolute inset-0 bg-gray-800 opacity-50"></div>
-          <div className="modal w-[700px] h-[650px] overflow-x-auto relative bg-white p-6 rounded-lg shadow-lg">
+          <div className="modal w-[700px] h-auto overflow-x-auto relative bg-white p-6 rounded-lg shadow-lg">
             <AddShelfs isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} openPopup={openPopup}
               closePopup={closePopup} />
           </div>

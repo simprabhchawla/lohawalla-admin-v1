@@ -46,7 +46,6 @@ function App() {
 			</Routes>
 
 			<SelfAuth>
-
 				<Routes>
 					<Route path="/sales" element={<Aside><SalesOrder /></Aside>}></Route>
 					<Route path="/selfs" element={<Aside><Selfs /></Aside>}></Route>

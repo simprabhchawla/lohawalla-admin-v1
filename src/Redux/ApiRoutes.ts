@@ -11,5 +11,8 @@ export const getAllGroupsApiPath = `${basePath}admin/pages/employeeListing/getVe
 
 // Godown Manager
 
-
 export const getAllShelfApiPath = `${basePath}store/shelf/`;
+export const getAllAisleApiPath = `${basePath}store/aisle/`;
+
+export const SalesOrderApiPath = `${basePath}salesOrder/`;
+export const PurchaseOrderApiPath = `${basePath}purchaseOrder/`;

@@ -27,6 +27,7 @@ const LoginPage = () => {
                 window.location.replace("/")
             }
             else {
+                window.location.replace("/#/selfs")
 
             }
 
@@ -93,7 +94,6 @@ const LoginPage = () => {
                             </div>
                         </div>
 
-
                         <div className='flex flex-col gap-[10px]'>
 
                             <button
@@ -110,8 +110,6 @@ const LoginPage = () => {
                                 </Link>
                             </div> */}
                         </div>
-
-
                     </div>
                 </div>
 
