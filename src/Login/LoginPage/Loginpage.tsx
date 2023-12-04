@@ -23,7 +23,6 @@ const LoginPage = () => {
             
             if (loginData.role === "ADMIN") {
                 window.localStorage.setItem("userData", JSON.stringify(loginData));
-                console.log("hello")
                 window.location.replace("/")
             }
             else {
