@@ -3,9 +3,22 @@ import Sidebar from '../../Components/Sidebar'
 import { Table } from './Components/Table'
 import add from "../../assets_/icons/add.svg"
 import edit from "../../assets_/icons/edit.svg"
+import { useState } from 'react'
+import AddRatioCreationForm from './Components/addRatioSelect'
 export const RatioSelect = () => {
 
+    const [isPopupOpen, setPopupOpen] = useState(false);
 
+    const openPopup = () => {
+        setPopupOpen(true);
+    };
+
+    const closePopup = () => {
+        setPopupOpen(false);
+    };
+    const handleFormSubmit=()=>{
+
+    }
 
     return (
         <>
@@ -28,10 +41,20 @@ export const RatioSelect = () => {
                                     <img src={edit} alt="" />
                                     Edit
                                 </div>
-                                <div className='border-2 flex px-[30px] cursor-pointer text-white  items-center bg-[#005D7F] font-bold gap-[5px] rounded-[8px]'>
+                                <div className='border-2 flex px-[30px] cursor-pointer text-white  items-center bg-[#005D7F] font-bold gap-[5px] rounded-[8px]' onClick={()=>{
+                                    openPopup()
+                                }}>
                                     <img src={add} alt="" />
                                     Create
                                 </div>
+                                {isPopupOpen && (
+                                        <div className="fixed inset-0 flex items-center justify-center z-50">
+                                            <div className="modal-bg absolute inset-0 bg-gray-800 opacity-50"></div>
+                                            <div className="modal w-[700px] relative bg-white p-6 rounded-lg shadow-lg">
+                                                <AddRatioCreationForm onClose={closePopup} onSubmit={handleFormSubmit} />
+                                            </div>
+                                        </div>
+                                    )}
 
                             </div>
                         </div>

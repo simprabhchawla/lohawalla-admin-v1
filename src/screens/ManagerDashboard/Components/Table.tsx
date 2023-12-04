@@ -81,9 +81,9 @@ export const Table = ({ managerData }: any) => {
                             </td>
 
                             {isEditPopupOpen && (
-                                <div className="fixed inset-0 flex items-center p-[50px] z-50 justify-center bg-black bg-opacity-50">
-                                    <div className="modal-bg absolute inset-0 bg-gray-800 opacity-[-8]"></div>
-                                    <div className="relative w-[656px] bg-white p-[40px] rounded-lg shadow-lg">
+                                <div className="fixed inset-0 flex items-center justify-center z-50">
+                                <div className="modal-bg absolute inset-0"></div>
+                                <div className="modal w-[700px] relative bg-white p-6 rounded-lg shadow-lg">
                                         <EditPopupManager selectedRowData={selectedRowData} handleEditPopupClose={handlePopupClose}
                                         />
                                     </div>

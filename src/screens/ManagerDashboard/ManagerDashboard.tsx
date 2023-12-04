@@ -87,7 +87,7 @@ export const ManagerDashboard = () => {
                         </div>
                         <div className='flex items-center ps-[20px] pt-[20px] gap-[5px]'>
                             <div className='text-[#62C6D7] text-[24px] font-medium '>
-                                List of Managers (80)
+                                List of Managers ({managerData.length})
                             </div>
                             <div className='bg-[#62C6D7] w-[900px] h-[1px] '>
 

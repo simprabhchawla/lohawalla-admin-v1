@@ -16,3 +16,8 @@ export const getAllAisleApiPath = `${basePath}store/aisle/`;
 
 export const SalesOrderApiPath = `${basePath}salesOrder/`;
 export const PurchaseOrderApiPath = `${basePath}purchaseOrder/`;
+
+
+export const RatioApiPath=`${basePath}admin/pages/ratio/`
+export const GetAllItemApiPath=`${basePath}`
+export const GetAllUnitPath=`${basePath}purchaser/`
