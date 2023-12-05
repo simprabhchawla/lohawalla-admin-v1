@@ -260,7 +260,7 @@ export const Godown = () => {
                                         <div className='flex flex-col gap-[12px]'>
                                             <div className='flex gap-[12px]'>
                                                 <div>
-                                                    <p className='semibold'>Number Of Selfs - {selectedRow?.numberOfShelfs}</p>
+                                                    <p className='semibold'>Number Of Selfs - {selectedRow?.shelfs.length}</p>
                                                     <p className='semibold'>Updated At - {selectedRow?.updatedAt.slice(0, 10)}</p>
                                                     <p className='semibold'>Address - {selectedRow?.address}</p>
                                                 </div>
