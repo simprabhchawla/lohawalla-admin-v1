@@ -4,8 +4,6 @@ import {  RatioApiPath,GetAllUnitPath, GetAllItemApiPath} from "../../ApiRoutes"
 
 
 export const AllRatioDataApi = async () => {
-
-  console.log()
   try {
     const response = await axios.get(`${RatioApiPath}getAll`,{
       withCredentials:true
@@ -17,8 +15,6 @@ export const AllRatioDataApi = async () => {
   }
 };
 export const AllUnitApi = async () => {
-
-  console.log()
   try {
     const response = await axios.get(`${GetAllUnitPath}`,{
       withCredentials:true
@@ -30,8 +26,6 @@ export const AllUnitApi = async () => {
   }
 };
 export const AllItemApi = async () => {
-
-  console.log()
   try {
     const response = await axios.get(`${GetAllItemApiPath}`,{
       withCredentials:true
@@ -44,8 +38,6 @@ export const AllItemApi = async () => {
 };
 
 export const addRatioDataApi = async (formData:any) => {
-
-  console.log(formData)
   try {
     const response = await axios.post(`${RatioApiPath}`,formData,{
       withCredentials:true
