@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {  RatioApiPath} from "../../ApiRoutes";
+import {  RatioApiPath,GetAllUnitPath, GetAllItemApiPath} from "../../ApiRoutes";
 
 
 
@@ -7,7 +7,7 @@ export const AllRatioDataApi = async () => {
 
   console.log()
   try {
-    const response = await axios.get(`${RatioApiPath}/getAll`,{
+    const response = await axios.get(`${RatioApiPath}getAll`,{
       withCredentials:true
     });
     console.log(response.data)
@@ -16,6 +16,33 @@ export const AllRatioDataApi = async () => {
     throw error;
   }
 };
+export const AllUnitApi = async () => {
+
+  console.log()
+  try {
+    const response = await axios.get(`${GetAllUnitPath}`,{
+      withCredentials:true
+    });
+    console.log(response.data)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+export const AllItemApi = async () => {
+
+  console.log()
+  try {
+    const response = await axios.get(`${GetAllItemApiPath}`,{
+      withCredentials:true
+    });
+    console.log(response.data)
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const addRatioDataApi = async (formData:any) => {
 
   console.log(formData)

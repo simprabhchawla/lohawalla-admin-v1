@@ -19,5 +19,5 @@ export const PurchaseOrderApiPath = `${basePath}purchaseOrder/`;
 
 
 export const RatioApiPath=`${basePath}admin/pages/ratio/`
-export const GetAllItemApiPath=`${basePath}`
-export const GetAllUnitPath=`${basePath}purchaser/`
+export const GetAllItemApiPath=`${basePath}purchaser/forms/itemForm/getAllItems`
+export const GetAllUnitPath=`${basePath}purchaser/forms/companyProductForm/getAllUnit`

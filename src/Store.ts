@@ -8,6 +8,7 @@ import ShelfsSlice from './Redux/Slice/GodownManager/ShelfSlice';
 import AisleSlice from './Redux/Slice/GodownManager/AisleSlice';
 import SalesOrder from './Redux/Slice/GodownManager/SalesOrderSlice';
 import PurchaseOrderSlice from './Redux/Slice/GodownManager/PurchaseOrderSlice';
+import ratioSlice from './Redux/Slice/Admin/ratioSlice';
 
 const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ const store = configureStore({
     aisle:AisleSlice,
     salesOrder:SalesOrder,
     purchaseOrder:PurchaseOrderSlice,
+    ratio:ratioSlice
 
   },
 });

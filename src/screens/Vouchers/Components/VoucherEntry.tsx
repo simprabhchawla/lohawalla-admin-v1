@@ -84,6 +84,7 @@ export const VoucherEntry = ({ vouchersData }: any) => {
                         <option value="purchaseOrder">Purchase Order</option>
                         <option value="sales">Sales</option>
                         <option value="salesOrder">Sales Order</option>
+                        <option value="transfer">Transfer</option>
                     </select>
 
                     <div className="flex  gap-[10px] items-center">

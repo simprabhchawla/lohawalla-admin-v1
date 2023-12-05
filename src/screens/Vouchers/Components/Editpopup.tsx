@@ -30,7 +30,10 @@ export const Editpopup = ({ closePopup, voucherData }: any) => {
   };
 
   const groupsData = useSelector((state: any) => state?.groups?.data);
-  console.log("hello", groupsData)
+
+  console.log("hello", groupsData);
+  
+  const filteredGroups = groupsData?.filter((element: any) => element.role !== "GODOWN_ASSISTANT");
 
 
   useEffect(() => {
@@ -55,7 +58,7 @@ export const Editpopup = ({ closePopup, voucherData }: any) => {
             {...register('group', { required: 'group is required' })}
 
           >
-            {groupsData && groupsData.map((element: any, index: any) => (
+            {filteredGroups && filteredGroups.map((element: any, index: any) => (
               <option key={element.id} value={element.id}>
                 {element.name}
               </option>
