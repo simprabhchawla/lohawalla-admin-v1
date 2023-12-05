@@ -8,22 +8,22 @@ const EditPopUp = ({ handleFormSubmit, closed, selectedRow, setSelectedRow }: an
     const [countries, setCountries] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState('');
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('https://api.countrystatecity.in/v1/countries', {
-                    headers: {
-                        'X-CSCAPI-KEY': 'ZTV0b3VBTDRoRk9USjM2dXBwUDQ4VXZnQVhsTEtCWUFpa0NDeGZ1bw==',
-                    },
-                });
-                setCountries(response.data);
-            } catch (error) {
-                console.error('Error fetching countries:', error);
-            }
-        };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await axios.get('https://api.countrystatecity.in/v1/countries', {
+    //                 headers: {
+    //                     'X-CSCAPI-KEY': 'ZTV0b3VBTDRoRk9USjM2dXBwUDQ4VXZnQVhsTEtCWUFpa0NDeGZ1bw==',
+    //                 },
+    //             });
+    //             setCountries(response.data);
+    //         } catch (error) {
+    //             console.error('Error fetching countries:', error);
+    //         }
+    //     };
 
-        fetchData();
-    }, []);
+    //     fetchData();
+    // }, []);
 
     const handleCountryChange = (event: any) => {
         setSelectedCountry(event.target.value);
@@ -87,6 +87,22 @@ const EditPopUp = ({ handleFormSubmit, closed, selectedRow, setSelectedRow }: an
                                         <option value="Delhi">Delhi</option>
                                         <option value="Mumbai">Mumbai</option>
                                         <option value="Uttarakhand">Uttarakhand</option>
+                                        <option value="Kolkata">Kolkata</option>
+                                        <option value="Chennai">Chennai</option>
+                                        <option value="Bengaluru">Bengaluru</option>
+                                        <option value="Hyderabad">Hyderabad</option>
+                                        <option value="Pune">Pune</option>
+                                        <option value="Jaipur">Jaipur</option>
+                                        <option value="Ahmedabad">Ahmedabad</option>
+                                        <option value="Surat">Surat</option>
+                                        <option value="Kanpur">Kanpur</option>
+                                        <option value="Lucknow">Lucknow</option>
+                                        <option value="Nagpur">Nagpur</option>
+                                        <option value="Indore">Indore</option>
+                                        <option value="Patna">Patna</option>
+                                        <option value="Bhopal">Bhopal</option>
+                                        <option value="Ludhiana">Ludhiana</option>
+                                        <option value="Agra">Agra</option>
                                     </select>
                                 </div>
 
