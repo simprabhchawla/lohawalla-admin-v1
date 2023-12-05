@@ -46,7 +46,7 @@ export const ManagerDashboard = () => {
 
     return (
         <>
-            <div className='flex   bg-theme-white'>
+            <div className='flex'>
                 <div>
                     <Sidebar />
                 </div>
