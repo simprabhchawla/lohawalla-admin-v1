@@ -47,15 +47,15 @@ export const Table = ({ managerData }: any) => {
         <div>
             <table className='w-full mt-[30px] border-2 '>
                 <tbody>
-                    <tr className='border-b-2'>
+                    <tr className=''>
                         <td className={`${tableHeading} w-[20px]`}>Sr No</td>
                         <td className={`${tableHeading}`}>Name</td>
                         <td className={`${tableHeading}`}>Phone No.</td>
                         <td className={`${tableHeading}`}>Employee Code</td>
                         <td className={`${tableHeading}`}>Email</td>
                         <td className={`${tableHeading}`}>Role</td>
-                        <td className={`${tableHeading} border-0`}></td>
-                        <td className={`${tableHeading} border-0`}></td>
+                        <td className={`${tableHeading} border-0 border-e-0 border-b`}></td>
+                        <td className={`${tableHeading} border-0 border-b`}></td>
                     </tr>
                     {managerData && managerData.map((element: any, index: any) => (
                         <tr key={index}>
