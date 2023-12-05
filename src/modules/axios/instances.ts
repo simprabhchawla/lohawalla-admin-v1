@@ -5,7 +5,7 @@ type Mode = "dev" | "prod";
 const mode = "dev";
 
 export const DEV = axios.create({
-	baseURL: "http://localhost:8081/",
+	baseURL: "http://localhost:8080/",
 });
 
 export const PROD = axios.create({

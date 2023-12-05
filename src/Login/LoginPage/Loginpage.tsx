@@ -16,7 +16,7 @@ const LoginPage = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:8081/auth/LogIn/companyLogIn/companyUserLogin', data, {                
+            const response = await axios.post('http://localhost:8080/auth/LogIn/companyLogIn/companyUserLogin', data, {                
                 withCredentials: true
             });
             const loginData = response.data.loginData
