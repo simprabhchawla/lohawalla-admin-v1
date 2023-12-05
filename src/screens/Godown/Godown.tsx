@@ -196,36 +196,38 @@ export const Godown = () => {
                     <table className='w-full '>
                         <tbody className='border-2'>
                             <tr className='border'>
-                                <td className='px-4 w-[50px] border-e text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize'>Sr No</td>
+                                <td className='px-4 w-[10px] border-e text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize'>Sr No</td>
                                 <td className='px-4 w-[200px] max-w-[500px] border-e text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize'>Godown name</td>
-                                <td className='px-4 border-e text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize'>Details</td>
-                                <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize'>Code</td>
-                                <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'></td>
+                                <td className='px-4 w-[200px] text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize'>Code</td>
+                                <td className='px-4 w-[250px] border-s text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize'>Details</td>
+                                <td className='px-4 w-[150px] text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'></td>
                             </tr>
 
                             {filteredGodownData && filteredGodownData.map((element: any, index: any) => {
                                 return <tr className="{border-b border-solid border-[#0000001A]}" key={index}>
-                                    <td className='ps-[34px] border-e h-14 text-sm font-medium text-[#5C5C77]'>{index + 1}</td>
+                                    <td className='ps-[24px] border-e h-14 text-sm font-bold text-[#5C5C77]'>{index + 1}</td>
                                     <td className='px-4 border-e h-14 text-sm font-medium text-[#5C5C77]'>
                                         {element.godownName.length > 15 ? `${element.godownName.substring(0, 15)}...` : element.godownName}
                                     </td>
-                                    <td onClick={() => openPopup(element)} className='px-4 h-14 flex cursor-pointer items-center gap-[5px] text-sm font-medium text-[#4B4DED]'
-                                    >
-                                        View Detail
-                                    </td>
-                                    <td className='px-4 h-14 border-s text-sm font-medium  text-[#5C5C77]'>
-                                        <span className='bg-[#F5F5F5] rounded-[42px] px-[16px] py-[6px] w-[80px]'>
+
+                                    <td className='px-4 h-14 border-e text-sm font-medium  text-[#5C5C77]'>
+                                        <span className='bg-[#F5F5F5] rounded-[42px]  px-[16px] py-[6px]'>
                                             {element.godownCode}
                                         </span>
+
+                                    </td>
+                                    <td onClick={() => openPopup(element)} className=' px-4 h-14 flex cursor-pointer items-center text-sm font-medium text-[#4B4DED]'
+                                    >   
+                                        View Detail
                                     </td>
                                     <td onClick={() => {
                                         toggleMenu(element, index)
                                     }
-                                    } className='text-sm  cursor-pointer flex gap-[5px] items-center font-medium text-[#5C5C77]'>
+                                    } className='text-sm  cursor-pointer   items-center font-medium text-[#5C5C77]'>
                                         <div className='relative flex gap-1  items-center'>
-                                            Edit
+                                            Edit    
                                             <img src={edit} alt="" className='w-[14px] cursor-pointer h-[14px] ' />
-                                            <div className='absolute right-[-7rem]'>
+                                            <div className='absolute right-[5rem]'>
                                                 {menuOpen.includes(index) && (
                                                     <div className='bg-white border border-gray-300 shadow-md rounded-md w-[95px]'>
                                                         <ul>
