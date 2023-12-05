@@ -15,20 +15,15 @@ import x from "../../assets_/icons/x-close.svg"
 export const Godown = () => {
     const dispatch = useDispatch();
     const Godowndata = useSelector((state: any) => state.godown.data);
-    // console.log("hiii", Godowndata)
 
     const [editData, setEditData] = useState<any>()
     useEffect(() => {
         setEditData(Godowndata)
     })
 
-    // console.log("ecbieucbie", editData)
-
-
     const { handleSubmit, register, formState: { errors } } = useForm();
 
     const onSubmit = (data: any) => {
-        // console.log('Form submitted with data:', data);
         dispatch(addGodown(data));
     };
 
@@ -40,10 +35,10 @@ export const Godown = () => {
     const [popupVisible, setPopupVisible] = useState(false);
     const [selectedRow, setSelectedRow] = useState<any>(null);
 
-    const openeditPopup = () => {
+    const openeditPopup = (element: any) => {
         seteditPopupOpen(true);
+        setMenuOpen([]);
         setIsPopupOpen(false);
-
     };
 
     const openAddPopup = () => {
@@ -62,10 +57,15 @@ export const Godown = () => {
         setdeletePopupOpen(false);
     };
 
-    const [menuOpen, setMenuOpen] = useState(false);
+    const [menuOpen, setMenuOpen] = useState<number[]>([]);
 
-    const toggleMenu = () => {
-        setMenuOpen(!menuOpen);
+    const toggleMenu = (element: any, index: number) => {
+        setSelectedRow(element);
+        if (menuOpen.includes(index)) {
+            setMenuOpen([]);
+        } else {
+            setMenuOpen([index]);
+        }
     };
 
 
@@ -80,7 +80,7 @@ export const Godown = () => {
     const closed = () => {
         return <div onClick={handleClosePopup} className="absolute -right-3 top-[-15px] p-[5px] flex items-center justify-center bg-[#FFFFFF] rounded-full cursor-pointer">
             <img src={close} className="w-[25px] h-[25px]" alt="" />
-            
+
         </div>
     }
 
@@ -94,7 +94,7 @@ export const Godown = () => {
     useEffect(() => {
         dispatch(fetchGodownData());
     }, [dispatch]);
- 
+
     // edit
     const handleFormSubmit = (e: any) => {
         e.preventDefault();
@@ -154,8 +154,10 @@ export const Godown = () => {
     const handleSuggestionClick = (suggestion: string) => {
         setSearchInput(suggestion);
     };
-
-
+    const [memoizedGodownDataLength, setMemoizedGodownDataLength] = React.useState(0);
+    React.useEffect(() => {
+        setMemoizedGodownDataLength(filteredGodownData && filteredGodownData.length);
+    }, [filteredGodownData]);
 
     return (
         <div className='flex'>
@@ -182,7 +184,7 @@ export const Godown = () => {
 
                 <div className='flex items-center gap-[5px] '>
                     <div className='text-[#62C6D7] text-[24px] font-medium'>
-                        List of Godown (05)
+                        List of Godown ({memoizedGodownDataLength})
                     </div>
                     <div className='bg-[#62C6D7] w-[900px] h-[1px] '>
 
@@ -193,30 +195,53 @@ export const Godown = () => {
                 <div >
                     <table className='w-full '>
                         <tbody className='border-2'>
-                            <tr className='border-b-4'>
-                                <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'>SR NO</td>
-                                <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'>Godown name</td>
-                                <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'>Details</td>
-                                <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'>Code</td>
-                                <td className='px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'></td>
+                            <tr className='border'>
+                                <td className='px-4 w-[10px] border-e text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize'>Sr No</td>
+                                <td className='px-4 w-[200px] max-w-[500px] border-e text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize'>Godown name</td>
+                                <td className='px-4 w-[200px] text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize'>Code</td>
+                                <td className='px-4 w-[250px] border-s text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize'>Details</td>
+                                <td className='px-4 w-[150px] text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap'></td>
                             </tr>
 
                             {filteredGodownData && filteredGodownData.map((element: any, index: any) => {
-                                return <tr className={`border-b border-solid border-[#0000001A]`} key={index}>
-                                    <td className='ps-[34px] h-14 text-sm font-medium text-[#5C5C77]'>{index + 1}</td>
-                                    <td className='px-4 h-14 text-sm font-medium text-[#5C5C77]'>{element.godownName}</td>
-                                    <td className='px-4 h-14 flex cursor-pointer items-center gap-[5px] text-sm font-medium text-[#4B4DED]'
-                                       >
-                                        View Detail
+                                return <tr className="{border-b border-solid border-[#0000001A]}" key={index}>
+                                    <td className='ps-[24px] border-e h-14 text-sm font-bold text-[#5C5C77]'>{index + 1}</td>
+                                    <td className='px-4 border-e h-14 text-sm font-medium text-[#5C5C77]'>
+                                        {element.godownName.length > 15 ? `${element.godownName.substring(0, 15)}...` : element.godownName}
                                     </td>
-                                    <td className='px-4 h-14 text-sm font-medium  text-[#5C5C77]'>
-                                        <span className='bg-[#F5F5F5] rounded-[42px] px-[16px] py-[6px] w-[80px]'>
+
+                                    <td className='px-4 h-14 border-e text-sm font-medium  text-[#5C5C77]'>
+                                        <span className='bg-[#F5F5F5] rounded-[42px]  px-[16px] py-[6px]'>
                                             {element.godownCode}
                                         </span>
+
                                     </td>
-                                    <td onClick={() => openPopup(element)} className='text-sm  cursor-pointer flex gap-[5px] items-center font-medium text-[#5C5C77]'>
-                                        Edit
-                                        <img src={edit} alt="" className='w-[14px] cursor-pointer h-[14px]'  />
+                                    <td onClick={() => openPopup(element)} className=' px-4 h-14 flex cursor-pointer items-center text-sm font-medium text-[#4B4DED]'
+                                    >   
+                                        View Detail
+                                    </td>
+                                    <td onClick={() => {
+                                        toggleMenu(element, index)
+                                    }
+                                    } className='text-sm  cursor-pointer   items-center font-medium text-[#5C5C77]'>
+                                        <div className='relative flex gap-1  items-center'>
+                                            Edit    
+                                            <img src={edit} alt="" className='w-[14px] cursor-pointer h-[14px] ' />
+                                            <div className='absolute right-[5rem]'>
+                                                {menuOpen.includes(index) && (
+                                                    <div className='bg-white border border-gray-300 shadow-md rounded-md w-[95px]'>
+                                                        <ul>
+                                                            <li className='py-2 px-4 hover:bg-gray-100 cursor-pointer' onClick={openeditPopup}>
+                                                                Edit
+                                                            </li>
+                                                            <li className='py-2 px-4 hover:bg-gray-100 cursor-pointer' onClick={opendeletePopup}>
+                                                                Delete
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             })}
@@ -229,52 +254,27 @@ export const Godown = () => {
                             <div className="relative bg-white p-6 rounded-lg shadow-lg">
                                 <div className='flex w-[624px] justify-between '>
                                     <div className='flex flex-col gap-[24px] w-[319px]'>
-                                        <h1 className="text-[32px] bold">{selectedRow?.godownName}</h1>
+                                        <h1 className="text-[25px] bold">
+                                            {selectedRow.godownName.length > 35 ? `${selectedRow.godownName.substring(0, 35)}...` : selectedRow.godownName}
+                                        </h1>
                                         <div className='flex flex-col gap-[12px]'>
                                             <div className='flex gap-[12px]'>
-                                               
                                                 <div>
                                                     <p className='semibold'>Number Of Selfs - {selectedRow?.numberOfShelfs}</p>
                                                     <p className='semibold'>Updated At - {selectedRow?.updatedAt.slice(0, 10)}</p>
                                                     <p className='semibold'>Address - {selectedRow?.address}</p>
                                                 </div>
-
                                             </div>
                                         </div>
-
                                     </div>
                                     <div className='flex gap-[15px] items-start justify-end w-[200px]'>
                                         <span className='text-[14px]'>Godown Code - {selectedRow.godownCode}</span>
-                                        <img
-                                            src={dots}
-                                            alt=""
-                                            className='w-[32px] h-[32px] cursor-pointer'
-                                            onClick={toggleMenu}
-                                        />
                                     </div>
-
-                                    {menuOpen && (
-                                        <div className='absolute top-[50px] right-[10px] mt-2 bg-white border border-gray-300 shadow-md rounded-md w-[95px]'>
-                                            <ul>
-                                                <li className='py-2 px-4 hover:bg-gray-100 cursor-pointer' onClick={openeditPopup}>
-                                                    Edit
-                                                </li>
-                                                <li className='py-2 px-4 hover:bg-gray-100 cursor-pointer' onClick={opendeletePopup}>
-                                                    Delete
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    )}
                                 </div>
-
-
-
                                 {closed()}
-
                             </div>
                         </div>
-                    )} 
-
+                    )}
                     {deletePopupOpen && (
                         <div className="fixed inset-0 flex items-center z-50 justify-center bg-black bg-opacity-50">
                             <div className="modal-bg absolute inset-0 bg-gray-800 opacity-50"></div>
@@ -296,7 +296,6 @@ export const Godown = () => {
                                 </div>
                             </div>
                         </div>
-
                     )}
 
 
