@@ -39,7 +39,7 @@ export const RatioSelect = () => {
    
     return (
         <>
-            <div className='flex  bg-theme-white'>
+            <div className='flex '>
                 <div>
                     <Sidebar />
                 </div>
@@ -75,7 +75,7 @@ export const RatioSelect = () => {
 
                             </div>
                         </div>
-                        <div className='flex items-center pt-[20px] gap-[5px]'>
+                        <div className='flex items-center gap-3 pt-[20px] pb-2'>
                             <div className='text-[#62C6D7] text-[24px] font-medium '>
                                 Ratio Lists
                             </div>

@@ -41,29 +41,31 @@ export const Table = ({ managerData }: any) => {
     //     console.log('Edited Data:', data);
     //     handlePopupClose();
     // };
+    const tableHeading =`px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize border-e-2`
+    const tableData =`px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap capitalize border`
     return (
         <div>
-            <table className='w-full mt-[30px]'>
+            <table className='w-full mt-[30px] border-2 '>
                 <tbody>
-                    <tr className='border-b-4'>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap">SR NO</td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap">Name</td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap">Phone No.</td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap">Employee Code</td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap">Email</td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap">Role</td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap"></td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap"></td>
+                    <tr className='border-b-2'>
+                        <td className={`${tableHeading} w-[20px]`}>Sr No</td>
+                        <td className={`${tableHeading}`}>Name</td>
+                        <td className={`${tableHeading}`}>Phone No.</td>
+                        <td className={`${tableHeading}`}>Employee Code</td>
+                        <td className={`${tableHeading}`}>Email</td>
+                        <td className={`${tableHeading}`}>Role</td>
+                        <td className={`${tableHeading} border-0`}></td>
+                        <td className={`${tableHeading} border-0`}></td>
                     </tr>
                     {managerData && managerData.map((element: any, index: any) => (
-                        <tr key={index} className='border-b-4'>
-                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{index + 1}</td>
-                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element?.user?.name}</td>
-                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element?.user?.phoneNumber}</td>
-                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element?.employeeCode}</td>
-                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element?.user?.email}</td>
-                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element?.user?.role}</td>
-                            <td className='px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap'>
+                        <tr key={index}>
+                            <td className={`${tableData} border-e-2`}>{index + 1}</td>
+                            <td className={`${tableData}`}>{element?.user?.name}</td>
+                            <td className={`${tableData}`}>{element?.user?.phoneNumber}</td>
+                            <td className={`${tableData}`}>{element?.employeeCode}</td>
+                            <td className={`${tableData}`}>{element?.user?.email}</td>
+                            <td className={`${tableData}`}>{element?.user?.role}</td>
+                            <td className={`${tableData} border-0 w-[4rem]`}>
                                 <img
                                     src={edit}
                                     alt=""
@@ -71,7 +73,7 @@ export const Table = ({ managerData }: any) => {
                                     onClick={() => handleEditClick(element)}
                                 />
                             </td>
-                            <td className='px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap'>
+                            <td className={`${tableData} border-0 w-[4rem]`}>
                                 <img
                                     src={deletes}
                                     alt=""

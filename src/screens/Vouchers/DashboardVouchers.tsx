@@ -51,7 +51,7 @@ export const DashboardVouchers = () => {
 
     return (
         <>
-            <div className='flex  bg-theme-white'>
+            <div className='flex'>
                 <div>
                     <Sidebar />
 

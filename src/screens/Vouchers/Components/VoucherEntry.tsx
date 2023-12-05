@@ -64,7 +64,8 @@ export const VoucherEntry = ({ vouchersData }: any) => {
             });
         }
     };
-
+    const tableHeading = `px-4 text-[#6B778C] border text-xs font-bold h-[56px] whitespace-nowrap capitalize`;
+    const tableData = `px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap capitalize border`;
 
     return (
         <div className='pt-[32px] flex flex-col gap-[30px]'>
@@ -123,7 +124,7 @@ export const VoucherEntry = ({ vouchersData }: any) => {
 
             <div className='flex items-center gap-[5px]'>
                 <div className='text-[#62C6D7] text-[24px] font-medium '>
-                    Vouchers Lists
+                    Vouchers Lists {filteredData ? `(${filteredData.length})` : ''}
                 </div>
                 <div className='bg-[#62C6D7] w-[381px] h-[1px] '>
 
@@ -133,33 +134,33 @@ export const VoucherEntry = ({ vouchersData }: any) => {
 
             <table className='w-full'>
                 <tbody>
-                    <tr className='border-b-4'>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap">SR NO</td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap">Voucher Name</td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap">Voucher Method</td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap">Voucher Type</td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap">Voucher Code</td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap">Date</td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap"></td>
-                        <td className="px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap"></td>
+                    <tr className=''>
+                        <td className={`${tableHeading} w-[20px]`}>sr No</td>
+                        <td className={`${tableHeading}`}>Voucher Name</td>
+                        <td className={`${tableHeading}`}>Voucher Method</td>
+                        <td className={`${tableHeading}`}>Voucher Type</td>
+                        <td className={`${tableHeading}`}>Voucher Code</td>
+                        <td className={`${tableHeading}`}>Date</td>
+                        <td className={`${tableHeading} border-0 border-t border-b`}></td>
+                        <td className={`${tableHeading} border-0 border-t border-b border-e`}></td>
                     </tr>
                     {filteredData && filteredData.map((element: any, index: any) => (
-                        <tr key={index} className='border-b-4'>
-                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{index + 1}</td>
-                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element.voucherName}</td>
-                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element.voucherMethod}</td>
-                            <td className="px-4 text-[#21A0C3]  underline  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element.typeOfVoucher}</td>
-                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element.voucherCode}</td>
-                            <td className="px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap">{element.updatedAt.slice(0, 10)}</td>
-                            <td className='px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap'>
+                        <tr key={index} className=''>
+                            <td className={`${tableData}`}>{index + 1}</td>
+                            <td className={`${tableData}`}>{element.voucherName}</td>
+                            <td className={`${tableData}`}>{element.voucherMethod}</td>
+                            <td className={`${tableData} text-[#21A0C3]`}>{element.typeOfVoucher}</td>
+                            <td className={`${tableData}`}>{element.voucherCode}</td>
+                            <td className={`${tableData}`}>{element.updatedAt.slice(0, 10)}</td>
+                            <td className={`${tableData} border-0 border-b w-[50px]`}>
                                 <img
                                     src={edit}
                                     alt=""
-                                    className='w-[20px] cursor-pointer h-[20px]'
+                                    className='w-[25px] cursor-pointer h-[25px]'
                                     onClick={() => handleEditClick(element._id, element)}
                                 />
                             </td>
-                            <td className='px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap'>
+                            <td className={`${tableData} border-0 border-t border-b  w-[50px] border-e`}>
                                 <img
                                     src={deletes}
                                     alt=""
