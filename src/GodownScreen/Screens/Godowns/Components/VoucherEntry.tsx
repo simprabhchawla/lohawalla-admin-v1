@@ -2,10 +2,13 @@ import { useState } from 'react'
 import edit from "../../../../assets_/icons/edit.svg"
 import deletes from "../../../../assets_/icons/Delete.svg"
 import { useDispatch } from 'react-redux';
+import {useNavigate} from 'react-router-dom'
 
 export const VoucherEntry = ({ vouchersData }: any) => {
     const [isSwitchOn, setSwitchOn] = useState(false);
     const [searchInput, setSearchInput] = useState('');
+    const navigate=useNavigate()
+    
 
     const toggleSwitch = () => {
         setSwitchOn(!isSwitchOn);
@@ -44,6 +47,7 @@ export const VoucherEntry = ({ vouchersData }: any) => {
                         <option value="purchaseOrder">Purchase Order</option>
                         <option value="sales">Sales</option>
                         <option value="salesOrder">Sales Order</option>
+                        <option value="transfer">Transfer</option>
                     </select>
 
                     <div className="flex  gap-[10px] items-center">
@@ -106,7 +110,7 @@ export const VoucherEntry = ({ vouchersData }: any) => {
                             <td className={`${commonTableRow}`}>{index + 1}</td>
                             <td className={`${commonTableRow}`}>{element.voucherName}</td>
                             <td className={`${commonTableRow}`}>{element.voucherMethod}</td>
-                            <td className={`${commonTableRow} text-[#21A0C3]  underline`}>{element.typeOfVoucher}</td>
+                            <td onClick={()=>navigate(`/${element.typeOfVoucher==="salesOrder"?"sales":"purchaseorder"}/${element.voucherCode}`)} className={`${commonTableRow} text-[#21A0C3]  underline cursor-pointer`}>{element.typeOfVoucher}</td>
                             <td className={`${commonTableRow}`}>{element.voucherCode}</td>
                             <td className={`${commonTableRow}`}>{element.createdAt.slice(0, 10)}</td>
                             <td className={`${commonTableRow}`}>{element.createdBy?.name}</td>

@@ -50,12 +50,12 @@ function App() {
 
 			<SelfAuth>
 				<Routes>
-					<Route path="/sales" element={<Aside><SalesOrder /></Aside>}></Route>
+					<Route path="/sales/:id" element={<Aside><SalesOrder /></Aside>}></Route>
 					<Route path="/selfs" element={<Aside><Selfs /></Aside>}></Route>
 					<Route path="/aisles" element={<Aside><Aisle /></Aside>}></Route>
 					<Route path="/purchase" element={<Aside><Purchase /></Aside>}></Route>
 					<Route path="/purchaseDetail" element={<Aside><PurchaseDetail /></Aside>}></Route>
-					<Route path="/purchaseorder" element={<Aside><PurchaseOrder /></Aside>}></Route>
+					<Route path="/purchaseorder/:id" element={<Aside><PurchaseOrder /></Aside>}></Route>
 					<Route path="/PurchaseOrderDetail" element={<Aside><PurchaseOrderDetail /></Aside>}></Route>
 					<Route path="/GodownDashboard" element={<Aside><DashboardGodowns /></Aside>}></Route>
 				</Routes>
