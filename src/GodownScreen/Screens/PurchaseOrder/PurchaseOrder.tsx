@@ -1,57 +1,36 @@
 import { useEffect, useState } from "react";
 import right from "../../../assets_/Godown Ions images//arrow-right.svg"
 import searchh from "../../../assets_/Godown Ions images//search.svg"
+import { useParams } from "react-router-dom";
 import Table from "./Components/table"
 import img from "../../../assets_/Godown Ions images//avatar.svg"
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPurchaseOrderAsync } from "@src/Redux/Slice/GodownManager/PurchaseOrderSlice";
+import { getVoucherOrderAsync } from "@src/Redux/Slice/GodownManager/VoucherSlice";
 
 // const PageLimit = 9
 
 
-const tableData = [
-  {
-    date: "23/04/23, 03:56pm",
-    img: img,
-    customerName: "Rajni",
-    voucherNumber: "07OCTO2023",
-    orderNumber: "0121213123",
-    totalAmount: "45000",
-  },
-  {
-    date: "23/04/23, 03:56pm",
-    img: img,
-    customerName: "kajal Sahrma",
-    voucherNumber: "07OCTO2023",
-    orderNumber: "0121213123",
-    totalAmount: "45000",
-  },
-  {
-    date: "23/04/23, 03:56pm",
-    img: img,
-    customerName: "komal",
-    voucherNumber: "07OCTO2023",
-    orderNumber: "0121213123",
-    totalAmount: "45000",
-  },
-];
 
 
 export const PurchaseOrder = () => {
+  
 
   const [searchInput, setSearchInput] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
 
   const dispatch = useDispatch()
+  const {id}=useParams()
+  useEffect(()=>{
+    dispatch(getVoucherOrderAsync(id))
 
-  const tableData = useSelector((state: any) => state.purchaseOrder?.data?.orders);
+  },[])
+
+  const tableData = useSelector((state:any)=>state.voucherOrder.data?.data);
   console.log(tableData)
 
-  useEffect(() => {
-    dispatch(getPurchaseOrderAsync());
-  }, [dispatch]);
 
 
 

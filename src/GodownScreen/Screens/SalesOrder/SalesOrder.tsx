@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
+import { useParams } from "react-router-dom";
 import right from "../../../assets_/Godown Ions images//arrow-right.svg"
 import searchh from "../../../assets_/Godown Ions images//search.svg"
 import Table from "./Components/Table"
@@ -6,26 +7,33 @@ import img from "../../../assets_/Godown Ions images//avatar.svg"
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSalesOrderAsync } from "@src/Redux/Slice/GodownManager/SalesOrderSlice";
+import { getVoucherOrderAsync } from "@src/Redux/Slice/GodownManager/VoucherSlice";
 
 
 export const SalesOrder = () => {
 
   const [searchInput, setSearchInput] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const {id}=useParams()
+  
 
 
   const dispatch = useDispatch()
 
-  const tableData = useSelector((state: any) => state.salesOrder?.data?.orders);
-  console.log(tableData)
+  //const tableData = useSelector((state: any) => state.salesOrder?.data?.orders);
+  const data=useSelector((state:any)=>state.voucherOrder.data?.data)
+  console.log("HII",data)
+ // console.log(tableData)
+  useEffect(()=>{
+    dispatch(getVoucherOrderAsync(id))
+    
+  },[])
 
-  useEffect(() => {
-    dispatch(getSalesOrderAsync());
-  }, [dispatch]);
+ 
 
 
 
-  const dataArray = Array.isArray(tableData) ? tableData : [];
+  const dataArray = Array.isArray(data) ? data : [];
 
   const filteredTableData = dataArray.filter((data: any) =>
     Object.values(data).some((value: any) =>
@@ -34,14 +42,14 @@ export const SalesOrder = () => {
   );
   useEffect(() => {
     if (searchInput.trim() !== "") {
-      const newSuggestions: string[] = tableData
+      const newSuggestions: string[] = data
         .map((data: any) => data.customerName)
         .filter((value: any) => value.toLowerCase().includes(searchInput.toLowerCase()));
       setSuggestions(newSuggestions);
     } else {
       setSuggestions([]);
     }
-  }, [searchInput, tableData]);
+  }, [searchInput]);
 
   const handleSuggestionClick = (suggestion: string) => {
     setSearchInput(suggestion);

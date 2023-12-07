@@ -28,24 +28,14 @@ const navItems: NavItem[] = [
     icon: sales,
 
   },
-  {
-    id: "Sales",
-    name: "Sales Order",
-    link: "/sales",
-    icon: sales
-  },
+
   {
     id: "Selfs",
     name: "Shelfs ",
     link: "/Selfs",
     icon: sales
   },
-  {
-    id: "PurchaseOrder",
-    name: "Purchase Order",
-    link: "/purchaseorder",
-    icon: Purchase,
-  },
+ 
   {
     id: "Purchase",
     name: "Purchase",
