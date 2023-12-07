@@ -13,26 +13,26 @@ export const Selfs = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getShelfsAsync());
-}, [dispatch]);
+  }, [dispatch]);
 
-const tableData =  useSelector((state: any) => state.shelfs?.data?.data);
-console.log(tableData)
+  const tableData = useSelector((state: any) => state.shelfs?.data?.data);
+  console.log(tableData)
 
   const [searchInput, setSearchInput] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
-  const filteredTableData = tableData ? tableData.filter((data:any) =>
-  Object.values(data).some((value:any) =>
-    value.toString().toLowerCase().includes(searchInput.toLowerCase())
-  )
-) : [];
+  const filteredTableData = tableData ? tableData.filter((data: any) =>
+    Object.values(data).some((value: any) =>
+      value.toString().toLowerCase().includes(searchInput.toLowerCase())
+    )
+  ) : [];
 
 
   useEffect(() => {
     if (searchInput.trim() !== "") {
       const newSuggestions: string[] = tableData
-        .map((data:any) => data.customerName)
-        ?.filter((value:any) => value?.toLowerCase().includes(searchInput.toLowerCase()));
+        .map((data: any) => data.customerName)
+        ?.filter((value: any) => value?.toLowerCase().includes(searchInput.toLowerCase()));
       setSuggestions(newSuggestions);
     } else {
       setSuggestions([]);
@@ -60,12 +60,12 @@ console.log(tableData)
         <div className="flex text-[#005D7F] text-[24px] font-medium">
           Shelfs Listing
         </div>
-          <Link to="" onClick={openPopup} className="bg-[#005D7F] flex gap-[10px] items-center px-[16px] py-[12px] rounded-lg ">
-            <img src={adds} alt="" />
-            <span className="text-white">
-              Add Shelfs
-            </span>
-          </Link>
+        <Link to="" onClick={openPopup} className="bg-[#005D7F] flex gap-[10px] items-center px-[16px] py-[12px] rounded-lg ">
+          <img src={adds} alt="" />
+          <span className="text-white">
+            Add Shelfs
+          </span>
+        </Link>
 
       </div>
 

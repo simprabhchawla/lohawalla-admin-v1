@@ -52,6 +52,12 @@ const navItems: NavItem[] = [
     link: "/purchase",
     icon: Purchase,
   },
+  {
+    id: "Transfer",
+    name: "Transfer",
+    link: "/transfer",
+    icon: Purchase,
+  },
 ];
 const asideButtonCSS = `flex text-[#2A333E] items-center text-[16px] font-bold gap-[8px] cursor-pointer`;
 

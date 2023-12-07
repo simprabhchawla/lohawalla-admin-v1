@@ -19,7 +19,6 @@ const Table = (props: any) => {
         dispatch(getAisleAsync(shelfCode));
     };
 
-
     return (
         <table className="w-full">
             <tbody className="border">

@@ -17,7 +17,6 @@ const Table = (props: any) => {
                     <td className={`${commonTableCell}`}>Voucher Number</td>
                     <td className={`${commonTableCell}`}>Order Number</td>
                     <td className={`${commonTableCell}`}>Total Amount</td>
-
                 </tr>
                 {tableData && tableData.map((row: any, index: any) => (
                     <tr key={index} className="hover:bg-[#FAFAFA] cursor-pointer">
