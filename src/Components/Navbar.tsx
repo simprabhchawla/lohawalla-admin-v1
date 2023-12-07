@@ -24,14 +24,7 @@ const Navbar = ({ Pagename }: PageNameProps) => {
 				</div>
 				<div className="ml-auto flex">
 
-					<Link to='/sales'>
-						<li
-							className="text-sm border py-[15px] rounded-[8px] px-3 flex items-center active:brightness-95 mr-3  transition duration-300 hover:bg-slate-700 hover:text-white"
-
-						>
-							Switch To Godown Manager
-						</li>
-					</Link>
+					
 					<div className="mr-5">
 						<Clock />
 					</div>

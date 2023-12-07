@@ -11,17 +11,7 @@ export const Navbar = ({ title }: any) => {
         <h1 className="text-white md:text-[24px]   md:px-20">{title}</h1>
       </div>
 
-      <div className="flex items-center pr-[20px]">
-
-        <Link to='/'>
-          <li
-            className="text-sm border py-[15px] rounded-[8px] px-3 flex items-center active:brightness-95 mr-3  transition duration-300 hover:bg-[#21A0C3] hover:text-white"
-
-          >
-            Switch To Admin
-          </li>
-        </Link>
-      </div>
+    
 
     </div>
   )

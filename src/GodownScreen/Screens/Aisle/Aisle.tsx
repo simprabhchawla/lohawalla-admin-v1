@@ -86,7 +86,7 @@ export const Aisle = () => {
           <div className="modal-bg absolute inset-0 bg-gray-800 opacity-50"></div>
           <div className="modal   overflow-x-auto relative bg-white p-6 rounded-lg shadow-lg">
             <AddAisle isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} openPopup={openPopup}
-              closePopup={closePopup} />
+              closePopup={closePopup} aisleData={aisleData}/>
           </div>
         </div>
       )}
