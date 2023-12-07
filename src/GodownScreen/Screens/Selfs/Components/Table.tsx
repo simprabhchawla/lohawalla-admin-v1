@@ -29,7 +29,6 @@ const Table = (props: any) => {
                     <td className={`${commonTableCell}`}>Shelf Code</td>
                     <td className={`${commonTableCell}`}>Location</td>
                     <td className={`${commonTableCell}`}>Created At</td>
-                    <td className={`${commonTableCell}`}>Shelf Photo</td>
                     <td className={`${commonTableCell}`}>View Aisles</td>
 
                 </tr>
@@ -40,11 +39,7 @@ const Table = (props: any) => {
                         <td className={`${commonTableRow} text-[#21A0C3] font-bold underline cursor-pointer`}>{row.shelfCode}</td>
                         <td className={`${commonTableRow}`}>{row.location}</td>
                         <td className={`${commonTableRow}`}>{row.createdAt.slice(0, 10)}</td>
-                        <td className={`${commonTableRow} `}>
-                            <div className="flex items-center justify-center w-full" >
-                                <img src={row.imageLogs ? row.imageLogs : "NOT AVAILABLE"} alt="" />
-                            </div>
-                        </td>
+                      
                         <td className={`${commonTableRow}`}>
                             <Link to="/aisles" className="flex items-center justify-center w-full" onClick={() => handleViewAisles(row.shelfCode)}>
                                 <img src={view} alt="" />

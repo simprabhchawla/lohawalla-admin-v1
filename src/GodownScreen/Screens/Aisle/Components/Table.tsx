@@ -16,7 +16,6 @@ const Table = (props: any) => {
                     <td className={`${commonTableCell}`}>Sr No.</td>
                     <td className={`${commonTableCell}`}>Aisle Name</td>
                     <td className={`${commonTableCell}`}>Aisle Code</td>
-                    <td className={`${commonTableCell}`}>Number of Aisle</td>
                     <td className={`${commonTableCell}`}>Created At</td>
                     <td className={`${commonTableCell}`}>Aisle Photo</td>
 
@@ -29,7 +28,6 @@ const Table = (props: any) => {
                             {row.aisleName}
                         </td>
                         <td className={`${commonTableRow} text-[#21A0C3] font-bold underline cursor-pointer`}>{row.aisleCode}</td>
-                        <td className={`${commonTableRow}`}>{row?.length}</td>
                         <td className={`${commonTableRow}`}>{row.createdAt.slice(0,10)}</td>
                         <td className={`${commonTableRow}`}>
                             <img src={row.imageLogs} alt="" />

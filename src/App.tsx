@@ -31,15 +31,18 @@ function App() {
 	return (
 
 		<div>
-			<NewAuthGuard>
-				<Routes>
-					<Route path="/" element={<DashboardVouchers />}></Route>
-					<Route path="/employer" element={<EmployerPage />}></Route>
-					<Route path="/ratio" element={<RatioSelect />}></Route>
-					<Route path="/manager" element={<ManagerDashboard />}></Route>
-					<Route path="/godown" element={<Godown />}></Route>
-				</Routes>
-			</NewAuthGuard>
+			{/* <AuthGuard> */}
+
+			{/* <NewAuthGuard> */}
+			<Routes>
+				<Route path="/" element={<DashboardVouchers />}></Route>
+				<Route path="/employer" element={<EmployerPage />}></Route>
+				<Route path="/ratio" element={<RatioSelect />}></Route>
+				<Route path="/manager" element={<ManagerDashboard />}></Route>
+				<Route path="/godown" element={<Godown />}></Route>
+			</Routes>
+			{/* </NewAuthGuard> */}
+
 
 			<Routes>
 				<Route path="/login" element={<LoginPage />}></Route>
@@ -62,6 +65,7 @@ function App() {
 				position="top-center"
 				reverseOrder={false}
 			/>
+			{/* </AuthGuard> */}
 		</div>
 
 	);

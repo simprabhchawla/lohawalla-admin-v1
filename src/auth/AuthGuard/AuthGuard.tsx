@@ -70,12 +70,12 @@ export default function AuthGuard(props: Props) {
 		state.loginData.role !== RoleIndex.ADMIN
 	) {
 		return (
-			// <UnAuthPage
-			// 	login={() => {
-			// 		authActions.login();
-			// 	}}
-			// />
-			<LoginPage/>
+			<UnAuthPage
+				login={() => {
+					authActions.login();
+				}}
+			/>
+			// <LoginPage/>
 		);
 	} else {
 		return (
