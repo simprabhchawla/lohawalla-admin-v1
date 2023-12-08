@@ -24,6 +24,9 @@ import LoginPage from "./Login/LoginPage/Loginpage";
 import { Routes } from "react-router-dom/dist";
 import NewAuthGuard from "./newAuth/AuthGuard";
 import SelfAuth from "./newAuth/ShelfAuth";
+import { Transfer } from "./GodownScreen/Screens/Transfer/Transfer";
+import { Reconcilation } from "./GodownScreen/Screens/Reconcilattion/Reconcilation";
+import { SalesOrderDetailsTab } from "./GodownScreen/Screens/SalesOrder/SalesOrderPages/Button Components/SalesOrderDetailsTab";
 // import { GodownDashboard } from "./screens/Godown/GodownDashboard";
 
 function App() {
@@ -56,8 +59,11 @@ function App() {
 					<Route path="/purchase" element={<Aside><Purchase /></Aside>}></Route>
 					<Route path="/purchaseDetail" element={<Aside><PurchaseDetail /></Aside>}></Route>
 					<Route path="/purchaseorder/:id" element={<Aside><PurchaseOrder /></Aside>}></Route>
-					<Route path="/PurchaseOrderDetail" element={<Aside><PurchaseOrderDetail /></Aside>}></Route>
+					<Route path="/PurchaseOrderDetail/:id" element={<Aside><PurchaseOrderDetail /></Aside>}></Route>
 					<Route path="/GodownDashboard" element={<Aside><DashboardGodowns /></Aside>}></Route>
+					<Route path="/transfer" element={<Aside><Transfer /></Aside>}></Route>
+					<Route path="/reconcilation" element={<Aside><Reconcilation /></Aside>}></Route>
+					<Route path="/salesdetail/:id" element={<Aside><SalesOrderDetail /></Aside>}></Route>
 				</Routes>
 			</SelfAuth>
 

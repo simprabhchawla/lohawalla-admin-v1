@@ -20,11 +20,6 @@ export const DashboardVouchers = () => {
     const vouchersData = useSelector((state: any) => state.voucher?.data?.vouchers);
     console.log("dd", vouchersData)
 
-    // const group = {
-    //     "userId": "64896cb3ced762755e663d38"
-    // }
-
-
     // view
     useEffect(() => {
         dispatch(getVouchersAsync());

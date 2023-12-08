@@ -1,27 +1,18 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { AddShelfsApi, AllShelfsApi } from '@src/Redux/Api/GodownManager/SalesOrder/ShelfApi';
+import { AllRecouncilationApi, RequestRecouncilationApi } from '@src/Redux/Api/GodownManager/Recouncilation';
 
 const initialState = {
   data: null,
   isLoading: false,
   error: null,
-  shelfs: [],
+  recouncilation: [],
   status: 'idle',
 
 };
 
-export const getShelfsAsync: any = createAsyncThunk('getShelfsAsync', async () => {
+export const getRecouncilationAsync: any = createAsyncThunk('getRecouncilationAsync', async () => {
   try {
-    const data = await AllShelfsApi();
-    return data;
-  } catch (error) {
-    throw error;
-  }
-});
-
-export const addShelfsAsync: any = createAsyncThunk('addShelfsAsync', async (selfData) => {
-  try {
-    const data = await AddShelfsApi(selfData);
+    const data = await AllRecouncilationApi();
     return data;
   } catch (error) {
     throw error;
@@ -29,43 +20,56 @@ export const addShelfsAsync: any = createAsyncThunk('addShelfsAsync', async (sel
 });
 
 
+export const requestRecouncilationAsync: any = createAsyncThunk('requestRecouncilationAsync', async (formData) => {
+  try {
+    const data = await RequestRecouncilationApi(formData);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+});
 
-const ShelfsSlice = createSlice({
+
+
+const RecouncilationSlice = createSlice({
   name: 'data',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getShelfsAsync.pending, (state) => {
+      .addCase(getRecouncilationAsync.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getShelfsAsync.fulfilled, (state: any, action: any) => {
+      .addCase(getRecouncilationAsync.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
         state.data = action.payload;
         state.error = null;
       })
-      .addCase(getShelfsAsync.rejected, (state: any, action: any) => {
+      .addCase(getRecouncilationAsync.rejected, (state: any, action: any) => {
         state.isLoading = false;
         state.data = null;
         state.error = action.error.message;
       })
-      .addCase(addShelfsAsync.pending, (state) => {
+
+      .addCase(requestRecouncilationAsync.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(addShelfsAsync.fulfilled, (state: any, action: any) => {
+      .addCase(requestRecouncilationAsync.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
         console.log("post",action.payload)
         state.data = action.payload;
         state.error = null;
       })
-      .addCase(addShelfsAsync.rejected, (state: any, action: any) => {
+      .addCase(requestRecouncilationAsync.rejected, (state: any, action: any) => {
         state.isLoading = false;
         state.data = null;
         state.error = action.error.message;
       })
+
+
   },
 });
 
-export default ShelfsSlice.reducer;
+export default RecouncilationSlice.reducer;

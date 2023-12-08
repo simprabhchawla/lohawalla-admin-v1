@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { SalesOrderTab } from './Button Components/SalesOrderTab';
 import { PartyDetailsTab } from './Button Components/PartyDetailsTab';
 import { SalesOrderDetailsTab } from './Button Components/SalesOrderDetailsTab';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import right from "../../../../assets_/Godown Ions images//arrow-right.svg";
 import edit from "../../../../assets_/Godown Ions images//edit.svg";
+import { useDispatch, useSelector } from 'react-redux';
+import { getSalesOrderAsync, getSingleSalesOrderAsync } from '@src/Redux/Slice/GodownManager/SalesOrder/SalesOrderSlice';
 
 export const SalesOrderDetail = () => {
     const [activeTab, setActiveTab] = useState('Sales Order');
@@ -32,8 +34,21 @@ export const SalesOrderDetail = () => {
         }
     };
 
+    
+    const { id } = useParams()
+    console.log("params", id)
+
+    const dispatch = useDispatch()
+    const Salesdata = useSelector((state: any) => state.salesOrder.data);
+    console.log("naya wala adata", Salesdata)
+
+    useEffect(() => {
+        dispatch(getSingleSalesOrderAsync(id));
+    }, []);
+
+
     return (
-        <div className="flex gap-[40px] px-[30px] py-[20px] flex-col">
+        <div className="flex gap-[40px] mt-[50px] px-[30px] py-[20px] flex-col">
             <div className="flex text-[#005D7F] text-[24px] font-medium">Sales Order</div>
             <div className="flex gap-[31px] flex-col">
                 <div className="flex justify-between items-center">
@@ -87,18 +102,18 @@ export const SalesOrderDetail = () => {
                 <div className="">
                     {activeTab === 'Sales Order' && (
                         <div className={`p-[16px] ${salesOrderDisabled ? 'disabled' : ''}`}>
-                            <SalesOrderTab disabled={salesOrderDisabled} />
+                            <SalesOrderTab disabled={salesOrderDisabled} Salesdata={Salesdata} id={id} />
                         </div>
                     )}
                     {activeTab === 'Party Details' && (
                         <div className={`p-[16px] ${partyDetailsDisabled ? 'disabled' : ''}`}>
-                            <PartyDetailsTab disabled={partyDetailsDisabled} />
+                            <PartyDetailsTab disabled={partyDetailsDisabled}  Salesdata={Salesdata}/>
                         </div>
                     )}
 
                     {activeTab === 'Sales Order Details Page' && (
                         <div className={`p-[16px] ${salesOrderDetailsDisabled ? 'disabled' : ''}`}>
-                            <SalesOrderDetailsTab disabled={salesOrderDetailsDisabled} />
+                            <SalesOrderDetailsTab disabled={salesOrderDetailsDisabled}  Salesdata={Salesdata} ids={id}/>
                         </div>
                     )}
                 </div>

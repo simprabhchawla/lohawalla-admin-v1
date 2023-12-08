@@ -1,50 +1,49 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getPurchaseOrderApiPath } from '@src/Redux/Api/GodownManager/PurchaseOrderApi';
+import { getSalesOrderDataApi } from '@src/Redux/Api/GodownManager/SalesOrder/OrderDataApi';
+
 
 const initialState = {
   data: null,
   isLoading: false,
   error: null,
-  purchaseOrder: [],
+  godownData: [],
   status: 'idle',
 
 };
 
-export const getPurchaseOrderAsync: any = createAsyncThunk('getPurchaseOrderAsync', async () => {
+
+export const getSalesDataAsync: any = createAsyncThunk('getSalesOrderAsync', async (ids) => {
   try {
-    const data = await getPurchaseOrderApiPath();
+    const data = await getSalesOrderDataApi(ids);
+    // console.log("Slicessss",data)
     return data;
+    
   } catch (error) {
     throw error;
   }
 });
-
-
-
-
-
-const purchaseOrderSlice = createSlice({
+const DatasalesSlice = createSlice({
   name: 'data',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getPurchaseOrderAsync.pending, (state) => {
+      .addCase(getSalesDataAsync.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getPurchaseOrderAsync.fulfilled, (state: any, action: any) => {
+      .addCase(getSalesDataAsync.fulfilled, (state, action) => {
         state.isLoading = false;
         state.data = action.payload;
         state.error = null;
       })
-      .addCase(getPurchaseOrderAsync.rejected, (state: any, action: any) => {
+      .addCase(getSalesDataAsync.rejected, (state: any, action) => {
         state.isLoading = false;
         state.data = null;
         state.error = action.error.message;
       })
-
+  
   },
 });
 
-export default purchaseOrderSlice.reducer;
+export default DatasalesSlice.reducer;

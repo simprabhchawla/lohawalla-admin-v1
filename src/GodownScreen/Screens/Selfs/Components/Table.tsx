@@ -18,7 +18,7 @@ const Table = (props: any) => {
         console.log("hihieie",shelfCode)
         dispatch(getAisleAsync(shelfCode));
     };
-
+ 
     return (
         <table className="w-full">
             <tbody className="border">

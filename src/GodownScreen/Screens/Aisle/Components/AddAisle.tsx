@@ -2,9 +2,9 @@ import {useEffect} from 'react';
 import { useForm } from 'react-hook-form';
 import check from '../../../../assets_/Godown Ions images/check.svg';
 import close from '../../../../assets_/icons/x-close.svg';
-import { getShelfsAsync } from '@src/Redux/Slice/GodownManager/ShelfSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { addAisleApiAsync, getAisleAsync } from '@src/Redux/Slice/GodownManager/AisleSlice';
+import { getShelfsAsync } from '@src/Redux/Slice/GodownManager/ShelfSlice';
 
 export const AddAisle = ({closePopup }: any) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();

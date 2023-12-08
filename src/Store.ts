@@ -6,10 +6,13 @@ import godownReducer from './Redux/Slice/Admin/godownSlice';
 import groupsSlice from './Redux/Slice/Admin/getGroupSlice';
 import ShelfsSlice from './Redux/Slice/GodownManager/ShelfSlice';
 import AisleSlice from './Redux/Slice/GodownManager/AisleSlice';
-import SalesOrder from './Redux/Slice/GodownManager/SalesOrderSlice';
-import PurchaseOrderSlice from './Redux/Slice/GodownManager/PurchaseOrderSlice';
+import SalesOrder from './Redux/Slice/GodownManager/SalesOrder/SalesOrderSlice';
+import PurchaseOrderSlice from './Redux/Slice/GodownManager/PurchaseOrder/PurchaseOrderSlice';
 import ratioSlice from './Redux/Slice/Admin/ratioSlice';
 import VoucherOrderSlice from './Redux/Slice/GodownManager/VoucherSlice'
+import RecouncilationSlice from './Redux/Slice/GodownManager/RecouncilationSlice';
+import DatasalesSlice from './Redux/Slice/GodownManager/SalesOrder/OrderDataSlice';
+import SalesBillSlice from './Redux/Slice/GodownManager/SalesOrder/SalesBillSlice';
 const store = configureStore({
   reducer: {
     voucher:VoucherSlice,
@@ -21,7 +24,10 @@ const store = configureStore({
     salesOrder:SalesOrder,
     purchaseOrder:PurchaseOrderSlice,
     ratio:ratioSlice,
-    voucherOrder:VoucherOrderSlice
+    voucherOrder:VoucherOrderSlice,
+    recouncilation:RecouncilationSlice,
+    datasales:DatasalesSlice,
+    salesSlice:SalesBillSlice
 
   },
 });
