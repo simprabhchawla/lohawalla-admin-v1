@@ -6,13 +6,8 @@ import Table from "./Components/table"
 import img from "../../../assets_/Godown Ions images//avatar.svg"
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getPurchaseOrderAsync } from "@src/Redux/Slice/GodownManager/PurchaseOrderSlice";
+import { getPurchaseOrderAsync } from "@src/Redux/Slice/GodownManager/PurchaseOrder/PurchaseOrderSlice";
 import { getVoucherOrderAsync } from "@src/Redux/Slice/GodownManager/VoucherSlice";
-
-// const PageLimit = 9
-
-
-
 
 export const PurchaseOrder = () => {
   
@@ -30,9 +25,6 @@ export const PurchaseOrder = () => {
 
   const tableData = useSelector((state:any)=>state.voucherOrder.data?.data);
   console.log(tableData)
-
-
-
 
   const dataArray = Array.isArray(tableData) ? tableData : [];
 

@@ -37,15 +37,15 @@ const navItems: NavItem[] = [
   },
  
   {
-    id: "Purchase",
-    name: "Purchase",
-    link: "/purchase",
-    icon: Purchase,
-  },
-  {
     id: "Transfer",
     name: "Transfer",
     link: "/transfer",
+    icon: Purchase,
+  },
+  {
+    id: "Reconcilation",
+    name: "Reconcilation",
+    link: "/reconcilation",
     icon: Purchase,
   },
 ];

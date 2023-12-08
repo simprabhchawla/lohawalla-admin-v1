@@ -6,7 +6,7 @@ import Table from "./Components/Table"
 import img from "../../../assets_/Godown Ions images//avatar.svg"
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getSalesOrderAsync } from "@src/Redux/Slice/GodownManager/SalesOrderSlice";
+import { getSalesOrderAsync } from "@src/Redux/Slice/GodownManager/SalesOrder/SalesOrderSlice";
 import { getVoucherOrderAsync } from "@src/Redux/Slice/GodownManager/VoucherSlice";
 
 
@@ -96,7 +96,6 @@ export const SalesOrder = () => {
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
             />
-
             <img src={searchh} alt="" />
           </div>
           {suggestions.length > 0 && (
@@ -113,8 +112,6 @@ export const SalesOrder = () => {
       </div>
       <div className="mt-12 overflow-auto">
         <Table tableData={filteredTableData} />
-
-
       </div>
 
     </div>

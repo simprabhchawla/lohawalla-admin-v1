@@ -1,3 +1,5 @@
+import {useNavigate} from 'react-router-dom'
+
 const Table = (props: any) => {
     const { tableData } = props;
 
@@ -7,6 +9,8 @@ const Table = (props: any) => {
     }
     const commonTableCell = `text-[#6B778C] border flex-wrap text-center`
     const commonTableRow = `py-[10px] border flex-wrap text-center`
+    const navigate=useNavigate()
+
     return (
         <table className="w-full">
             <tbody className="border">
@@ -26,7 +30,7 @@ const Table = (props: any) => {
                             {row.customer.customerName}
                         </td>
                         <td className={`${commonTableRow}`}>{row.createdAt.slice(0, 10)}</td>
-                        <td className={`${commonTableRow} text-[#21A0C3] font-bold underline cursor-pointer`}>{row.voucherCode}</td>
+                        <td onClick={()=>navigate(`/salesdetail/${row._id}`)} className={`${commonTableRow} text-[#21A0C3] font-bold hover:underline cursor-pointer`}>{row.voucherCode}</td>
                         <td className={`${commonTableRow}`}>{row.orderNumber}</td>
                         <td className={`${commonTableRow}`}>₹{row.total}</td>
 

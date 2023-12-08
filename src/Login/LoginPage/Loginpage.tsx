@@ -26,7 +26,7 @@ const LoginPage = () => {
                 window.location.replace("/")
             }
             else {
-                window.location.replace("/#/selfs")
+                window.location.replace("/#/GodownDashboard")
 
             }
 

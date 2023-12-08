@@ -66,6 +66,7 @@ export const AddShelfs = ({ closePopup }: any) => {
                     <label className='text-[12px] font-semibold'>Godown</label>
                     <select {...register('godown', { required: 'Godown is required' })}
                         className='w-full border rounded-[8px] px-[12px] py-[8px] focus:outline-none outline:none'>
+                        <option value="">Select Godown</option>
                         {Godowndata && Godowndata.map((godown: any) => (
                             <option key={godown._id} value={godown._id} className='focus:outline-none outline:none'>
                                 {godown.godownName}
