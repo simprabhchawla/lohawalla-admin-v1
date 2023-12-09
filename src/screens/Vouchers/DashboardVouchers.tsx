@@ -15,10 +15,10 @@ export const DashboardVouchers = () => {
         setActiveTab(tab);
     };
 
- 
+
     const dispatch = useDispatch();
     const vouchersData = useSelector((state: any) => state.voucher?.data?.vouchers);
-    console.log("dd", vouchersData)
+    // console.log("dd", vouchersData)
 
     // view
     useEffect(() => {
@@ -26,7 +26,7 @@ export const DashboardVouchers = () => {
     }, [dispatch]);
 
     const groupsData = useSelector((state: any) => state?.groups?.data);
-    console.log("hellogroupsss", groupsData)
+    // console.log("hellogroupsss", groupsData)
 
     useEffect(() => {
         dispatch(getGroupsAsync());
@@ -80,7 +80,7 @@ export const DashboardVouchers = () => {
                             </button>
                             {isPopupOpen && (
                                 <div className="fixed inset-0 flex items-center justify-center z-50">
-                                    <div className="modal-bg absolute inset-0 bg-gray-800 opacity-50"></div>
+                                    <div className="modal-bg absolute inset-0"></div>
                                     <div className="modal w-[700px] h-[650px] overflow-x-auto relative bg-white p-6 rounded-lg shadow-lg">
                                         <PopupComponent groupsData={groupsData} isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} openPopup={openPopup}
                                             closePopup={closePopup} />

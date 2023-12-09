@@ -5,9 +5,6 @@ import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-
-import addd from '../../../../../assets_/Godown Ions images//plus.svg'
-import serachh from "../../../../../assets_/Godown Ions images//search.svg"
 import add from "../../../../../assets_/Godown Ions images//check.svg"
 import { getSalesDataAsync } from '@src/Redux/Slice/GodownManager/SalesOrder/OrderDataSlice';
 import { addSalesAsync } from '@src/Redux/Slice/GodownManager/SalesOrder/SalesBillSlice';
@@ -94,14 +91,12 @@ export const SalesOrderDetailsTab = ({ disabled, ids }: any) => {
       <div className="flex items-center justify-between gap-[21px]">
         <div className="flex text-[#005D7F] text-[24px] font-medium">Sales Order</div>
         <div className="flex bg-[#818181aa] h-[2px] w-[950px] font-medium"></div>
-
-
       </div>
 
       <div className="flex font-bold text-[#6B778C] gap-[20px]">
         <table className="w-full border">
           <tbody className='w-[100%]'>
-            <tr >
+            <tr>
               <td className={`${commonTableCell}`}>Sr No.</td>
               <td className={`${commonTableCell}`}>Description of goods</td>
               <td className={`${commonTableCell}`}>M.Code</td>
@@ -110,7 +105,8 @@ export const SalesOrderDetailsTab = ({ disabled, ids }: any) => {
               <td className={`${commonTableCell}`}>Rate</td>
             </tr>
 
-            <tr >
+            <tr>
+
               <td className={`${commonTableRow}`}>1</td>
 
               <td className={`${commonTableRow}`}>
@@ -132,7 +128,6 @@ export const SalesOrderDetailsTab = ({ disabled, ids }: any) => {
                     ))}
                   </select>
                 </div>
-
                 <hr />
                 <div className="container px-[13px] gap-[10px] flex justify-between mx-auto mt-10">
                   <select
@@ -158,7 +153,6 @@ export const SalesOrderDetailsTab = ({ disabled, ids }: any) => {
                     Save
                   </button>
                 </div>
-
                 <tr className="container flex justify-between mx-auto mt-10 h-[142px] overflow-y-auto">
                   <td className='font-bold text-[18px] text-black px-[13px]'>
                     <div>
@@ -187,6 +181,7 @@ export const SalesOrderDetailsTab = ({ disabled, ids }: any) => {
               <td className={`${commonTableRow} flex border h-[23rem]`}>
                 -
               </td>
+
               <td className={`${commonTableRow} relative top-[-155px] `}>
                 -
               </td>
@@ -214,6 +209,7 @@ export const SalesOrderDetailsTab = ({ disabled, ids }: any) => {
                 <hr />
 
               </td>
+
             </tr>
           </tbody>
         </table>

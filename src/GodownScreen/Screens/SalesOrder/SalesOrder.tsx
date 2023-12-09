@@ -7,7 +7,7 @@ import img from "../../../assets_/Godown Ions images//avatar.svg"
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSalesOrderAsync } from "@src/Redux/Slice/GodownManager/SalesOrder/SalesOrderSlice";
-import { getVoucherOrderAsync } from "@src/Redux/Slice/GodownManager/VoucherSlice";
+import { getVoucherOrderAsync } from "@src/Redux/Slice/GodownManager/PurchaseOrder/VoucherSlice";
 
 
 export const SalesOrder = () => {

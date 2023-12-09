@@ -26,3 +26,5 @@ export const salesDataApiPath=`${basePath}sales/salesbill/getByOrder/`
 
 // purchaseOrder
 export const PurchaseOrderApiPath = `${basePath}purchaseOrder/`;
+export const PurchaseBillApiPath = `${basePath}purchaser/pages/purchaseBill/`;
+export const getPurchaseByOrderApiPath = `${basePath}purchaser/pages/purchaseBill/getByOrder/`;

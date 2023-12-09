@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Table = (props: any) => {
     const { tableData } = props;
     console.log("hello",tableData)
+
 
     if (!Array.isArray(tableData)) {
         console.error('tableData is not an array:', tableData);
@@ -28,7 +29,7 @@ const Table = (props: any) => {
                     <tr key={index} className="hover:bg-[#FAFAFA] cursor-pointer">
                         <td className={`${commonTableRow}`}>{index + 1}</td>
                         <td className={`${commonTableRow}`}>
-                            {row.customer.customerName}
+                            {row.customer?.customerName}
                         </td>
                         <td className={`${commonTableRow}`}>{row.createdAt.slice(0,10)}</td>
                         <td onClick={()=>navigate(`/PurchaseOrderDetail/${row._id}`)} className={`${commonTableRow} text-[#21A0C3] font-bold hover:underline cursor-pointer`}>{row.voucherCode}</td>

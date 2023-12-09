@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PurchaseOrderTab } from './Button Components/PurchaseOrderTab';
 import { PartyDetailsTab } from './Button Components/PartyDetailsTab';
 import { PurchaseOrderDetailsTab } from './Button Components/PurchaseOrderDetailsTab';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 // import right from "../../../assets/arrow-right.svg";
 import right from "../../../../assets_/Godown Ions images/arrow-right.svg";
 import edit from "../../../../assets_/Godown Ions images/edit.svg";
+import { useDispatch, useSelector } from 'react-redux';
+import { getSinglePurchaseOrderAsync } from '@src/Redux/Slice/GodownManager/PurchaseOrder/PurchaseOrderSlice';
 
 export const PurchaseOrderDetail = () => {
     const [activeTab, setActiveTab] = useState('Purchase Order');
@@ -16,6 +18,18 @@ export const PurchaseOrderDetail = () => {
     const toggleTab = (tab: any) => {
         setActiveTab(tab);
     };
+
+    const {id}=useParams()
+    console.log("hihih",id)
+
+    const dispatch = useDispatch()
+    const purchaseData = useSelector((state: any) => state.purchaseOrder?.data?.data);
+    console.log("purcghase naya wala adata", purchaseData)
+
+    useEffect(() => {
+        dispatch(getSinglePurchaseOrderAsync(id));
+    }, []);
+
 
     const handleEditClick = () => {
         switch (activeTab) {
@@ -89,18 +103,18 @@ export const PurchaseOrderDetail = () => {
                 <div className="">
                     {activeTab === 'Purchase Order' && (
                         <div className={`p-[16px] ${PurchaseOrderDisabled ? 'disabled' : ''}`}>
-                            <PurchaseOrderTab disabled={PurchaseOrderDisabled} />
+                            <PurchaseOrderTab disabled={PurchaseOrderDisabled} purchaseData={purchaseData} id={id}/>
                         </div>
                     )}
                     {activeTab === 'Party Details' && (
                         <div className={`p-[16px] ${partyDetailsDisabled ? 'disabled' : ''}`}>
-                            <PartyDetailsTab disabled={partyDetailsDisabled} />
+                            <PartyDetailsTab disabled={partyDetailsDisabled}  purchaseData={purchaseData} id={id}/>
                         </div>
                     )}
 
                     {activeTab === 'Purchase Order Details Page' && (
                         <div className={`p-[16px] ${PurchaseOrderDetailsDisabled ? 'disabled' : ''}`}>
-                            <PurchaseOrderDetailsTab disabled={PurchaseOrderDetailsDisabled} />
+                            <PurchaseOrderDetailsTab disabled={PurchaseOrderDetailsDisabled}  purchaseData={purchaseData} id={id}/>
                         </div>
                     )}
                 </div>
