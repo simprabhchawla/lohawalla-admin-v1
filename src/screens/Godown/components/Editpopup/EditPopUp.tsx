@@ -3,35 +3,40 @@ import React, { useState, useEffect } from 'react'
 
 import check from "../../../../assets_/icons/save.svg"
 // import search from "../../../../assets/icons/Search.svg"
+
 const EditPopUp = ({ handleFormSubmit, closed, selectedRow, setSelectedRow }: any) => {
+    const [states, setStates] = useState([]);
+    const [selectedState, setSelectedState] = useState('');
 
-    const [countries, setCountries] = useState([]);
-    const [selectedCountry, setSelectedCountry] = useState('');
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await axios.get('https://api.countrystatecity.in/v1/countries', {
-    //                 headers: {
-    //                     'X-CSCAPI-KEY': 'ZTV0b3VBTDRoRk9USjM2dXBwUDQ4VXZnQVhsTEtCWUFpa0NDeGZ1bw==',
-    //                 },
-    //             });
-    //             setCountries(response.data);
-    //         } catch (error) {
-    //             console.error('Error fetching countries:', error);
-    //         }
-    //     };
+    useEffect(() => {
+        const fetchStates = async () => {
+            try {
+                const response = await axios.get(`https://api.countrystatecity.in/v1/countries/IN/states`, {
+                    headers: {
+                        'X-CSCAPI-KEY': 'ZTV0b3VBTDRoRk9USjM2dXBwUDQ4VXZnQVhsTEtCWUFpa0NDeGZ1bw==',
+                    },
+                });
+                console.log(response.data)
+                setStates(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
-    //     fetchData();
-    // }, []);
+        fetchStates();
+    
+    }, []);
 
-    const handleCountryChange = (event: any) => {
-        setSelectedCountry(event.target.value);
+    const handleStateChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedState(event.target.value);
+        setSelectedRow(({...selectedRow ,address : event.target.value}));
     };
+
     return (
         <form onSubmit={handleFormSubmit}>
             <div className="fixed inset-0 flex items-center p-[50px] z-50 justify-center bg-black bg-opacity-50">
-                <div className="modal-bg absolute inset-0 bg-gray-800 opacity-50"></div>
+                <div className="modal-bg absolute inset-0"></div>
                 <div className="relative w-[656px] bg-white p-[40px] rounded-lg shadow-lg">
                     <div className="scrollable-content max-h-[550px] overflow-y-scroll">
                         <div className='flex flex-col gap-[44px]'>
@@ -79,7 +84,7 @@ const EditPopUp = ({ handleFormSubmit, closed, selectedRow, setSelectedRow }: an
                                 </div>
 
 
-                                <div className='border items-start gap-[10px] rounded-[8px] px-[16px] py-[8px] flex flex-col'>
+                                {/* <div className='border items-start gap-[10px] rounded-[8px] px-[16px] py-[8px] flex flex-col'>
                                     <span className="text-[12px]">Address</span>
                                     <select onChange={(e) => setSelectedRow({ ...selectedRow, address: e.target.value })}
                                         value={selectedRow.address} className='w-full border-none outline-none'>
@@ -104,26 +109,24 @@ const EditPopUp = ({ handleFormSubmit, closed, selectedRow, setSelectedRow }: an
                                         <option value="Ludhiana">Ludhiana</option>
                                         <option value="Agra">Agra</option>
                                     </select>
-                                </div>
+                                </div> */}
 
-                                {/* <select
-                                    id="country"
-                                    name="country"
-                                    value={selectedCountry}
-                                    // onChange={handleCountryChange}
-                                    onChange={(e) => setSelectedRow({ ...selectedRow, address: e.target.value })}
-                                    // value={selectedRow.address} 
-                                    className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                >
-                                    <option value="" disabled>
-                                        Choose a country
-                                    </option>
-                                    {countries.map((country: any) => (
-                                        <option key={country.id} value={country.name}>
-                                            {country.name}
-                                        </option>
-                                    ))}
-                                </select> */}
+
+                                <div className='border items-start gap-[10px] rounded-[8px] px-[16px] py-[8px] flex flex-col'>
+                                    <span className="text-[12px]">Address</span>
+                                    <select
+                                        onChange={handleStateChange}
+                                        value={selectedState}
+                                        className='w-full border-none outline-none'
+                                    >
+                                        <option value="">Select a state</option>
+                                        {states.map((state: any) => (
+                                            <option key={state.id} value={state.name}>
+                                                {state.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
 
                             </div>
                         </div>

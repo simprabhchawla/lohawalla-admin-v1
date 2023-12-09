@@ -40,7 +40,7 @@ export const SalesOrderDetail = () => {
 
     const dispatch = useDispatch()
     const Salesdata = useSelector((state: any) => state.salesOrder.data);
-    console.log("naya wala adata", Salesdata)
+    console.log("sales naya wala adata", Salesdata)
 
     useEffect(() => {
         dispatch(getSingleSalesOrderAsync(id));

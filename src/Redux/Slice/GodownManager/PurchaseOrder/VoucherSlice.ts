@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getVoucherOrderApi } from '@src/Redux/Api/GodownManager/VoucherApi';
+import { getVoucherOrderApi } from '@src/Redux/Api/GodownManager/PurchaseOrder/VoucherApi';
 
 
 const initialState = {

@@ -7,7 +7,7 @@ import img from "../../../assets_/Godown Ions images//avatar.svg"
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getPurchaseOrderAsync } from "@src/Redux/Slice/GodownManager/PurchaseOrder/PurchaseOrderSlice";
-import { getVoucherOrderAsync } from "@src/Redux/Slice/GodownManager/VoucherSlice";
+import { getVoucherOrderAsync } from "@src/Redux/Slice/GodownManager/PurchaseOrder/VoucherSlice";
 
 export const PurchaseOrder = () => {
   
@@ -18,6 +18,7 @@ export const PurchaseOrder = () => {
 
   const dispatch = useDispatch()
   const {id}=useParams()
+  console.log("paaramgs",id)
   useEffect(()=>{
     dispatch(getVoucherOrderAsync(id))
 

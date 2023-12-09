@@ -12,7 +12,7 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
     const [formData, setFormData] = useState<any>()
     console.log(formData)
 
-    const { handleSubmit, register, formState: { errors } } = useForm();
+    const { handleSubmit, register, setValue, formState: { errors } } = useForm();
     const dispatch = useDispatch();
     const onSubmit = (data: any) => {
         console.log("Data", data);
@@ -21,10 +21,9 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
             ...data,
             typeOfVoucher: selectedVoucherType,
             godownPermissionLevel: permissionLevel,
-            godownTo: [data.godownTo],
-            group: [data.group],
+            godownTo: data.godownTo,
+            group: data.group,
         };
-        console.log(updatedData);
 
         setFormData(updatedData);
 
@@ -52,10 +51,24 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
 
 
     const Godowndata = useSelector((state: any) => state.godown.data);
-    console.log(Godowndata)
+    console.log("gd data", Godowndata)
     useEffect(() => {
         dispatch(fetchGodownData());
     }, [dispatch]);
+
+
+    const handleGroupSelect = (selectedList: any, selectedItem: any) => {
+        setValue('group', selectedList.map((item: any) => item.id));
+    };
+
+    const [selectedGodownData, setSelectedGodownData] = useState<any[]>([]);
+
+
+    const handleGodownSelect = (selectedList: any) => {
+        setValue('godownTo', selectedList.map((item: any) => item._id));
+        setSelectedGodownData(selectedList);
+    };
+    console.log("ll", selectedGodownData)
 
     return (
 
@@ -71,7 +84,6 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
                 <span>Choose Types Of Vouchers</span>
 
                 <select
-                    // {...register('typeOfVoucher', { required: 'typeOfVoucher is required' })}
                     className='outline-none border rounded-[8px]'
                     value={selectedVoucherType}
                     onChange={(event: any) => {
@@ -113,16 +125,15 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
 
             <div className='flex flex-col gap-[10px]'>
                 <span>Group</span>
-                <select className='outline-none border rounded-[8px]'
-                    {...register('group', { required: 'group is required' })}
 
-                >
-                    {groupsData && groupsData.map((element: any, index: any) => (
-                        <option key={element.id} value={element.id}>
-                            {element.name}
-                        </option>
-                    ))}
-                </select>
+                <Multiselect
+                    options={groupsData}
+                    selectedValues={formData?.group}
+                    onSelect={handleGroupSelect}
+                    onRemove={(selectedList, removedItem) => {
+                    }}
+                    displayValue="name"
+                />
             </div>
 
             {selectedVoucherType && selectedVoucherType === "transfer" && (
@@ -176,17 +187,24 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
                     </div> */}
                     <div className='flex  w-[100%] flex-col gap-[10px]'>
                         <span>Choose Godown To</span>
-                        <select
+                        {/* <select
                             className='outline-none border rounded-[8px]'
                             {...register('godownTo', { required: 'godownTo is required' })}
-                            >
+                        >
                             {Godowndata && Godowndata.map((element: any, index: any) => (
                                 <option key={element?._id} value={element?._id}>
                                     {element?.godownName}
                                 </option>
                             ))}
-                        </select>
+                        </select> */}
 
+                        <Multiselect
+                            options={Godowndata}
+                            selectedValues={selectedGodownData}
+                            onSelect={handleGodownSelect}
+                            onRemove={handleGodownSelect}
+                            displayValue="godownName"
+                        />
                     </div>
                 </div>
             )}

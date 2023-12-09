@@ -19,3 +19,7 @@ span{
   font-size: 14px !important;
 }
 
+.modal-bg {
+  background: black !important;
+  opacity: 0.1;
+}

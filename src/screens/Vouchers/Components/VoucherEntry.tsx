@@ -170,43 +170,43 @@ export const VoucherEntry = ({ vouchersData }: any) => {
                             </td>
 
 
-                            {isPopupOpen && (
-                                <div className="popup-container">
-                                    {selectedAction === 'edit' ? (
-                                        <div className="fixed inset-0 flex items-center justify-center z-50">
-                                            <div className="bsolute inset-0 bg-gray-800 opacity-[-8]"></div>
-                                            <div className='w-[768px] relative bg-white p-6 rounded-lg shadow-lg'>
-                                                <Editpopup closePopup={closePopup} voucherData={selectedVoucherData} />
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <div className="fixed inset-0 flex items-center z-50 justify-center bg-opacity-50">
-                                            <div className="modal-bg absolute inset-0  opacity-50"></div>
-                                            <div className="relative bg-white p-6 rounded-lg shadow-lg">
-                                                <div className='flex flex-col gap-[16px]'>
-                                                    <h1 className='px-[12px] py-[8px] text-[20px]  bold'>Do you want to delete this file</h1>
-                                                    <div className='flex items-center justify-center gap-[20px]'>
-                                                        <div className='border flex gap-[5px] bold rounded-[8px] px-[12px] py-[8px] cursor-pointer text-[14px]' onClick={closePopup}>
-                                                            Cancel
-                                                        </div>
-                                                        <div
-                                                            onClick={deleteVouchers}
-                                                            className='border flex gap-[5px] items-center rounded-[8px] px-[12px] py-[8px] cursor-pointer bg-[#f6e2e2]'>
-                                                            <img src={deletes} alt="" className='w-[16px] h-[16px]' />
-                                                            <span className='text-[#F23A3A] bold text-[14px]'>Yes, Delete!</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-
-                                </div>
-                            )}
                         </tr>
                     ))}
                 </tbody>
             </table>
+            {isPopupOpen && (
+                <div>
+                    {selectedAction === 'edit' ? (
+                        <div className="fixed inset-0 flex items-center justify-center z-50">
+                            <div className="modal-bg absolute inset-0"></div>
+                            <div className='w-[768px] relative bg-white p-6 rounded-lg shadow-lg'>
+                                <Editpopup closePopup={closePopup} voucherData={selectedVoucherData} />
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="fixed inset-0 flex items-center justify-center z-50">
+                            <div className="modal-bg absolute inset-0"></div>
+                            <div className="relative bg-white p-6 rounded-lg shadow-lg">
+                                <div className='flex flex-col gap-[16px]'>
+                                    <h1 className='px-[12px] py-[8px] text-[20px]  bold'>Do you want to delete this file</h1>
+                                    <div className='flex items-center justify-center gap-[20px]'>
+                                        <div className='border flex gap-[5px] bold rounded-[8px] px-[12px] py-[8px] cursor-pointer text-[14px]' onClick={closePopup}>
+                                            Cancel
+                                        </div>
+                                        <div
+                                            onClick={deleteVouchers}
+                                            className='border flex gap-[5px] items-center rounded-[8px] px-[12px] py-[8px] cursor-pointer bg-[#f6e2e2]'>
+                                            <img src={deletes} alt="" className='w-[16px] h-[16px]' />
+                                            <span className='text-[#F23A3A] bold text-[14px]'>Yes, Delete!</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                </div>
+            )}
 
         </div>
     )
