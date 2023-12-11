@@ -34,44 +34,29 @@ function App() {
 	return (
 
 		<div>
-			{/* <AuthGuard> */}
+			<AuthGuard>
 
-			{/* <NewAuthGuard> */}
-			<Routes>
+				{/* <NewAuthGuard> */}
+				<Routes>
 				<Route path="/" element={<DashboardVouchers />}></Route>
 				<Route path="/employer" element={<EmployerPage />}></Route>
 				<Route path="/ratio" element={<RatioSelect />}></Route>
 				<Route path="/manager" element={<ManagerDashboard />}></Route>
 				<Route path="/godown" element={<Godown />}></Route>
 			</Routes>
-			{/* </NewAuthGuard> */}
+				{/* </NewAuthGuard> */}
 
 
-			<Routes>
+				{/* <Routes>
 				<Route path="/login" element={<LoginPage />}></Route>
-			</Routes>
+			</Routes> */}
 
-			<SelfAuth>
-				<Routes>
-					<Route path="/sales/:id" element={<Aside><SalesOrder /></Aside>}></Route>
-					<Route path="/selfs" element={<Aside><Selfs /></Aside>}></Route>
-					<Route path="/aisles" element={<Aside><Aisle /></Aside>}></Route>
-					<Route path="/purchase" element={<Aside><Purchase /></Aside>}></Route>
-					<Route path="/purchaseDetail" element={<Aside><PurchaseDetail /></Aside>}></Route>
-					<Route path="/purchaseorder/:id" element={<Aside><PurchaseOrder /></Aside>}></Route>
-					<Route path="/PurchaseOrderDetail/:id" element={<Aside><PurchaseOrderDetail /></Aside>}></Route>
-					<Route path="/GodownDashboard" element={<Aside><DashboardGodowns /></Aside>}></Route>
-					<Route path="/transfer" element={<Aside><Transfer /></Aside>}></Route>
-					<Route path="/reconcilation" element={<Aside><Reconcilation /></Aside>}></Route>
-					<Route path="/salesdetail/:id" element={<Aside><SalesOrderDetail /></Aside>}></Route>
-				</Routes>
-			</SelfAuth>
 
-			<Toaster
-				position="top-center"
-				reverseOrder={false}
-			/>
-			{/* </AuthGuard> */}
+				<Toaster
+					position="top-center"
+					reverseOrder={false}
+				/>
+			</AuthGuard>
 		</div>
 
 	);

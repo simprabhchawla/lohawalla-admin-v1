@@ -6,6 +6,7 @@ enum RoleIndex {
 	SALES = "SALES",
 	SALES_UNVERIFIED = "SALES_UNVERIFIED",
 	UNKNOWN = "UNKNOWN",
+	MANAGER = "MANAGER",
 }
 
 export default RoleIndex;
