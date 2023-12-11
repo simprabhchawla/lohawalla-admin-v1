@@ -24,7 +24,7 @@ const navItems: NavItem[] = [
   {
     id: "Godown",
     name: "Godown Vouchers",
-    link: "/GodownDashboard",
+    link: "/",
     icon: sales,
 
   },
