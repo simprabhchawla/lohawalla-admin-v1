@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { EditPopupManager } from "./EditPopupManager";
 import { useDispatch } from "react-redux";
 import { deleteManagerAsync, getManagerAsync } from "@src/Redux/Slice/Admin/ManagerSlice";
+import toast from "react-hot-toast";
 
 export const Table = ({ managerData }: any) => {
     const [isEditPopupOpen, setEditPopupOpen] = useState(false);
@@ -31,18 +32,29 @@ export const Table = ({ managerData }: any) => {
     };
     const deleteManager = () => {
         const id = deleteID
-        dispatch(deleteManagerAsync(id)).then(() => {
-            dispatch(getManagerAsync())
-            handlePopupClose()
+        dispatch(deleteManagerAsync(id)).then((res: any) => {
+            if (res.payload.status) {
+                console.log("add", res.payload)
+                toast.success(res.payload.message)
+                dispatch(getManagerAsync())
+                handlePopupClose()
+            }
+            else {
+                toast.error(res.payload.message)
+
+            }
         })
     }
+
+
+
 
     // const handleEditFormSubmit = (data: any) => {
     //     console.log('Edited Data:', data);
     //     handlePopupClose();
     // };
-    const tableHeading =`px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize border-e-2`
-    const tableData =`px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap capitalize border`
+    const tableHeading = `px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize border-e-2`
+    const tableData = `px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap capitalize border`
     return (
         <div>
             <table className='w-full mt-[30px] border-2 '>
@@ -84,8 +96,8 @@ export const Table = ({ managerData }: any) => {
 
                             {isEditPopupOpen && (
                                 <div className="fixed inset-0 flex items-center justify-center z-50">
-                                <div className="modal-bg absolute inset-0"></div>
-                                <div className="modal w-[700px] relative bg-white p-6 rounded-lg shadow-lg">
+                                    <div className="modal-bg absolute inset-0"></div>
+                                    <div className="modal w-[700px] relative bg-white p-6 rounded-lg shadow-lg">
                                         <EditPopupManager selectedRowData={selectedRowData} handleEditPopupClose={handlePopupClose}
                                         />
                                     </div>

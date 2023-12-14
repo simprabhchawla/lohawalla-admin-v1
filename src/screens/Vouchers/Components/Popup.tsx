@@ -6,6 +6,7 @@ import check from "../../../assets_/icons/save.svg"
 import { getGroupsAsync } from '@src/Redux/Slice/Admin/getGroupSlice';
 import Multiselect from 'multiselect-react-dropdown';
 import { fetchGodownData } from '@src/Redux/Slice/Admin/godownSlice';
+import toast from 'react-hot-toast';
 
 const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }: any) => {
 
@@ -19,6 +20,7 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
 
         const updatedData = {
             ...data,
+            voucherCode: data.voucherCode.toLowerCase(),
             typeOfVoucher: selectedVoucherType,
             godownPermissionLevel: permissionLevel,
             godownTo: data.godownTo,
@@ -27,12 +29,22 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
 
         setFormData(updatedData);
 
-        dispatch(addVouchers(updatedData)).then(() => {
-            dispatch(getVouchersAsync());
-            dispatch(getGroupsAsync());
+        dispatch(addVouchers(updatedData)).then((res: any) => {
+
+
+            console.log("haaaa", res)
+            if (res.payload.status) {
+                toast.success(res.payload.message)
+                dispatch(getVouchersAsync());
+                dispatch(getGroupsAsync());
+                closePopup()
+            }
+            else {
+                toast.error(res.payload.message)
+
+            }
         });
 
-        closePopup()
 
     };
 
@@ -44,7 +56,7 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
     };
 
     const [permissionLevel, setPermissonLevel] = useState("");
-
+    console.log("hii permission", permissionLevel)
     const handelPermissionLevel = (event: any) => {
         setPermissonLevel(event.target.value);
     };
@@ -145,6 +157,7 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
                             {...register('transferType', { required: 'transferType is required' })}
                         >
 
+                            <option value="">Select Transfer Type</option>
                             <option value="Equal">Equal</option>
                             <option value="Ratio">Ratio</option>
                             <option value="UnEqual">UnEqual</option>
@@ -161,6 +174,7 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
                             }}
 
                             className='outline-none border rounded-[8px]'>
+                            <option value="">Select Permission Level</option>
                             <option value="Single">Single</option>
                             <option value="Multi">Multiple</option>
                         </select>
@@ -187,16 +201,7 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
                     </div> */}
                     <div className='flex  w-[100%] flex-col gap-[10px]'>
                         <span>Choose Godown To</span>
-                        {/* <select
-                            className='outline-none border rounded-[8px]'
-                            {...register('godownTo', { required: 'godownTo is required' })}
-                        >
-                            {Godowndata && Godowndata.map((element: any, index: any) => (
-                                <option key={element?._id} value={element?._id}>
-                                    {element?.godownName}
-                                </option>
-                            ))}
-                        </select> */}
+
 
                         <Multiselect
                             options={Godowndata}

@@ -6,7 +6,8 @@ const mode = "dev";
 
 export const DEV = axios.create({
 	// baseURL: "http://localhost:8080/",
-	baseURL: "https://lohawalla.onrender.com/",
+	baseURL: "/",
+	// baseURL: "https://lohawalla.onrender.com/",
 });
 
 export const PROD = axios.create({

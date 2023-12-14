@@ -7,6 +7,7 @@ import { addManagerDataAsync, getManagerAsync } from '@src/Redux/Slice/Admin/Man
 import AddManagerForm from './Components/AddManagerForm'
 import add from "../../assets_/icons/add.svg"
 import { fetchGodownData } from '@src/Redux/Slice/Admin/godownSlice'
+import toast from 'react-hot-toast'
 
 export const ManagerDashboard = () => {
 
@@ -33,9 +34,20 @@ export const ManagerDashboard = () => {
     const handleFormSubmit = (formData: any) => {
         console.log('Form Data:', formData);
 
-        dispatch(addManagerDataAsync(formData)).then(() => {
-            dispatch(getManagerAsync());
+        dispatch(addManagerDataAsync(formData)).then((res:any) => {
+            if (res.payload.status) {
+                console.log("add", res.payload)
+                toast.success(res.payload.message)
+                dispatch(getManagerAsync());
+                setPopupOpen(false)
+            }
+            else {
+                toast.error(res.payload.message)
+        
+            }
         });
+
+
         
     };
 

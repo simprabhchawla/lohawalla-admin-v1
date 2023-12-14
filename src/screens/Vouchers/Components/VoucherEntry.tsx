@@ -5,6 +5,7 @@ import { Editpopup } from '../Components/Editpopup';
 import { useDispatch } from 'react-redux';
 import { deleteCustomerApi } from '@src/Redux/Api/Admin/customerApi';
 import { deleteCustomerAsync, getVouchersAsync } from '@src/Redux/Slice/Admin/customerSlice';
+import toast from 'react-hot-toast';
 
 export const VoucherEntry = ({ vouchersData }: any) => {
     const [isSwitchOn, setSwitchOn] = useState(false);
@@ -58,9 +59,19 @@ export const VoucherEntry = ({ vouchersData }: any) => {
 
     const deleteVouchers = () => {
         if (selectedRowId) {
-            dispatch(deleteCustomerAsync(selectedRowId)).then(() => {
-                dispatch(getVouchersAsync());
-                closePopup();
+            dispatch(deleteCustomerAsync(selectedRowId)).then((res: any) => {
+
+
+                if (res.payload.status) {
+                    console.log("haaaa", res.payload)
+                    toast.success(res.payload.message)
+                    dispatch(getVouchersAsync());
+                    closePopup();
+                }
+                else {
+                    toast.error(res.payload.message)
+
+                }
             });
         }
     };
