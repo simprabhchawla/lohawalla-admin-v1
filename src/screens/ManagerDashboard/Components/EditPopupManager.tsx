@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import closed from "../../../assets_/icons/CloseIcon.svg"
 import { useDispatch } from 'react-redux';
 import { getManagerAsync, updateManagerDataAsync } from '@src/Redux/Slice/Admin/ManagerSlice';
+import toast from 'react-hot-toast';
 
 export const EditPopupManager = ({ selectedRowData, handleEditPopupClose }: any) => {
   const { register, handleSubmit, setValue } = useForm();
@@ -15,9 +16,19 @@ export const EditPopupManager = ({ selectedRowData, handleEditPopupClose }: any)
       data: data
     }
     console.log(editData)
-    dispatch(updateManagerDataAsync(editData)).then(() => {
-      dispatch(getManagerAsync());
-      handleEditPopupClose()
+    dispatch(updateManagerDataAsync(editData)).then((res:any) => {
+      if (res.payload.status) {
+        console.log("add", res.payload)
+        toast.success(res.payload.message)
+        dispatch(getManagerAsync());
+        handleEditPopupClose()
+    }
+    else {
+        toast.error(res.payload.message)
+
+    }
+
+
     });
     console.log('Submitted Data:', editData);
   };

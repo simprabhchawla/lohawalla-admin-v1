@@ -6,6 +6,8 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import closed from '../../../assets_/icons/CloseIcon.svg';
 import { getGroupsAsync } from '@src/Redux/Slice/Admin/getGroupSlice';
 import { MultiSelect } from "react-multi-select-component";
+import toast from 'react-hot-toast';
+import Multiselect from 'multiselect-react-dropdown';
 
 
 export const Editpopup = ({ closePopup, voucherData }: any) => {
@@ -21,18 +23,29 @@ export const Editpopup = ({ closePopup, voucherData }: any) => {
   const onSubmit: SubmitHandler<any> = (data) => {
     const editData = {
       id: voucherData._id,
-      group:[editedData.group],
+      group: data.group,
     };
-    dispatch(updateCustomer(editData)).then(() => {
-      dispatch(getVouchersAsync());
-      closePopup();
+    dispatch(updateCustomer(editData)).then((res: any) => {
+
+
+
+      if (res.payload.status) {
+        console.log("haaaa", res.payload)
+        toast.success(res.payload.message)
+        dispatch(getVouchersAsync());
+        closePopup();
+      }
+      else {
+        toast.error(res.payload.message)
+
+      }
     });
   };
 
   const groupsData = useSelector((state: any) => state?.groups?.data);
 
   console.log("hello", groupsData);
-  
+
   const filteredGroups = groupsData?.filter((element: any) => element.role !== "GODOWN_ASSISTANT");
 
 
@@ -41,6 +54,9 @@ export const Editpopup = ({ closePopup, voucherData }: any) => {
   }, [dispatch]);
 
 
+  const handleGroupSelect = (selectedList: any, selectedItem: any) => {
+    setValue('group', selectedList.map((item: any) => item.id));
+};
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -54,7 +70,7 @@ export const Editpopup = ({ closePopup, voucherData }: any) => {
 
         <div className='flex flex-col gap-[10px]'>
           <span>Group</span>
-          <select className='outline-none border rounded-[8px]'
+          {/* <select className='outline-none border rounded-[8px]'
             {...register('group', { required: 'group is required' })}
 
           >
@@ -63,7 +79,17 @@ export const Editpopup = ({ closePopup, voucherData }: any) => {
                 {element.name}
               </option>
             ))}
-          </select>
+          </select> */}
+
+
+          <Multiselect
+            options={filteredGroups}
+            selectedValues={filteredGroups?.group}
+            onSelect={handleGroupSelect}
+            onRemove={(selectedList, removedItem) => {
+            }}
+            displayValue="name"
+          />
         </div>
 
 

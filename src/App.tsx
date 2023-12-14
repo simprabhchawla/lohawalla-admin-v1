@@ -34,7 +34,7 @@ function App() {
 	return (
 
 		<div>
-			<AuthGuard>
+			{/* <AuthGuard> */}
 
 				{/* <NewAuthGuard> */}
 				<Routes>
@@ -47,16 +47,16 @@ function App() {
 				{/* </NewAuthGuard> */}
 
 
-				{/* <Routes>
+				<Routes>
 				<Route path="/login" element={<LoginPage />}></Route>
-			</Routes> */}
+			</Routes>
 
 
 				<Toaster
 					position="top-center"
 					reverseOrder={false}
 				/>
-			</AuthGuard>
+			{/* </AuthGuard> */}
 		</div>
 
 	);

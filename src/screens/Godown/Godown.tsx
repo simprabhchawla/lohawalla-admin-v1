@@ -11,6 +11,7 @@ import close from "../../assets_/icons/CloseIcon.svg"
 import dots from "../../assets_/icons/dots.svg"
 import deletes from "../../assets_/icons/Delete.svg"
 import x from "../../assets_/icons/x-close.svg"
+import toast from 'react-hot-toast';
 
 export const Godown = () => {
     const dispatch = useDispatch();
@@ -105,9 +106,18 @@ export const Godown = () => {
             address: selectedRow.address,
         };
         console.log(editData)
-        dispatch(updateGodown(editData)).then(() => {
-            dispatch(fetchGodownData());
-            handleClosePopup()
+        dispatch(updateGodown(editData)).then((res:any) => {
+        
+            if (res.payload.status) {
+                console.log("haaaa", res.payload)
+                toast.success(res.payload.message)
+                dispatch(fetchGodownData())
+                handleClosePopup();
+            }
+            else {
+                toast.error(res.payload.message)
+
+            }
         });
     }
 
@@ -115,17 +125,33 @@ export const Godown = () => {
 
     // add
     const handleAddGodownSubmit = (formData: any) => {
-        dispatch(addGodown(formData)).then(() => {
-            dispatch(fetchGodownData())
-            handleClosePopup()
+        dispatch(addGodown(formData)).then((res:any) => {
+            if (res.payload.status) {
+                console.log("haaaa", res.payload)
+                toast.success(res.payload.message)
+                dispatch(fetchGodownData())
+                handleClosePopup();
+            }
+            else {
+                toast.error(res.payload.message)
+
+            }
         })
 
     };
     // delete
     const deleteGodown = (id: any) => {
-        dispatch(deleteGodownAsync(id)).then(() => {
-            dispatch(fetchGodownData())
-            handleClosePopup()
+        dispatch(deleteGodownAsync(id)).then((res: any) => {
+            if (res.payload.status) {
+                console.log("haaaa", res.payload)
+                toast.success(res.payload.message)
+                dispatch(fetchGodownData())
+                handleClosePopup();
+            }
+            else {
+                toast.error(res.payload.message)
+
+            }
         })
     }
 
@@ -217,7 +243,7 @@ export const Godown = () => {
 
                                     </td>
                                     <td onClick={() => openPopup(element)} className=' px-4 h-14 flex cursor-pointer items-center text-sm font-medium text-[#4B4DED]'
-                                    >   
+                                    >
                                         View Detail
                                     </td>
                                     <td onClick={() => {
@@ -225,7 +251,7 @@ export const Godown = () => {
                                     }
                                     } className='text-sm  cursor-pointer   items-center font-medium text-[#5C5C77]'>
                                         <div className='relative flex gap-1  items-center'>
-                                            Edit    
+                                            Edit
                                             <img src={edit} alt="" className='w-[14px] cursor-pointer h-[14px] ' />
                                             <div className='absolute right-[5rem]'>
                                                 {menuOpen.includes(index) && (
@@ -318,7 +344,7 @@ export const Godown = () => {
                             handleSubmit={handleSubmit}
                             register={register}
                             onSubmitCallback={handleAddGodownSubmit}
-                            
+
                             closed={closed}
                         />
                     )}
