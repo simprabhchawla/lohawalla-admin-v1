@@ -7,6 +7,7 @@ import { getGroupsAsync } from '@src/Redux/Slice/Admin/getGroupSlice';
 import Multiselect from 'multiselect-react-dropdown';
 import { fetchGodownData } from '@src/Redux/Slice/Admin/godownSlice';
 import toast from 'react-hot-toast';
+import { update } from 'lodash';
 
 const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }: any) => {
 
@@ -180,6 +181,32 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
                         </select>
 
                     </div>
+
+
+                </div>
+            )}
+            {permissionLevel && permissionLevel === "Single" && (
+                <div className='flex flex-col gap-[20px]'>
+                    <div className='flex flex-col gap-[10px]'>
+                    <span>Choose Godown To</span>
+
+                        <select
+                            onChange={(event)=>{
+                                setValue('godownTo', [event.target.value]);
+                            }}
+                            
+                        >
+
+                            <option value="">Select Godown</option>
+                            {Godowndata && Godowndata.map((element:any)=>{
+                                return(
+                                    <option value={element._id}>{element.godownName}</option>
+                                )
+                            })}
+                        </select>
+                    </div>
+
+                   
 
 
                 </div>

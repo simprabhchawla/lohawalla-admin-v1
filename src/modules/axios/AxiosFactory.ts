@@ -1,6 +1,5 @@
 import axios, { CreateAxiosDefaults } from "axios";
-
-// export const basePath = "http://localhost:8080/";
+//export const basePath = "http://localhost:8080/";
 export const basePath = "/";
 // export const basePath = "https://www.lohawalla.com/";
 // export const basePath = "https://lohawalla.onrender.com/";

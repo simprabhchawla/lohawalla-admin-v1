@@ -5,7 +5,7 @@ type Mode = "dev" | "prod";
 const mode = "dev";
 
 export const DEV = axios.create({
-	// baseURL: "http://localhost:8080/",
+	//baseURL: "http://localhost:8080/",
 	baseURL: "/",
 	// baseURL: "https://lohawalla.onrender.com/",
 });
