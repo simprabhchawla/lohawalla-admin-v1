@@ -41,18 +41,10 @@ export const Table = ({ managerData }: any) => {
             }
             else {
                 toast.error(res.payload.message)
-
             }
         })
     }
 
-
-
-
-    // const handleEditFormSubmit = (data: any) => {
-    //     console.log('Edited Data:', data);
-    //     handlePopupClose();
-    // };
     const tableHeading = `px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize border-e-2`
     const tableData = `px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap capitalize border`
     return (

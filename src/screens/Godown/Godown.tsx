@@ -106,8 +106,8 @@ export const Godown = () => {
             address: selectedRow.address,
         };
         console.log(editData)
-        dispatch(updateGodown(editData)).then((res:any) => {
-        
+        dispatch(updateGodown(editData)).then((res: any) => {
+
             if (res.payload.status) {
                 console.log("haaaa", res.payload)
                 toast.success(res.payload.message)
@@ -125,7 +125,7 @@ export const Godown = () => {
 
     // add
     const handleAddGodownSubmit = (formData: any) => {
-        dispatch(addGodown(formData)).then((res:any) => {
+        dispatch(addGodown(formData)).then((res: any) => {
             if (res.payload.status) {
                 console.log("haaaa", res.payload)
                 toast.success(res.payload.message)
@@ -197,9 +197,8 @@ export const Godown = () => {
                 </div>
 
                 <div className='flex justify-between gap-[10px] items-center'>
-                    <div>
-                        <span className='text-[40px] text-[#005D7F]  bold '>Godown List</span>
-                    </div>
+
+                    <p className='text-[30px] text-[#005D7F]  bold '>Godown List</p>
 
 
                     <div onClick={openAddPopup} className='cursor-pointer flex py-[16px]  px-[20px] bg-[#005D7F] text-white  justify-center text-center items-center rounded-[8px] shadow-lg text-[18px] bold '>

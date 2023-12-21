@@ -1,4 +1,3 @@
-import { Aisle } from './GodownScreen/Screens/Aisle/Aisle';
 import { configureStore } from '@reduxjs/toolkit';
 import VoucherSlice from "@src/Redux/Slice/Admin/customerSlice"
 import ManagerSlice from './Redux/Slice/Admin/ManagerSlice';
