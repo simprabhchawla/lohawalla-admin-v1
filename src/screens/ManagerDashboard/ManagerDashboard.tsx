@@ -34,7 +34,7 @@ export const ManagerDashboard = () => {
     const handleFormSubmit = (formData: any) => {
         console.log('Form Data:', formData);
 
-        dispatch(addManagerDataAsync(formData)).then((res:any) => {
+        dispatch(addManagerDataAsync(formData)).then((res: any) => {
             if (res.payload.status) {
                 console.log("add", res.payload)
                 toast.success(res.payload.message)
@@ -43,12 +43,8 @@ export const ManagerDashboard = () => {
             }
             else {
                 toast.error(res.payload.message)
-        
             }
         });
-
-
-        
     };
 
     const Godowndata = useSelector((state: any) => state.godown.data);
@@ -67,7 +63,7 @@ export const ManagerDashboard = () => {
                     <div>
                         <Navbar Pagename='ManagerDashboard' />
                     </div>
-                    <div className='flex flex-col px-[20px]'>
+                    <div className='flex flex-col px-[20px] gap-[20px]'>
 
                         <div className='px-[20px]'>
                             <div className='flex  pt-[32px] justify-between '>
@@ -88,7 +84,7 @@ export const ManagerDashboard = () => {
                                         <div className="fixed inset-0 flex items-center justify-center z-50">
                                             <div className="modal-bg absolute inset-0 "></div>
                                             <div className="modal w-[700px] relative bg-white p-6 rounded-lg shadow-lg">
-                                                <AddManagerForm onClose={closePopup} onSubmit={handleFormSubmit} Godowndata={Godowndata}/>
+                                                <AddManagerForm onClose={closePopup} onSubmit={handleFormSubmit} Godowndata={Godowndata} />
                                             </div>
                                         </div>
                                     )}
@@ -106,8 +102,10 @@ export const ManagerDashboard = () => {
                             </div>
 
                         </div>
-                        <Table managerData={managerData} />
-                    </div>
+                        <div className='overflow-auto h-[550px]'>
+                            <Table managerData={managerData} />
+                        </div>
+                    </div> 
 
 
                 </div>

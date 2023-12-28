@@ -18,25 +18,25 @@ export const RatioSelect = () => {
     const closePopup = () => {
         setPopupOpen(false);
     };
-    const handleFormSubmit=(formData: any)=>{
+    const handleFormSubmit = (formData: any) => {
         console.log('Form Data:', formData);
 
         dispatch(addRatioDataAsync(formData)).then(() => {
             dispatch(getRatioAsync());
         });
     }
-    const dispatch=useDispatch()
-   useEffect(()=>{
+    const dispatch = useDispatch()
+    useEffect(() => {
         dispatch(getUnitAsync())
         dispatch(getItemAsync())
         dispatch(getRatioAsync());
 
-   },[])
-   const Unitdata=useSelector((state: any) => state.ratio.units)
-   const ItemsData=useSelector((state: any) => state.ratio.items)
-   const RatioData=useSelector((state: any) => state.ratio.ratio)
-   console.log(RatioData)
-   
+    }, [])
+    const Unitdata = useSelector((state: any) => state.ratio.units)
+    const ItemsData = useSelector((state: any) => state.ratio.items)
+    const RatioData = useSelector((state: any) => state.ratio.ratio)
+    console.log(RatioData)
+
     return (
         <>
             <div className='flex '>
@@ -54,24 +54,21 @@ export const RatioSelect = () => {
                                 Ratio Creation
                             </div>
                             <div className='flex gap-[10px]'>
-                                <div className='border-2 flex px-[30px] cursor-pointer  items-center text-[#005D7F] font-bold gap-[5px] rounded-[8px]'>
-                                    <img src={edit} alt="" />
-                                    Edit
-                                </div>
-                                <div className='border-2 flex px-[30px] cursor-pointer text-white  items-center bg-[#005D7F] font-bold gap-[5px] rounded-[8px]' onClick={()=>{
+
+                                <div className='border-2 flex px-[30px] cursor-pointer text-white  items-center bg-[#005D7F] font-bold gap-[5px] rounded-[8px]' onClick={() => {
                                     openPopup()
                                 }}>
                                     <img src={add} alt="" />
                                     Create
                                 </div>
                                 {isPopupOpen && (
-                                        <div className="fixed inset-0 flex items-center justify-center z-50">
-                                            <div className="modal-bg absolute inset-0 "></div>
-                                            <div className="modal w-[700px] relative bg-white p-6 rounded-lg shadow-lg">
-                                                <AddRatioCreationForm onClose={closePopup} onSubmit={handleFormSubmit} UnitData={Unitdata} ItemData={ItemsData}  />
-                                            </div>
+                                    <div className="fixed inset-0 flex items-center justify-center z-50">
+                                        <div className="modal-bg absolute inset-0 "></div>
+                                        <div className="modal w-[700px] relative bg-white p-6 rounded-lg shadow-lg">
+                                            <AddRatioCreationForm onClose={closePopup} onSubmit={handleFormSubmit} UnitData={Unitdata} ItemData={ItemsData} />
                                         </div>
-                                    )}
+                                    </div>
+                                )}
 
                             </div>
                         </div>
@@ -85,7 +82,10 @@ export const RatioSelect = () => {
 
                         </div>
 
-                        <Table ratioData={RatioData}/>
+                        <div className='overflow-auto h-[460px]'>
+
+                            <Table ratioData={RatioData} />
+                        </div>
                     </div>
 
                 </div>

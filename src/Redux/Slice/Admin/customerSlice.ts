@@ -51,7 +51,7 @@ export const deleteCustomerAsync: any = createAsyncThunk(
       throw error;
     }
   }
-);
+); 
 
 const VoucherSlice = createSlice({
   name: 'data',

@@ -17,14 +17,14 @@ const Sidebar = () => {
 
     return (
         <>
-            <aside className="flex flex-col w-56 h-full px-3 py-3 overflow-y-auto bg-white border-r border-r-slate-200 rtl:border-r-0 rtl:border-l ">
+            <aside className="flex flex-col w-56 h-auto px-3 py-3 overflow-y-auto bg-white border-r border-r-slate-200 rtl:border-r-0 rtl:border-l ">
                 <div className='px-4' >
                     <img className="" src={Logo} alt="" />
                 </div>
 
                 <div className="flex flex-col justify-between flex-1 mt-6">
                     <nav className=" ">
-                        <ul className='mt-16 text-left text-sm py-2 text-zinc-600'>
+                        <ul className='mt-5 text-left text-sm py-2 text-zinc-600'>
                             <Link to='/'>
                                 <li
                                     className={`my-3 px-4 py-2 rounded-lg transition duration-300 hover:bg-slate-700 hover:text-white ${pathname === '/' ? 'bg-slate-700 text-white' : ''
@@ -94,7 +94,7 @@ const Sidebar = () => {
                         </ul>
 
                         <ul className=''>
-                            <ul className='mt-32 text-left text-sm py-2 text-zinc-600'>
+                            <ul className='mt-5 text-left text-sm py-2 text-zinc-600'>
                                 <li className='bg-gray-200 my-3 px-4 py-2 rounded-xl hover:bg-slate-700 hover:text-white '><Icon className=' mr-2 inline-block hover:text-white' icon="ri:headphone-line" width="26" /> Contact Support</li>
                                 <li
                                     onClick={() => {

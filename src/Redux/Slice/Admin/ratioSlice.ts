@@ -3,7 +3,9 @@ import {
   AllItemApi,
   AllRatioDataApi,
   AllUnitApi,
+  DeleteRatioApi,
   addRatioDataApi,
+  updateRatioDataApi,
 } from "@src/Redux/Api/Admin/ratioApi";
 
 const initialState = {
@@ -58,6 +60,32 @@ export const addRatioDataAsync: any = createAsyncThunk(
   }
 );
 
+export const updateRatioDataAsync: any = createAsyncThunk(
+  "updateRatioDataAsync",
+  async (RatioData) => {
+    try {
+      // console.log(data)
+      return await updateRatioDataApi(RatioData);
+    } catch (error: any) {
+      console.log("not added", error);
+      throw error;
+    }
+  }
+);
+
+export const DeleteRatioApiAsync: any = createAsyncThunk(
+  "DeleteRatioApiAsync",
+  async (id) => {
+    try {
+      // console.log(data)
+      return await DeleteRatioApi(id);
+    } catch (error: any) {
+      console.log("not added", error);
+      throw error;
+    }
+  }
+);
+
 const RatioSlice = createSlice({
   name: "data",
   initialState,
@@ -74,6 +102,20 @@ const RatioSlice = createSlice({
         state.error = null;
       })
       .addCase(getRatioAsync.rejected, (state: any, action: any) => {
+        state.isLoading = false;
+        state.data = null;
+        state.error = action.error.message;
+      })
+      .addCase(updateRatioDataAsync.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateRatioDataAsync.fulfilled, (state: any, action: any) => {
+        state.isLoading = false;
+        state.ratio = action.payload.rationCreation;
+        state.error = null;
+      })
+      .addCase(updateRatioDataAsync.rejected, (state: any, action: any) => {
         state.isLoading = false;
         state.data = null;
         state.error = action.error.message;
@@ -114,6 +156,17 @@ const RatioSlice = createSlice({
         state.error = null;
       })
       .addCase(getItemAsync.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(DeleteRatioApiAsync.pending, (state: any) => {
+        state.status = "loading";
+      })
+      .addCase(DeleteRatioApiAsync.fulfilled, (state: any, action: any) => {
+        state.status = "idle";
+        state.ratio = action.payload.rationCreation;
+      })
+      .addCase(DeleteRatioApiAsync.rejected, (state: any, action: any) => {
         state.status = "failed";
         state.error = action.error.message;
       });
