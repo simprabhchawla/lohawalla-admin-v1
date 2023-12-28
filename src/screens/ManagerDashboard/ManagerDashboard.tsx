@@ -63,7 +63,7 @@ export const ManagerDashboard = () => {
                     <div>
                         <Navbar Pagename='ManagerDashboard' />
                     </div>
-                    <div className='flex flex-col px-[20px]'>
+                    <div className='flex flex-col px-[20px] gap-[20px]'>
 
                         <div className='px-[20px]'>
                             <div className='flex  pt-[32px] justify-between '>
@@ -105,7 +105,7 @@ export const ManagerDashboard = () => {
                         <div className='overflow-auto h-[550px]'>
                             <Table managerData={managerData} />
                         </div>
-                    </div>
+                    </div> 
 
 
                 </div>

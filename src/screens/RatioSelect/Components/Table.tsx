@@ -105,7 +105,7 @@ export const Table = ({ ratioData }: any) => {
     console.log("unit", allUnits && allUnits);
     const tableHeading = `text-[#6B778C] border flex-wrap text-center py-[8px]`;
     const tableData = `py-[10px] border flex-wrap text-center`;
-
+ 
     return (
         <table className="min-w-full border border-gray-300">
             <tbody>

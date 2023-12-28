@@ -37,9 +37,9 @@ export default function UnAuthPage(props: Props) {
 									className="px-12 py-4 bg-indigo-600 text-white rounded-full"
 									onClick={() => {
 										props.login && props.login();
-										// window.location.replace('https://www.lohawalla.com/')
+										window.location.replace('https://www.lohawalla.com/')
 										// window.location.replace('http://localhost:3000/')
-										window.location.replace('https://lohawalla.onrender.com/')
+										// window.location.replace('https://lohawalla.onrender.com/')
 									}}
 								>
 									Login

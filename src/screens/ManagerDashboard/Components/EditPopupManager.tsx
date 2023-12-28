@@ -25,10 +25,7 @@ export const EditPopupManager = ({ selectedRowData, handleEditPopupClose }: any)
     }
     else {
         toast.error(res.payload.message)
-
     }
-
-
     });
     console.log('Submitted Data:', editData);
   };
@@ -83,7 +80,7 @@ export const EditPopupManager = ({ selectedRowData, handleEditPopupClose }: any)
       </div>
 
       <div>
-        <div className=' flex justify-end'>
+        <div className='flex justify-end'>
           <div onClick={handleEditPopupClose} className="absolute -right-3 top-[-15px] p-[5px] flex items-center justify-center bg-[#FFFFFF] rounded-full cursor-pointer">
             <img src={closed} className="w-[25px] h-[25px]" alt="" />
           </div>

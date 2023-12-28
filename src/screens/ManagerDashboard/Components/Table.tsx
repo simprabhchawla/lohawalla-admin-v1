@@ -43,16 +43,16 @@ export const Table = ({ managerData }: any) => {
                 toast.error(res.payload.message)
             }
         })
-    }
+    } 
 
-    const tableHeading = `px-4 text-[#6B778C] text-xs font-bold h-[56px] whitespace-nowrap capitalize border-e-2`
-    const tableData = `px-4  text-xs font-medium text-[12px] h-[56px] whitespace-nowrap capitalize border`
+    const tableHeading = `text-[#6B778C] border flex-wrap text-center py-[8px]`;
+    const tableData = `py-[10px] border flex-wrap text-center`;
     return (
         <div>
-            <table className='w-full mt-[30px] border-2 '>
+        <table className="min-w-full border border-gray-300">
                 <tbody>
-                    <tr className=''>
-                        <td className={`${tableHeading} w-[20px]`}>Sr No</td>
+                <tr className="sticky top-0 z-10 bg-[#FAFAFA]">
+                        <td className={`${tableHeading}`}>Sr No</td>
                         <td className={`${tableHeading}`}>Name</td>
                         <td className={`${tableHeading}`}>Phone No.</td>
                         <td className={`${tableHeading}`}>Employee Code</td>
@@ -71,7 +71,7 @@ export const Table = ({ managerData }: any) => {
                             <td className={`${tableData}`}>{element?.user?.role}</td>
                             <td className={`${tableData} border-0 w-[4rem]`}>
                                 <img
-                                    src={edit}
+                                    src={edit} 
                                     alt=""
                                     className='w-[20px] cursor-pointer h-[20px]'
                                     onClick={() => handleEditClick(element)}
