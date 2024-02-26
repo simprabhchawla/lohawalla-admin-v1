@@ -4,13 +4,10 @@ import { addVouchersApiPath, getAllGroupsApiPath, getAllVouchersApiPath, updateV
 
 
 export const AllVouchersDataApi = async () => {
-
-  // console.log(groups)
   try {
     const response = await axios.get(`${addVouchersApiPath}`,{
       withCredentials:true
     });
-    console.log(response.data)
     return response.data;
   } catch (error) {
     throw error;
@@ -22,7 +19,6 @@ export const AllGroupsDataApi = async () => {
     const response = await axios.get(`${getAllGroupsApiPath}?limit=100`,{
       withCredentials:true
     });
-    console.log("aa",response.data)
     return response.data;
   } catch (error) {
     throw error;
@@ -33,7 +29,6 @@ export const AllGroupsDataApi = async () => {
 
 export const addVouchersAPI = async (updatedData:any) => {
   try {
-    console.log("efnefuw",updatedData)
     const response = await axios.post(`${addVouchersApiPath}`, updatedData,{
       withCredentials:true
     });
@@ -46,8 +41,6 @@ export const addVouchersAPI = async (updatedData:any) => {
 
 
 export const editCustomerAPI = async (editData: any) => {
-  console.log(editData)
-  
   try {
     const response = await axios.patch(`${updateVouchersApiPath}/${editData.id}`, editData, {
       withCredentials: true
@@ -62,9 +55,7 @@ export const editCustomerAPI = async (editData: any) => {
 
 
 export const deleteCustomerApi = async (id: any) => {
-  console.log(id)
   try {
-    // console.log("hiihihihihih",id)
     const response = await axios.delete(`${addVouchersApiPath}/${id}`, {
       withCredentials: true,
     });
