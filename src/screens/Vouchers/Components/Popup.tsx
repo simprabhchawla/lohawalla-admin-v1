@@ -12,7 +12,6 @@ import { update } from 'lodash';
 const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }: any) => {
 
     const [formData, setFormData] = useState<any>()
-    console.log(formData)
 
     const { handleSubmit, register, setValue, formState: { errors } } = useForm();
     const dispatch = useDispatch();
@@ -31,9 +30,6 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
         setFormData(updatedData);
 
         dispatch(addVouchers(updatedData)).then((res: any) => {
-
-
-            console.log("haaaa", res)
             if (res.payload.status) {
                 toast.success(res.payload.message)
                 dispatch(getVouchersAsync());
@@ -57,14 +53,12 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
     };
 
     const [permissionLevel, setPermissonLevel] = useState("");
-    console.log("hii permission", permissionLevel)
     const handelPermissionLevel = (event: any) => {
         setPermissonLevel(event.target.value);
     };
 
 
     const Godowndata = useSelector((state: any) => state.godown.data);
-    console.log("gd data", Godowndata)
     useEffect(() => {
         dispatch(fetchGodownData());
     }, [dispatch]);
@@ -81,7 +75,6 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
         setValue('godownTo', selectedList.map((item: any) => item._id));
         setSelectedGodownData(selectedList);
     };
-    console.log("ll", selectedGodownData)
 
     return (
 
