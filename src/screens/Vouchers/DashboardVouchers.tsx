@@ -18,7 +18,6 @@ export const DashboardVouchers = () => {
 
     const dispatch = useDispatch();
     const vouchersData = useSelector((state: any) => state.voucher?.data?.vouchers);
-    // console.log("dd", vouchersData)
 
     // view
     useEffect(() => {
@@ -26,7 +25,6 @@ export const DashboardVouchers = () => {
     }, [dispatch]);
 
     const groupsData = useSelector((state: any) => state?.groups?.data);
-    // console.log("hellogroupsss", groupsData)
 
     useEffect(() => {
         dispatch(getGroupsAsync());
