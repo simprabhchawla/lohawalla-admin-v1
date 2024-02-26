@@ -1,110 +1,79 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getVouchersAsync, updateCustomer } from '@src/Redux/Slice/Admin/customerSlice';
-import { editCustomerAPI } from '@src/Redux/Api/Admin/customerApi';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import closed from '../../../assets_/icons/CloseIcon.svg';
-import { getGroupsAsync } from '@src/Redux/Slice/Admin/getGroupSlice';
-import { MultiSelect } from "react-multi-select-component";
-import toast from 'react-hot-toast';
-import Multiselect from 'multiselect-react-dropdown';
+import React from "react";
+import { getGroupsAsync } from "@src/Redux/Slice/Admin/getGroupSlice";
+import { useDispatch, useSelector } from "react-redux";
 
+interface VoucherData {
+  voucherName: string;
+  voucherMethod: string;
+  typeOfVoucher: string;
+  voucherCode: string;
+  updatedAt: string;
+  group: { name: string }[];
+}
 
-export const Editpopup = ({ closePopup, voucherData }: any) => {
-  const dispatch = useDispatch();
-  const { register, handleSubmit, setValue } = useForm();
-  const [editedData, setEditedData] = useState({ ...voucherData });
+interface EditPopupProps {
+  onClose: () => void;
+  data: VoucherData | null;
+}
 
-  useEffect(() => {
-    setValue('group', editedData.group);
-  }, [editedData, setValue]);
-
-
-  const onSubmit: SubmitHandler<any> = (data) => {
-    const editData = {
-      id: voucherData._id,
-      group: data.group,
-    };
-    dispatch(updateCustomer(editData)).then((res: any) => {
-
-
-
-      if (res.payload.status) {
-        console.log("haaaa", res.payload)
-        toast.success(res.payload.message)
-        dispatch(getVouchersAsync());
-        closePopup();
-      }
-      else {
-        toast.error(res.payload.message)
-
-      }
-    });
-  };
-
+const Editpopup: React.FC<EditPopupProps> = ({ onClose, data }) => {
   const groupsData = useSelector((state: any) => state?.groups?.data);
 
-  console.log("hello", groupsData);
+  const dispatch = useDispatch();
 
-  const filteredGroups = groupsData?.filter((element: any) => element.role !== "GODOWN_ASSISTANT");
-
-
-  useEffect(() => {
+  React.useEffect(() => {
     dispatch(getGroupsAsync());
   }, [dispatch]);
-
-
-  const handleGroupSelect = (selectedList: any, selectedItem: any) => {
-    setValue('group', selectedList.map((item: any) => item.id));
-};
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-
-      <div className='flex flex-col gap-[20px] '>
-        <div>
-          <h2 className="text-xl  font-bold">Edit Vouchers</h2>
-        </div>
-
-
-
-        <div className='flex flex-col gap-[10px]'>
-          <span>Group</span>
-          {/* <select className='outline-none border rounded-[8px]'
-            {...register('group', { required: 'group is required' })}
-
-          >
-            {filteredGroups && filteredGroups.map((element: any, index: any) => (
-              <option key={element.id} value={element.id}>
-                {element.name}
-              </option>
-            ))}
-          </select> */}
-
-
-          <Multiselect
-            options={filteredGroups}
-            selectedValues={filteredGroups?.group}
-            onSelect={handleGroupSelect}
-            onRemove={(selectedList, removedItem) => {
-            }}
-            displayValue="name"
-          />
-        </div>
-
-
-        <div className='flex justify-end gap-[10px]'>
-          <button
-            onClick={closePopup}
-            className="absolute -right-3 top-[-15px] p-[5px] flex items-center justify-center bg-[#FFFFFF] rounded-full cursor-pointer"
-          >
-            <img src={closed} alt="" />
-          </button>
-          <button type="submit" className='px-[20px] py-[10px] bg-[#005D7F] text-white rounded-[5px] '>
-            Update
-          </button>
-        </div>
+    <section className="flex h-[90vh] max-w-7xl  flex-col w-[50%] items-start gap-[44px] bg-white p-4 rounded-md">
+      <div className="flex w-full flex-row justify-between border-b p-4 py-8">
+        <h1 className="text-2xl font-semibold">Edit Voucher</h1>
+        <button
+          className="bg-[#005D7F] text-white p-3 rounded-md px-[2rem]"
+          onClick={onClose}
+        >
+          Save
+        </button>
       </div>
-    </form>
+      <div className="px-[52px] rounded-md border w-full p-4">
+        <h1 className="text-2xl">Group Present</h1>
+        <ul className="grid grid-cols-2 max-h-[15rem] overflow-y-auto gap-5 mt-5">
+          {data?.group.map((s, index) => (
+            <li
+              key={index}
+              className={`text-md text-gray-500 py-1 px-2 font-semibold capitalize
+              }`}
+            >
+              {s.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="px-[52px] rounded-md border p-4 w-full">
+        <h1 className="text-2xl">Group List</h1>
+        <ul className="grid grid-cols-2 gap-2 mt-5 max-h-[10rem] overflow-y-auto">
+          {groupsData.map((group: any, index: number) => (
+            <li key={index} className="flex items-center gap-5 list-decimal">
+              <label
+                htmlFor={`group-${index}`}
+                className="text-md text-gray-500 font-semibold capitalize w-[10rem]"
+              >
+                {group.name}
+              </label>
+              <input
+                type="checkbox"
+                id={`group-${index}`}
+                value={group.name}
+                // For example: onChange={(e) => handleCheckboxChange(e, group)}
+                className="mr-2"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 };
+
+export default Editpopup;

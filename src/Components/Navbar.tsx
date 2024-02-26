@@ -12,7 +12,6 @@ interface PageNameProps {
 
 const Navbar = ({ Pagename }: PageNameProps) => {
 	const { loginData } = useAuthGuardContext();
-	console.log(loginData);
 	return (
 		<div className="">
 			<div className="bg-white flex border-b-2 border-gray-100 py-2 px-4 ">

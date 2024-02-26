@@ -1,7 +1,7 @@
 import { useState } from "react";
 import edit from "../../../assets_/icons/edit.svg";
 import deletes from "../../../assets_/icons/Delete.svg";
-import { Editpopup } from "../Components/Editpopup";
+import Editpopup from "../Components/Editpopup";
 import { useDispatch } from "react-redux";
 import { deleteCustomerApi } from "@src/Redux/Api/Admin/customerApi";
 import {
@@ -10,6 +10,18 @@ import {
 } from "@src/Redux/Slice/Admin/customerSlice";
 import toast from "react-hot-toast";
 
+interface Voucher {
+  voucherName: string;
+  voucherMethod: string;
+  typeOfVoucher: string;
+  voucherCode: string;
+  updatedAt: string;
+  group: any[];
+}
+
+interface VoucherEntryProps {
+  vouchersData: Voucher[];
+}
 export const VoucherEntry = ({ vouchersData }: any) => {
   const [isSwitchOn, setSwitchOn] = useState(false);
   const [searchInput, setSearchInput] = useState("");
@@ -33,27 +45,12 @@ export const VoucherEntry = ({ vouchersData }: any) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
   const [selectedRowId, setSelectedRowId] = useState<any>(null);
-  const [selectedVoucherData, setSelectedVoucherData] = useState(null);
-
-  const openPopup = (action: any, voucherData: any) => {
-    setPopupOpen(true);
-    setSelectedAction(action);
-    setSelectedVoucherData(voucherData);
-  };
+  const [selectedVoucherData, setSelectedVoucherData] =
+    useState<Voucher | null>(null);
 
   const closePopup = () => {
     setPopupOpen(false);
     setSelectedAction(null);
-  };
-
-  const handleEditClick = (id: any, element: any) => {
-    setSelectedRowId(id);
-    openPopup("edit", element);
-  };
-
-  const handleDeleteClick = (id: any, element: any) => {
-    setSelectedRowId(id);
-    openPopup("delete", element);
   };
 
   const dispatch = useDispatch();
@@ -62,7 +59,6 @@ export const VoucherEntry = ({ vouchersData }: any) => {
     if (selectedRowId) {
       dispatch(deleteCustomerAsync(selectedRowId)).then((res: any) => {
         if (res.payload.status) {
-          console.log("haaaa", res.payload);
           toast.success(res.payload.message);
           dispatch(getVouchersAsync());
           closePopup();
@@ -74,7 +70,24 @@ export const VoucherEntry = ({ vouchersData }: any) => {
   };
   const tableHeading = `px-4 text-[#6B778C] border text-md font-semibold h-[56px] whitespace-nowrap capitalize`;
   const tableData = `px-4  text-md h-[56px] whitespace-nowrap capitalize border-e`;
+  const [menuOpen, setMenuOpen] = useState<number[]>([]);
+  const toggleMenu = (element: any, index: number) => {
+    setSelectedVoucherData(element);
+    if (menuOpen.includes(index)) {
+      setMenuOpen([]);
+    } else {
+      setMenuOpen([index]);
+    }
+  };
+  const [isEditPopupOpen, setEditPopupOpen] = useState(false);
 
+  const openEditPopup = () => {
+    setEditPopupOpen(true);
+  };
+
+  const closeEditPopup = () => {
+    setEditPopupOpen(false);
+  };
   return (
     <div className="pt-[32px] flex flex-col gap-[30px]">
       <div className="flex justify-between gap-[15px] w-[100%] items-center">
@@ -151,10 +164,9 @@ export const VoucherEntry = ({ vouchersData }: any) => {
             <td className={`${tableHeading}`}>Voucher Type</td>
             <td className={`${tableHeading}`}>Voucher Code</td>
             <td className={`${tableHeading}`}>Date</td>
-            <td className={`${tableHeading} border-0 border-t border-b`}></td>
-            <td
-              className={`${tableHeading} border-0 border-t border-b border-e`}
-            ></td>
+            <td className={`${tableHeading} border-0 border-t border-b`}>
+              Action
+            </td>
           </tr>
           {filteredData &&
             filteredData.map((element: any, index: any) => (
@@ -169,72 +181,48 @@ export const VoucherEntry = ({ vouchersData }: any) => {
                 <td className={`${tableData}`}>
                   {element.updatedAt.slice(0, 10)}
                 </td>
-                <td className={`${tableData} flex gap-3 items-center flex-row`}>
-                  Edit{" "}
-                  <img src={edit} alt="" className="w-[1rem] cursor-pointer" />
-                </td>
-
-                <td className={`${tableData} border-0  w-[50px]`}>
-                  <img
-                    src={edit}
-                    alt=""
-                    className="w-[25px] cursor-pointer h-[25px]"
-                    onClick={() => handleEditClick(element._id, element)}
-                  />
-                </td>
-                <td className={`${tableData} border-0   w-[50px]`}>
-                  <img
-                    src={deletes}
-                    alt=""
-                    className="w-[20px] cursor-pointer h-[20px]"
-                    onClick={() => handleDeleteClick(element._id, element)}
-                  />
+                <td
+                  onClick={() => {
+                    toggleMenu(element, index);
+                  }}
+                  className="text-sm cursor-pointer ps-5  font-medium text-[#5C5C77]"
+                >
+                  <div className="relative flex gap-1  items-center">
+                    Edit
+                    <img
+                      src={edit}
+                      alt=""
+                      className="w-[14px] cursor-pointer h-[14px] "
+                    />
+                    <div className="absolute top-0 right-[-1rem]">
+                      {menuOpen.includes(index) && (
+                        <div className="bg-white border border-gray-300 shadow-md z-20 rounded-md ">
+                          <ul>
+                            <li
+                              className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                              onClick={openEditPopup}
+                            >
+                              Edit
+                            </li>
+                            <li
+                              className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                              // onClick={opendeletePopup}
+                            >
+                              Delete
+                            </li>
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </td>
               </tr>
             ))}
         </tbody>
       </table>
-      {isPopupOpen && (
-        <div>
-          {selectedAction === "edit" ? (
-            <div className="fixed inset-0 flex items-center justify-center z-50">
-              <div className="modal-bg absolute inset-0"></div>
-              <div className="w-[768px] relative bg-white p-6 rounded-lg shadow-lg">
-                <Editpopup
-                  closePopup={closePopup}
-                  voucherData={selectedVoucherData}
-                />
-              </div>
-            </div>
-          ) : (
-            <div className="fixed inset-0 flex items-center justify-center z-50">
-              <div className="modal-bg absolute inset-0"></div>
-              <div className="relative bg-white p-6 rounded-lg shadow-lg">
-                <div className="flex flex-col gap-[16px]">
-                  <h1 className="px-[12px] py-[8px] text-[20px]  bold">
-                    Do you want to delete this file
-                  </h1>
-                  <div className="flex items-center justify-center gap-[20px]">
-                    <div
-                      className="border flex gap-[5px] bold rounded-[8px] px-[12px] py-[8px] cursor-pointer text-[14px]"
-                      onClick={closePopup}
-                    >
-                      Cancel
-                    </div>
-                    <div
-                      onClick={deleteVouchers}
-                      className="border flex gap-[5px] items-center rounded-[8px] px-[12px] py-[8px] cursor-pointer bg-[#f6e2e2]"
-                    >
-                      <img src={deletes} alt="" className="w-[16px] h-[16px]" />
-                      <span className="text-[#F23A3A] bold text-[14px]">
-                        Yes, Delete!
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+      {isEditPopupOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+          <Editpopup data={selectedVoucherData} onClose={closeEditPopup} />
         </div>
       )}
     </div>
