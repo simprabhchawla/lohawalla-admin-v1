@@ -1,14 +1,13 @@
 import { useState } from "react";
 import edit from "../../../assets_/icons/edit.svg";
-import deletes from "../../../assets_/icons/Delete.svg";
 import Editpopup from "../Components/Editpopup";
 import { useDispatch } from "react-redux";
-import { deleteCustomerApi } from "@src/Redux/Api/Admin/customerApi";
 import {
   deleteCustomerAsync,
   getVouchersAsync,
 } from "@src/Redux/Slice/Admin/customerSlice";
 import toast from "react-hot-toast";
+import deletes from "@src/assets_/icons/DeleteIcon.svg"
 
 interface Voucher {
   voucherName: string;
@@ -19,9 +18,7 @@ interface Voucher {
   group: any[];
 }
 
-interface VoucherEntryProps {
-  vouchersData: Voucher[];
-}
+
 export const VoucherEntry = ({ vouchersData }: any) => {
   const [isSwitchOn, setSwitchOn] = useState(false);
   const [searchInput, setSearchInput] = useState("");
@@ -45,12 +42,22 @@ export const VoucherEntry = ({ vouchersData }: any) => {
   const [isPopupOpen, setPopupOpen] = useState(false);
   const [selectedAction, setSelectedAction] = useState(null);
   const [selectedRowId, setSelectedRowId] = useState<any>(null);
+
+  const [opendeletePopup,setopenDeletePopup] = useState(false);
+
+
+  const deletePopup=(id:any)=>{
+    setopenDeletePopup(true)
+    setSelectedRowId(id)
+  }
+
   const [selectedVoucherData, setSelectedVoucherData] =
     useState<Voucher | null>(null);
 
   const closePopup = () => {
     setPopupOpen(false);
     setSelectedAction(null);
+    setopenDeletePopup(false)
   };
 
   const dispatch = useDispatch();
@@ -206,7 +213,7 @@ export const VoucherEntry = ({ vouchersData }: any) => {
                             </li>
                             <li
                               className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
-                              // onClick={opendeletePopup}
+                              onClick={()=>deletePopup(element?._id)}
                             >
                               Delete
                             </li>
@@ -225,6 +232,32 @@ export const VoucherEntry = ({ vouchersData }: any) => {
           <Editpopup data={selectedVoucherData} onClose={closeEditPopup} />
         </div>
       )}
+
+      {
+        opendeletePopup&& (
+          <>
+          <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="modal-bg absolute inset-0"></div>
+          <div className="relative bg-white p-6 rounded-lg shadow-lg">
+              <div className='flex flex-col gap-[16px]'>
+                  <h1 className='px-[12px] py-[8px] text-[20px]  bold'>Do you want to delete this file</h1>
+                  <div className='flex items-center justify-center gap-[20px]'>
+                      <div className='border flex gap-[5px] bold rounded-[8px] px-[12px] py-[8px] cursor-pointer text-[14px]' onClick={closePopup}>
+                          Cancel
+                      </div>
+                      <div
+                          onClick={deleteVouchers}
+                          className='border flex gap-[5px] items-center rounded-[8px] px-[12px] py-[8px] cursor-pointer bg-[#f6e2e2]'>
+                          <img src={deletes} alt="" className='w-[16px] h-[16px]' />
+                          <span className='text-[#F23A3A] bold text-[14px]'>Yes, Delete!</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+          </>
+        )
+      }
     </div>
   );
 };
