@@ -63,8 +63,7 @@ export const ManagerDashboard = () => {
                     <div>
                         <Navbar Pagename='ManagerDashboard' />
                     </div>
-                    <div className='flex flex-col px-[20px] gap-[20px]'>
-
+                    <div className='flex flex-col px-[20px] gap-[20px] h-[80vh] overflow-auto'>
                         <div className='px-[20px]'>
                             <div className='flex  pt-[32px] justify-between '>
                                 <div className='p-[10px] text-[24px] text-[#005D7F] font-bold'>
