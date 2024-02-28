@@ -35,7 +35,6 @@ export const RatioSelect = () => {
     const Unitdata = useSelector((state: any) => state.ratio.units)
     const ItemsData = useSelector((state: any) => state.ratio.items)
     const RatioData = useSelector((state: any) => state.ratio.ratio)
-    console.log(RatioData)
 
     return (
         <>

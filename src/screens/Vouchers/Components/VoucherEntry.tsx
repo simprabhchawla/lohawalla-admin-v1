@@ -164,7 +164,7 @@ export const VoucherEntry = ({ vouchersData }: any) => {
 
       <table className="w-full border rounded-md">
         <tbody>
-          <tr className="">
+          <tr className="bg-[#FAFAFA]">
             <td className={`${tableHeading} w-[20px]`}>sr No</td>
             <td className={`${tableHeading} w-[15%]`}>Voucher Name</td>
             <td className={`${tableHeading}`}>Voucher Method</td>
