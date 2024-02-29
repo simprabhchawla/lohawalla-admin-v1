@@ -13,7 +13,7 @@ export const ManagerDashboard = () => {
 
     const dispatch = useDispatch();
     const managerData = useSelector((state: any) => state.manager?.data?.data);
-    
+
 
     // view
     useEffect(() => {

@@ -105,6 +105,7 @@ export const Table = ({ ratioData }: any) => {
     
     const tableHeading = `text-[#6B778C] border flex-wrap text-center py-[8px]`;
     const tableData = `py-[10px] border flex-wrap text-center`;
+
  
     return (
         <table className="min-w-full border border-gray-300">
@@ -117,6 +118,7 @@ export const Table = ({ ratioData }: any) => {
                     <td className={`${tableHeading}`}>Raw Material 2</td>
                     <td className={`${tableHeading}`}>Number</td>
                     <td className={`${tableHeading}`}>Unit</td>
+                    <td className={`${tableHeading}`}>Action</td>
                 </tr>
                 {ratioData && ratioData.length > 0 && ratioData.map((element: any, index: any) => (
                     <tr key={index} className=''>
@@ -192,7 +194,7 @@ export const Table = ({ ratioData }: any) => {
                             )}
                         </td>
 
-                        <td className={`flex ps-[20px] gap-[20px] h-[56px] justify-center items-center w-full `}>
+                        <td className={`flex ps-[20px] gap-[20px] h-[56px] justify-start items-center w-full `}>
                             <div>
 
                                 {editPopupOpen && editPopupOpen.includes(index) ? (
