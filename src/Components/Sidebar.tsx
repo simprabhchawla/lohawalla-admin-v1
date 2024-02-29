@@ -68,6 +68,16 @@ const Sidebar = () => {
                                     Godown
                                 </li>
                             </Link>
+                            <Link to='/assistantManager'>
+                                <li
+                                    className={`my-3 px-4 py-2 rounded-lg transition duration-300 hover:bg-slate-700 hover:text-white ${pathname === '/assistantManager' ? 'bg-slate-700 text-white' : ''
+                                        }`}
+
+                                >
+                                    <Icon className='mr-2 inline-block hover:text-white' icon="ph:bag" width="26" />
+                                    Assistant Manager
+                                </li>
+                            </Link>
                             <Link to='/employer'>
                                 <li
                                     className={`my-3 px-4 py-2 rounded-lg transition duration-300 hover:bg-slate-700 hover:text-white ${pathname === '/employer' ? 'bg-slate-700 text-white' : ''

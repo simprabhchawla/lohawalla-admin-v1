@@ -6,7 +6,7 @@ export const createSales = async (salesData: any) => {
     const response = await axios.post(`${salesApiPath}`, salesData, {
       withCredentials: true
     })
-    // console.log(response.data)
+    // 
     return response.data;
   } catch (error) {
     throw error;

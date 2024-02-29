@@ -58,7 +58,7 @@ const RecouncilationSlice = createSlice({
       })
       .addCase(requestRecouncilationAsync.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
-        console.log("post",action.payload)
+        
         state.data = action.payload;
         state.error = null;
       })

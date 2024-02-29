@@ -15,7 +15,7 @@ const initialState = {
 export const getSalesDataAsync: any = createAsyncThunk('getSalesOrderAsync', async (ids) => {
   try {
     const data = await getSalesOrderDataApi(ids);
-    // console.log("Slicessss",data)
+    // 
     return data;
     
   } catch (error) {

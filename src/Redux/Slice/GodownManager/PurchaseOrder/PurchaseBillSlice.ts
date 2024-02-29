@@ -14,7 +14,7 @@ const initialState = {
 export const createPurchaseBillAsync: any = createAsyncThunk('createPurchaseBillAsync', async (Data) => {
   try {
     const data = await createPurchaseBill(Data);
-    // console.log("Slice",data)
+    // 
     return data;
     
   } catch (error) {
@@ -28,7 +28,7 @@ export const createPurchaseBillAsync: any = createAsyncThunk('createPurchaseBill
 export const getPurchaseOrderDataAsync: any = createAsyncThunk('getSalesOrderAsync', async (id) => {
   try {
     const data = await getPurchaseByOrderDataApi(id);
-    console.log("Slicessss",data)
+    
     return data;
     
   } catch (error) {
@@ -64,7 +64,7 @@ const PurchaseBillSlice = createSlice({
     })
     .addCase(getPurchaseOrderDataAsync.fulfilled, (state, action) => {
       state.isLoading = false;
-      console.log("slslsls",action.payload)
+      
       state.godown = action.payload;
       state.error = null;
     })

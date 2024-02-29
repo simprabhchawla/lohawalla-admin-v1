@@ -21,10 +21,10 @@ export const fetchGodownData: any = createAsyncThunk('godown/fetchGodownData', a
 
 export const addGodown:any = createAsyncThunk('sales/addGodown', async (godownData) => {
   try {
-    // console.log(godownData)
+    // 
     return await addGodownAPI(godownData);
   } catch (error:any) {
-    console.log("not added",error)
+    
     throw error
   }
 });

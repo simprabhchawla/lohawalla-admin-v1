@@ -15,10 +15,10 @@ export const EditPopupManager = ({ selectedRowData, handleEditPopupClose }: any)
       id: selectedRowData._id,
       data: data
     }
-    console.log(editData)
+    
     dispatch(updateManagerDataAsync(editData)).then((res:any) => {
       if (res.payload.status) {
-        console.log("add", res.payload)
+        
         toast.success(res.payload.message)
         dispatch(getManagerAsync());
         handleEditPopupClose()
@@ -27,7 +27,7 @@ export const EditPopupManager = ({ selectedRowData, handleEditPopupClose }: any)
         toast.error(res.payload.message)
     }
     });
-    console.log('Submitted Data:', editData);
+    
   };
 
   const handleInputChange = (name: any, value: any) => {

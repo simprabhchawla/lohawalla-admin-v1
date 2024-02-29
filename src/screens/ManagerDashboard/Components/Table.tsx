@@ -28,13 +28,13 @@ export const Table = ({ managerData }: any) => {
     const handleDeleteClick = (id: any) => {
         setDeleteID(id)
         setdeletePopupOpen(true)
-        console.log('Delete clicked for:', id);
+        
     };
     const deleteManager = () => {
         const id = deleteID
         dispatch(deleteManagerAsync(id)).then((res: any) => {
             if (res.payload.status) {
-                console.log("add", res.payload)
+                
                 toast.success(res.payload.message)
                 dispatch(getManagerAsync())
                 handlePopupClose()

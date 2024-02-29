@@ -56,7 +56,7 @@ export default function AuthGuard(props: Props) {
 	});
 
 	const data = localStorage.getItem("userData")
-	// console.log(data)
+	// 
 	const authActions = new AuthActions(state, setState);
 
 	useEffect(() => {

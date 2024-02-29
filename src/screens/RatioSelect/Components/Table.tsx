@@ -29,11 +29,11 @@ export const Table = ({ ratioData }: any) => {
     };
 
     const handleDeleteClick = (id: any) => {
-        console.log(id);
+        
         dispatch(DeleteRatioApiAsync(id)).then((res: any) => {
 
             if (res.payload.status) {
-                console.log("haaaa", res.payload)
+                
                 toast.success(res.payload.message)
                 dispatch(getRatioAsync());
                 setEditPopupOpen([]);
@@ -77,10 +77,10 @@ export const Table = ({ ratioData }: any) => {
             value2: editedValue2 ?? editedData.value2,
             unit2: editedUnit2 ?? editedData.unit2,
         };
-        console.log("Edited Data:", RatioData);
+        
         dispatch(updateRatioDataAsync(RatioData)).then((res: any) => {
             if (res.payload.status) {
-                console.log("haaaa", res.payload)
+                
                 toast.success(res.payload.message)
                 dispatch(getRatioAsync());
                 setEditPopupOpen([]);
@@ -102,7 +102,7 @@ export const Table = ({ ratioData }: any) => {
         dispatch(getUnitAsync());
     }, []);
 
-    console.log("unit", allUnits && allUnits);
+    
     const tableHeading = `text-[#6B778C] border flex-wrap text-center py-[8px]`;
     const tableData = `py-[10px] border flex-wrap text-center`;
  

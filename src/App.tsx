@@ -11,12 +11,13 @@ import { Godown } from "./screens/Godown/Godown";
 import LoginPage from "./Login/LoginPage/Loginpage";
 import { Routes } from "react-router-dom/dist";
 import AuthGuard from "./auth/AuthGuard/AuthGuard";
+import { AssistantManagerDashboard } from "./screens/AssistantManager/AssistantManagerDashboard";
 // import { GodownDashboard } from "./screens/Godown/GodownDashboard";
 
 function App() {
   return (
     <div>
-      <AuthGuard>
+      {/* <AuthGuard> */}
 
       <Routes>
         <Route path="/" element={<DashboardVouchers />}></Route>
@@ -24,14 +25,15 @@ function App() {
         <Route path="/ratio" element={<RatioSelect />}></Route>
         <Route path="/manager" element={<ManagerDashboard />}></Route>
         <Route path="/godown" element={<Godown />}></Route>
+        <Route path="/assistantManager" element={<AssistantManagerDashboard />}></Route>
       </Routes>
 
-      {/* <Routes>
+      <Routes>
         <Route path="/login" element={<LoginPage />}></Route>
-      </Routes> */}
+      </Routes>
 
       <Toaster position="top-center" reverseOrder={false} />
-      </AuthGuard>
+      {/* </AuthGuard> */}
     </div>
   );
 }

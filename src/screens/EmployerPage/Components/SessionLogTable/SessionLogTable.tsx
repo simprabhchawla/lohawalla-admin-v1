@@ -17,7 +17,7 @@ const SessionLogTable = (props: Props) => {
     const [pageCount, setPageCount] = useState(0)
     const getLogginLogs = async () => {
         const { data } = await axios.get(`${basePath}auth/LogIn/companyLogIn/loginLogs?page=${page}&limit=${limit}`, { withCredentials: true })
-        console.log(data)
+        
         setSessionLogs([...data.logs])
         setTotal(data.count)
 

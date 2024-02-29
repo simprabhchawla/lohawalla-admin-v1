@@ -18,7 +18,7 @@ export const AllGodownDataApi = async () => {
 
 export const addGodownAPI = async (godownData:any) => {
   try {
-    // console.log(godownData)
+    // 
     const response = await axios.post(`${getAllGodownApiPath}`, godownData,{
       withCredentials:true
     });
@@ -45,7 +45,7 @@ export const editGodownAPI = async (editData: any) => {
 
 export const deleteGodownApi = async (id: any) => {
   try {
-    // console.log("hiihihihihih",id)
+    // 
     const response = await axios.delete(`${getAllGodownApiPath}${id}`, {
       withCredentials: true,
     });

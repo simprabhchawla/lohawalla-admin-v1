@@ -21,10 +21,10 @@ export const getVouchersAsync: any = createAsyncThunk('getVouchersAsync', async 
 
 export const addVouchers: any = createAsyncThunk('addVouchers', async (updatedData) => {
   try {
-    // console.log(data)
+    // 
     return await addVouchersAPI(updatedData);
   } catch (error: any) {
-    console.log("not added", error)
+    
     throw error
   }
 });

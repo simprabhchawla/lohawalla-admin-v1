@@ -10,7 +10,7 @@ export const useSidebarActions = () => {
 
 
   const handleTabClick = (index: number) => {
-    console.log(index);
+    
     setState((prevState) => ({
       activeTab: index,
     }));

@@ -19,7 +19,7 @@ export const RatioSelect = () => {
         setPopupOpen(false);
     };
     const handleFormSubmit = (formData: any) => {
-        console.log('Form Data:', formData);
+        
 
         dispatch(addRatioDataAsync(formData)).then(() => {
             dispatch(getRatioAsync());
@@ -35,7 +35,7 @@ export const RatioSelect = () => {
     const Unitdata = useSelector((state: any) => state.ratio.units)
     const ItemsData = useSelector((state: any) => state.ratio.items)
     const RatioData = useSelector((state: any) => state.ratio.ratio)
-    console.log(RatioData)
+    
 
     return (
         <>

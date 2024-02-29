@@ -23,7 +23,7 @@ const Editpopup: React.FC<EditPopupProps> = ({ onClose, data }: any) => {
   const groupsData = useSelector((state: any) => state?.groups?.data);
   const dispatch = useDispatch();
   const [selectedGroups, setSelectedGroups] = useState<{ _id: string, name: string }[]>([]);
-  console.log(selectedGroups)
+  
   const [removedGroups, setRemovedGroups] = useState<{ _id: string, name: string }[]>([]);
   const [removedData, setRemovedData] = useState<any>(data)
 

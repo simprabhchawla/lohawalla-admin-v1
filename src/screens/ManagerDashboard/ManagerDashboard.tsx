@@ -13,7 +13,7 @@ export const ManagerDashboard = () => {
 
     const dispatch = useDispatch();
     const managerData = useSelector((state: any) => state.manager?.data?.data);
-    console.log("dd", managerData)
+    
 
     // view
     useEffect(() => {
@@ -32,11 +32,11 @@ export const ManagerDashboard = () => {
     };
 
     const handleFormSubmit = (formData: any) => {
-        console.log('Form Data:', formData);
+        
 
         dispatch(addManagerDataAsync(formData)).then((res: any) => {
             if (res.payload.status) {
-                console.log("add", res.payload)
+                
                 toast.success(res.payload.message)
                 dispatch(getManagerAsync());
                 setPopupOpen(false)

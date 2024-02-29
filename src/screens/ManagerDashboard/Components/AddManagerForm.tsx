@@ -3,7 +3,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import check from "../../../assets_/icons/save.svg"
 const AddManagerForm = ({ onClose, onSubmit, Godowndata }: any) => {
-    console.log("shshs", Godowndata)
+    
     const { register, handleSubmit } = useForm();
 
     const handleFormSubmit = (data: any) => {

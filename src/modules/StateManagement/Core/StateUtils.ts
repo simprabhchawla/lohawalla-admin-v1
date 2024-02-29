@@ -61,7 +61,7 @@ export class ServerStateUtils<
 			conf.onError && conf.onError(error);
 			const message =
 				error.status && error.status >= 500 ? "server error" : errMessage;
-			console.log("error received wasa", error);
+			
 			this.mutateState((p) => {
 				p.loading[name] = {
 					status: "failed",

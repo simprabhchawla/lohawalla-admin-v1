@@ -13,10 +13,12 @@ import RecouncilationSlice from './Redux/Slice/GodownManager/RecouncilationSlice
 import DatasalesSlice from './Redux/Slice/GodownManager/SalesOrder/OrderDataSlice';
 import SalesBillSlice from './Redux/Slice/GodownManager/SalesOrder/SalesBillSlice';
 import PurchaseBillSlice from './Redux/Slice/GodownManager/PurchaseOrder/PurchaseBillSlice';
+import AssistantManagerSlice from './Redux/Slice/Admin/AssistantManagerSlice';
 const store = configureStore({
   reducer: {
     voucher:VoucherSlice,
     manager:ManagerSlice,
+    Assistantmanager:AssistantManagerSlice,
     godown: godownReducer,
     groups: groupsSlice,
     shelfs: ShelfsSlice,
