@@ -19,7 +19,7 @@ export const RatioSelect = () => {
         setPopupOpen(false);
     };
     const handleFormSubmit = (formData: any) => {
-        console.log('Form Data:', formData);
+        
 
         dispatch(addRatioDataAsync(formData)).then(() => {
             dispatch(getRatioAsync());

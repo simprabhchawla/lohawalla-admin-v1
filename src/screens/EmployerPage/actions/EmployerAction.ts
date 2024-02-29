@@ -45,7 +45,7 @@ export default class EmployerAction
 	}
 
 	async getVerifiedEmployeeList(data:any) {
-		console.log(data)
+		
 		const res = await this.handleAsync("getVerifiedList", () =>
 			getVerifiedUserList(data)
 		);

@@ -3,6 +3,7 @@ export const getAllVouchersApiPath = `${basePath}voucher/getVoucher`;
 export const addVouchersApiPath = `${basePath}voucher`;
 export const updateVouchersApiPath = `${basePath}voucher/updateVoucher`;
 export const getAllManagerApiPath = `${basePath}manager`;
+export const getAllAssistantManagerApiPath = `${basePath}manager/Godown/Assistant`;
 export const getAllGodownApiPath = `${basePath}store/godown/`;
 export const getAllGroupsApiPath = `${basePath}admin/pages/employeeListing/getVerifiedEmployee`;
 

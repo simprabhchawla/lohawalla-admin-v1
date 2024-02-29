@@ -22,7 +22,7 @@ export const getSalesOrderAsync: any = createAsyncThunk('getSalesOrderAsync', as
 export const getSingleSalesOrderAsync: any = createAsyncThunk('getSingleSalesOrderAsync', async (id) => {
   try {
     const data = await getSingleSalesOrder(id);
-    // console.log("Slicessss",data)
+    // 
     return data;
     
   } catch (error) {
@@ -34,7 +34,7 @@ export const getSingleSalesOrderAsync: any = createAsyncThunk('getSingleSalesOrd
 export const updateSingleSalesOrderAsync: any = createAsyncThunk('updateSingleSalesOrderAsync', async (salesOrder) => {
   try {
     const data = await updateSingleSalesOrder(salesOrder);
-    // console.log("Slice",data)
+    // 
     return data;
     
   } catch (error) {
@@ -57,7 +57,7 @@ const SalesOrderSlice = createSlice({
       })
       .addCase(getSalesOrderAsync.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
-        console.log("slices",action.payload)
+        
         state.data = action.payload;
         state.error = null;
       })
@@ -73,7 +73,7 @@ const SalesOrderSlice = createSlice({
       })
       .addCase(getSingleSalesOrderAsync.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log("single wala",action.payload)
+        
         state.data = action.payload.salesOrder;
         state.error = null;
       })
@@ -90,7 +90,7 @@ const SalesOrderSlice = createSlice({
     })
     .addCase(updateSingleSalesOrderAsync.fulfilled, (state, action) => {
       state.isLoading = false;
-      console.log("update single",action.payload)
+      
       state.data = action.payload;
       state.error = null;
     })

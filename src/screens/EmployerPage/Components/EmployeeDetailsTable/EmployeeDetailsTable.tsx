@@ -17,7 +17,7 @@ const CustomerDetails = () => {
 	const [total, setTotal] = useState(0)
 	const getTotal = async () => {
 		const { data } = await axios.get(`${basePath}admin/pages/Dashboard/getPendingEmployeeListing?`, { withCredentials: true })
-		console.log(data)
+		
 		if (data.length > 0) {
 			setTotal(data[0].totalPendingEmployees)
 			setPageCount(Math.ceil(total / limit));
@@ -36,7 +36,7 @@ const CustomerDetails = () => {
 			limit: limit,
 		};
 
-		console.log("hii")
+		
 
 		employerActions.getPendingEmployeeList(requestData);
 
@@ -175,7 +175,7 @@ const CustomerDetails = () => {
 							className="bg-theme-btn-gray px-2 py-0.5 border-2 text-zinc-500 border-gray-50 rounded-lg"
 							value={limit}
 							onChange={(event) => {
-								console.log("Selected value:", event.target.value);
+								
 								setlimit(Number(event.target.value));
 							}}
 						>

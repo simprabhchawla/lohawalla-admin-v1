@@ -10,15 +10,15 @@ export default class AuthActions extends ServerStateUtils<State> {
 
 	async isLoggedIn() {		
 		const res = await this.handleAsync("getIsLoggedIn", () => getIsLoggedIn());
-		console.log("response22",res);
+		
 		if (res) {
-			console.log("response",res);
+			
 			this.mutateState((p) => {
 				p.loginData = { ...res.data.loginData, token: res.data.token };
 			});
 		}
 		else{
-			console.log("api not calling ")
+			
 		}
 	}
 	async logout() {

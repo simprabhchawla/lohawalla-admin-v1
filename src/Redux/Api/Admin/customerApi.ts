@@ -32,7 +32,7 @@ export const addVouchersAPI = async (updatedData:any) => {
     const response = await axios.post(`${addVouchersApiPath}`, updatedData,{
       withCredentials:true
     });
-    console.log("efnefuw",response.data)
+    
     return response.data;
   } catch (error:any) {
     throw new Error('Error adding : ' + error.message);

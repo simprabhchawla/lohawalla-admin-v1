@@ -21,10 +21,25 @@ export const Table = ({ managerData }: any) => {
     setSelectedRowData(rowData);
   };
 
-  const handlePopupClose = () => {
-    setEditPopupOpen(false);
-    setdeletePopupOpen(false);
-  };
+    const handleDeleteClick = (id: any) => {
+        setDeleteID(id)
+        setdeletePopupOpen(true)
+        
+    };
+    const deleteManager = () => {
+        const id = deleteID
+        dispatch(deleteManagerAsync(id)).then((res: any) => {
+            if (res.payload.status) {
+                
+                toast.success(res.payload.message)
+                dispatch(getManagerAsync())
+                handlePopupClose()
+            }
+            else {
+                toast.error(res.payload.message)
+            }
+        })
+    } 
 
   const handleDeleteClick = (id: any) => {
     setDeleteID(id);
