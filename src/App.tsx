@@ -16,7 +16,7 @@ import AuthGuard from "./auth/AuthGuard/AuthGuard";
 function App() {
   return (
     <div>
-      <AuthGuard>
+      {/* <AuthGuard> */}
 
       <Routes>
         <Route path="/" element={<DashboardVouchers />}></Route>
@@ -26,12 +26,12 @@ function App() {
         <Route path="/godown" element={<Godown />}></Route>
       </Routes>
 
-      {/* <Routes>
+      <Routes>
         <Route path="/login" element={<LoginPage />}></Route>
-      </Routes> */}
+      </Routes>
 
       <Toaster position="top-center" reverseOrder={false} />
-      </AuthGuard>
+      {/* </AuthGuard> */}
     </div>
   );
 }
