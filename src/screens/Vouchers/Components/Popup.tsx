@@ -16,7 +16,7 @@ const PopupComponent = ({ groupsData, isPopupOpen, setIsPopupOpen, closePopup }:
     const { handleSubmit, register, setValue, formState: { errors } } = useForm();
     const dispatch = useDispatch();
     const onSubmit = (data: any) => {
-        console.log("Data", data);
+        
 
         const updatedData = {
             ...data,

@@ -33,7 +33,7 @@ export const getSinglePurchaseOrderAsync: any = createAsyncThunk('getSinglePurch
 export const updateSinglePurchaseOrderAsync: any = createAsyncThunk('updateSinglePurchaseOrderAsync', async (purchaseOrder) => {
   try {
     const data = await updateSinglePurchaseOrder(purchaseOrder);
-    // console.log("Slice",data)
+    // 
     return data;
     
   } catch (error) {
@@ -67,7 +67,7 @@ const purchaseOrderSlice = createSlice({
       })
       .addCase(getSinglePurchaseOrderAsync.fulfilled, (state: any, action: any) => {
         state.isLoading = false;
-        console.log(action.payload)
+        
         state.data = action.payload; 
         state.error = null;
       })
@@ -83,7 +83,7 @@ const purchaseOrderSlice = createSlice({
     })
     .addCase(updateSinglePurchaseOrderAsync.fulfilled, (state, action) => {
       state.isLoading = false;
-      console.log("update single",action.payload)
+      
       state.data = action.payload;
       state.error = null;
     })

@@ -22,19 +22,19 @@ export const getManagerAsync: any = createAsyncThunk('getManagerAsync', async ()
 
 export const addManagerDataAsync: any = createAsyncThunk('addVouchers', async (formData) => {
   try {
-    // console.log(data)
+    // 
     return await addManagerDataApi(formData);
   } catch (error: any) {
-    console.log("not added", error)
+    
     throw error
   }
 });
 export const updateManagerDataAsync:any = createAsyncThunk('updateManagerDataAsync', async (editData:any) => {
   try {
-    console.log(editData)
+    
     return await updateManagerApi(editData);
   } catch (error: any) {
-    console.log("not added", error)
+    
     throw error
   }
 });
@@ -94,7 +94,7 @@ const ManagerSlice = createSlice({
         state.error = null;
       })
       .addCase(updateManagerDataAsync.fulfilled, (state,action) => {
-        console.log("hii",action.payload)
+        
         state.data = action.payload;
         state.status = 'success';
         state.error = null;

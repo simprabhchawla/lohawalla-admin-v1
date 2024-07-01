@@ -32,7 +32,7 @@ const LoginPage = () => {
         window.location.replace("/#/GodownDashboard");
       }
 
-      console.log("hiii", response.data);
+      
     } catch (error) {
       console.error("Error logging in:", error);
     }

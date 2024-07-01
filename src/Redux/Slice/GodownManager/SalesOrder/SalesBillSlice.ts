@@ -13,7 +13,7 @@ const initialState = {
 export const addSalesAsync: any = createAsyncThunk('addSalesAsync', async (Data) => {
   try {
     const data = await createSales(Data);
-    // console.log("Slice",data)
+    // 
     return data;
     
   } catch (error) {

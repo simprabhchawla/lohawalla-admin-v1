@@ -27,7 +27,7 @@ function convertToQueryString(data: any) {
 
 export default async function getVerifiedUserList(filterdata:any) {
 	const data=convertToQueryString(filterdata)
-	console.log("dddddd",data)
+	
 	return AxiosFactory.createInstance().get<VerifiedEmployeeListing[]>(
 		
 		apiIndex.getVerifiedUserList(data)

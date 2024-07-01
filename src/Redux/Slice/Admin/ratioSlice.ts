@@ -51,10 +51,10 @@ export const addRatioDataAsync: any = createAsyncThunk(
   "addRatioDataAsync",
   async (formData) => {
     try {
-      // console.log(data)
+      // 
       return await addRatioDataApi(formData);
     } catch (error: any) {
-      console.log("not added", error);
+      
       throw error;
     }
   }
@@ -64,10 +64,10 @@ export const updateRatioDataAsync: any = createAsyncThunk(
   "updateRatioDataAsync",
   async (RatioData) => {
     try {
-      // console.log(data)
+      // 
       return await updateRatioDataApi(RatioData);
     } catch (error: any) {
-      console.log("not added", error);
+      
       throw error;
     }
   }
@@ -77,10 +77,10 @@ export const DeleteRatioApiAsync: any = createAsyncThunk(
   "DeleteRatioApiAsync",
   async (id) => {
     try {
-      // console.log(data)
+      // 
       return await DeleteRatioApi(id);
     } catch (error: any) {
-      console.log("not added", error);
+      
       throw error;
     }
   }

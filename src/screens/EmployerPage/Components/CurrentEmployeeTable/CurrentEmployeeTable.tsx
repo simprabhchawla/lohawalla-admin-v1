@@ -66,7 +66,6 @@ export default function CurrentEmployeeTable(props: Props) {
 			limit: limit,
 		};
 
-
 		employerActions.getVerifiedEmployeeList(requestData);
 
 
@@ -118,12 +117,13 @@ export default function CurrentEmployeeTable(props: Props) {
 			closePopup()
 		}
 		catch (err: any) {
-			console.log(err);
+			
 			toast.error("Role not  update try again")
 		}
 
 	}
 	const handlePasswordSumbit = async () => {
+
 		try {
 			const { data } = await axios.patch(
 				`${basePath}admin/pages/employeeListing/updateEmployeePasword/${Id}`,
@@ -139,7 +139,7 @@ export default function CurrentEmployeeTable(props: Props) {
 			closeChangePopup()
 		}
 		catch (err: any) {
-			console.log(err);
+			
 			toast.error(err)
 		}
 	}
@@ -171,7 +171,7 @@ export default function CurrentEmployeeTable(props: Props) {
 	const [employeeId, setEmployeeId] = useState('');
 
 	const handleDeleteClick = (id: any) => {
-		console.log(id)
+		
 		setEmployeeId(id);
 		setShowConfirmation(true);
 	}
@@ -192,7 +192,7 @@ export default function CurrentEmployeeTable(props: Props) {
 
 		}
 		catch (err: any) {
-			console.log(err);
+			
 			toast.error("error")
 		}
 	}
@@ -500,7 +500,7 @@ export default function CurrentEmployeeTable(props: Props) {
 							className="bg-theme-btn-gray px-2 py-0.5 border-2 text-zinc-500 border-gray-50 rounded-lg"
 							value={limit}
 							onChange={(event) => {
-								//console.log("Selected value:", event.target.value);
+								//
 								setlimit(Number(event.target.value));
 							}}
 						>
