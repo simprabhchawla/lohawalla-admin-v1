@@ -23,6 +23,8 @@ export default function CurrentEmployeeTable(props: Props) {
 	const [show, setShow] = useState({ idx: -1, val: -1 });
 	const { state, employerActions } = useEmployerPageContext();
 	const [role, setrole] = useState("")
+	const [permission, setPermission] = useState("")
+
 	const [Id, setId] = useState("")
 	const [match, setMatch] = useState(false)
 	const [password, setPassword] = useState("")
@@ -30,12 +32,14 @@ export default function CurrentEmployeeTable(props: Props) {
 	const [limit, setlimit] = useState(10)
 	const [page, setPage] = useState(1)
 	const [isOpen, setIsOpen] = useState(false)
+	const [isOpenPermission, setIsOpenPermission] = useState(false)
+
+
 	const [isChangeOpen, setisChangeOpen] = useState(false)
 	const [total, setTotal] = useState(0)
 	const [pageCount, setPageCount] = useState(1)
 	const getTotal = async () => {
 		const { data } = await axios.get(`${basePath}admin/pages/employeeListing/getVerifiedEmployee`, { withCredentials: true })
-		console.log(data)
 		setTotal(data[0].totalVerifiedEmployee)
 		if (total % limit > 0) {
 			setPageCount(Math.ceil(total / limit));
@@ -62,7 +66,6 @@ export default function CurrentEmployeeTable(props: Props) {
 			limit: limit,
 		};
 
-		console.log("hii")
 
 		employerActions.getVerifiedEmployeeList(requestData);
 
@@ -73,12 +76,18 @@ export default function CurrentEmployeeTable(props: Props) {
 	const openPopup = (id: any) => {
 		setIsOpen(true)
 		setId(id)
-
 	}
 	const closePopup = () => {
 		setIsOpen(false)
 	}
 
+	const openPopupPermission = (id: any) => {
+		setIsOpenPermission(true)
+		setId(id)
+	}
+	const closePopupPermission = () => {
+		setIsOpenPermission(false)
+	}
 
 
 	const openChangePopup = (id: any) => {
@@ -115,7 +124,6 @@ export default function CurrentEmployeeTable(props: Props) {
 
 	}
 	const handlePasswordSumbit = async () => {
-		console.log("fgfjjhgjfgjhgjgjh", password)
 		try {
 			const { data } = await axios.patch(
 				`${basePath}admin/pages/employeeListing/updateEmployeePasword/${Id}`,
@@ -134,6 +142,27 @@ export default function CurrentEmployeeTable(props: Props) {
 			console.log(err);
 			toast.error(err)
 		}
+	}
+	const handleSumbitPermission = async () => {
+		try {
+			const { data } = await axios.patch(
+				`${basePath}admin/pages/employeeListing/updateEmployeePermission/${Id}`,
+				{
+					permission
+				},
+				{
+					withCredentials: true
+				}
+			);
+			toast.success("Permission update Sucessfully")
+
+			closePopupPermission()
+		}
+		catch (err: any) {
+			console.log(err);
+			toast.error("Permission not  update try again")
+		}
+
 	}
 
 
@@ -203,6 +232,7 @@ export default function CurrentEmployeeTable(props: Props) {
 							<TableHeaderCell text="Email" />
 							<TableHeaderCell text="Phone Number" />
 							<TableHeaderCell text="Role" />
+							<TableHeaderCell text="Permission" />
 							<TableHeaderCell text="Aadhar" />
 							<TableHeaderCell text="Password" />
 							<TableHeaderCell text="Profile Image" />
@@ -218,6 +248,7 @@ export default function CurrentEmployeeTable(props: Props) {
 										phoneNumber,
 										role,
 										aadhar,
+										dataPermissions,
 										profile,
 										dateOfCreation,
 										id,
@@ -255,6 +286,14 @@ export default function CurrentEmployeeTable(props: Props) {
 												<p className="text-sm text-slate-800">{role}</p>
 												<img src={edit} alt="" onClick={() => openPopup(id)} className="w-[16px] cursor-pointer h-[16px]" />
 											</td>
+											<td className="px-6 py-3  font-normal">
+												<div className="flex gap-2 ">
+												<p className="text-sm text-slate-800">{dataPermissions?"True":"False"}</p>
+												<img src={edit} alt="" onClick={() => openPopupPermission(id)} className="w-[16px] cursor-pointer h-[16px]" />
+
+												</div>
+											</td>
+
 											<td className="px-6 py-1">
 												<div
 													className="flex items-center hover:ring-1 hover:ring-slate-200 cursor-pointer p-2 rounded transition-all duration-500 delay-75"
@@ -350,6 +389,38 @@ export default function CurrentEmployeeTable(props: Props) {
 										</select>
 									</div>
 									<button onClick={handleSumbit} className="bg-[#5C5C77] py-[16px] text-white rounded-[10px] text-[16px] font-bold">
+										Save
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				)}
+				{isOpenPermission && (
+					<div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+						<div className="bg-[#fff] px-[32px] py-[25px] w-[563px] h-[457px] rounded-[40px] shadow-lg flex flex-col">
+							<div className="flex justify-end">
+								<button onClick={closePopupPermission}>
+									<img src={closed} alt="" className="w-[32px] h-[32px]" />
+								</button>
+							</div>
+
+							<div className="flex flex-col gap-[48px]">
+								<div className="flex flex-col justify-center items-center gap-[6px]">
+									<img src={lock} alt="" className="w-[56px] h-[56px]" />
+									<h1 className="text-[40px] text-[#5C5C77] font-[700]">Change Data Permission</h1>
+								</div>
+
+								<div className="flex flex-col gap-[56px]">
+									<div className="flex flex-col gap-[10px]">
+										<select className="border border-[#9797AA] rounded-[8px]"
+											value={role} onChange={(e) => setPermission(e.target.value)}>
+											<option value="">Select Permission</option>
+											<option value="true">Yes</option>
+											<option value="false">No</option>
+										</select>
+									</div>
+									<button onClick={handleSumbitPermission} className="bg-[#5C5C77] py-[16px] text-white rounded-[10px] text-[16px] font-bold">
 										Save
 									</button>
 								</div>

@@ -50,7 +50,7 @@ export default class EmployerAction
 			getVerifiedUserList(data)
 		);
 		if (res) {
-			this.mutateState((p) => {
+			this.mutateState((p:any) => {
 				p.verifiedEmployeeList = res.data;
 			});
 		}
