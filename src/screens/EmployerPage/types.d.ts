@@ -18,6 +18,7 @@ namespace Employee {
 		dateOfCreation: string;
 		phoneNumber: string;
 		profile: string;
+		dataPermissions:boolean
 	}
 
 	interface State {
