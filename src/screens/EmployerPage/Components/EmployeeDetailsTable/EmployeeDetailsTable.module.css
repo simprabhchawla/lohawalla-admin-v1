@@ -1,0 +1,8 @@
+.tableRow > th  p {
+	font-family: "Inter";
+}
+
+.tableRow > th  {
+	font-family: "Inter";
+  color: gray
+}

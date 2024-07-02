@@ -1,0 +1,8 @@
+.table th,
+.table tr {
+	min-width: 100px;
+}
+
+.table th:first-child {
+  min-width: none;
+}
